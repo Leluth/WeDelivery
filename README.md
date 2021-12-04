@@ -19,3 +19,4 @@ release data: 12/30/2022
 3. Analyze the delivery status (e.g., delay, on time, early delivery)
 4. page layout -modern + animation 
 5. 3D and Geometric Design
+6. day/night mode transfer
