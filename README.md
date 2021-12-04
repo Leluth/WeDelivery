@@ -17,4 +17,5 @@ release data: 12/30/2022
 1. Offer customer recommendations based on user’s preference 
 2. Get feedback on user’s rating
 3. Analyze the delivery status (e.g., delay, on time, early delivery)
-4. page layout -modern + animation
+4. page layout -modern + animation 
+5. 3D and Geometric Design
