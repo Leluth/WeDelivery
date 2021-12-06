@@ -5,9 +5,9 @@ release data:12/18/2021
 features:
 1. Create signin/singn up platform 
 2. Input package information
-3. Webapp provides delivery options
+3. Webapp provides delivery options with estimated delivery time & cost
 4. Checkout/cancel the request and create track number
-5. Function for tracking package
+
 
 
 version2:
@@ -20,3 +20,4 @@ release data: 12/30/2022
 4. page layout -modern + animation 
 5. 3D and Geometric Design
 6. day/night mode transfer
+7. Function for tracking package
