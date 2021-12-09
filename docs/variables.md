@@ -30,9 +30,9 @@
 | delivered_at  | String  |  estimated delivery time |  
 | status | enum  | [pending, picking-up, on-time, late, delivered]  |   
 ---
-## **Distribution Center page ??**
+## Distribution Center page 
 |  Variable | Type | Instruction  |   
 |---|---|---|
-| id_center_ | int |  id of the distribution center |   
+| id_center | int |  id of the distribution center |   
 | latitude| int  | latitude of the distribution center  |   
 | longtitude  | int  | longtitude of the distribution center  |   
