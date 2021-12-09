@@ -13,10 +13,12 @@ import org.apache.commons.io.IOUtils;
 public class HelloServlet extends HttpServlet {
     private String message;
 
+    @Override
     public void init() {
         message = "Hello World!";
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
 
@@ -29,6 +31,7 @@ public class HelloServlet extends HttpServlet {
 
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
@@ -43,7 +46,7 @@ public class HelloServlet extends HttpServlet {
 
     }
 
-
+    @Override
     public void destroy() {
     }
 }
