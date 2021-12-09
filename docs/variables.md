@@ -17,15 +17,15 @@
 |  Variable | Type | Instruction  |   
 |---|---|---|
 | id_package | int | unique number for each package information|   
-| weight| String  | weight of the package  |   
-| size  | String  |  size of the package |   
+| weight| double  | weight of the package  |   
+| size  | double  |  size of the package |   
 | package_type  |  enum |  [small, medium, big, *fragile?*] |   
 | shipping_from |  String | where to pick up the pacakge  |   
 | shipping_to  | String  | where to ship the package  |   
 | id_order | int | unique number for placed order |   
-| delivery_type| enum  | [drone, robot, hybrid]  |   
-| service_type  | enum  | [Expreess, Standard, Economic]   |   
-| price  |  int |  price of the option user select |   
+| service_type| enum  | [drone, robot, hybrid]  |   
+| deliver_type  | enum  | [Express, Standard, Economic]   |   
+| price  |  double |  price of the option user select |   
 | ordered_at |  String | the time that order is placed  |   
 | delivered_at  | String  |  estimated delivery time |  
 | status | enum  | [pending, picking-up, on-time, late, delivered]  |   
