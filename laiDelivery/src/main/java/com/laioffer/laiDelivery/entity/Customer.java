@@ -17,9 +17,15 @@ public class Customer implements Serializable  {
 
     private String lastName;
 
+    private String userName;
+
     private String password;
 
     private boolean enabled;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private Cart cart;
 
     public String getEmail() {
         return email;
@@ -35,6 +41,14 @@ public class Customer implements Serializable  {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getLastName() {
@@ -60,4 +74,13 @@ public class Customer implements Serializable  {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
 }
