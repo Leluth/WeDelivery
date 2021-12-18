@@ -6,12 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "authorities")
 public class Authorities implements Serializable {
-
-    /* variables should be inserted correctly for connecting to DB */
-
 
     private static final long serialVersionUID = 8734140534986494039L;
 
@@ -36,4 +34,3 @@ public class Authorities implements Serializable {
         this.authorities = authorities;
     }
 }
-
