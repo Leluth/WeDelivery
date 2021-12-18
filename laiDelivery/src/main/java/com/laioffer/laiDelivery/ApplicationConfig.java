@@ -1,12 +1,13 @@
 package com.laioffer.laiDelivery;
 
-import java.util.Properties;
-import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
@@ -26,9 +27,11 @@ public class ApplicationConfig {
         String RDS_INSTANCE = "laidelivery-instance.ccnndes8w3bt.us-east-2.rds.amazonaws.com";
         String USERNAME = "admin";
         String PASSWORD = "11111111";
+        String DATABASE_NAME = "onlineDelivery";
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://" + RDS_INSTANCE + ":3306/onlineDelivery?createDatabaseIfNotExist=true&serverTimezone=UTC");
+        dataSource.setUrl("jdbc:mysql://" + RDS_INSTANCE + ":3306/" + DATABASE_NAME
+                + "?createDatabaseIfNotExist=true&serverTimezone=UTC");
         dataSource.setUsername(USERNAME);
         dataSource.setPassword(PASSWORD);
 
