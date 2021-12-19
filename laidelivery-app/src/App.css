@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  color: azure;
+}
+.header.img {
+  margin-top: 10px
+
+}
