@@ -14,6 +14,19 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    public List<DeliveryOrder> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<DeliveryOrder> orderItemList) {
+        this.orderItemList = orderItemList;
+    }
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<DeliveryOrder> orderItemList;
+//    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+//    private DeliveryOrder orderItem;
+
     private double totalPrice;
 
     public int getId() {
