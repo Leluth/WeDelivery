@@ -15,17 +15,8 @@ public class DeliveryOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
     @ManyToOne
     @JsonIgnore
-//    @OneToOne
     private Cart cart;
 
     private double weight;
@@ -51,6 +42,14 @@ public class DeliveryOrder implements Serializable {
     private double price;
 
     private String orderId;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public int getId() {
         return id;

@@ -14,6 +14,11 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<DeliveryOrder> orderItemList;
+//    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+//    private DeliveryOrder orderItem;
+
     public List<DeliveryOrder> getOrderItemList() {
         return orderItemList;
     }
@@ -21,11 +26,6 @@ public class Cart implements Serializable {
     public void setOrderItemList(List<DeliveryOrder> orderItemList) {
         this.orderItemList = orderItemList;
     }
-
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    private List<DeliveryOrder> orderItemList;
-//    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-//    private DeliveryOrder orderItem;
 
     private double totalPrice;
 
