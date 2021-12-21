@@ -2,7 +2,6 @@ import { Layout, Typography } from "antd";
 import React from "react";
 import { useState } from "react";
 import logo from './image/logo.svg';
-import Logo from './image/logo'
 import {makeStyles} from '@material-ui/core/styles';
 import {CssBaseline} from '@material-ui/core';
 
@@ -18,16 +17,36 @@ const { Title } = Typography;
 function App() {
     const [authed, setAuthed] = useState(false);
 
-
     return (
         <Layout style={{ height: "100vh" }}>
             <Header>
                 <div className="header">
-                    <img height={40} src={logo} alt='logo'/>
+
+                    <div >
+                        <img
+                            height={40}
+                            src={logo}
+                            alt='logo'
+                            style = {{marginBottom: 5 }}
+                        />
+
+                        <Title
+                            level = {2}
+                            style={{
+                                color: "white",
+                                lineHeight: "inherit",
+                                marginBottom: 0,
+                                display: "inline",
+                                marginLeft: 10
+                            }} >
+                            Lai Delivery
+                        </Title>
+                    </div>
+
+
                     <div>{authed ? <MyCart /> : <SignupForm />}</div>
                 </div>
             </Header>
-
 
 
             <Content
@@ -42,6 +61,7 @@ function App() {
                 ) : (
                     <LoginForm onSuccess={() => setAuthed(true)} />
                 )}
+
             </Content>
         </Layout>
     );

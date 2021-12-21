@@ -52,20 +52,41 @@ class SignupForm extends React.Component {
                         onFinish={this.onFinish}
                         preserve={false}
                     >
+
                         <Form.Item
-                            name="email"
-                            rules={[{ required: true, message: "Please input your email!" }]}
+                            name="firstName"
+                            rules={[
+                                { required: true, message: "Please input your first name!" },
+                            ]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Email" />
+                            <Input prefix={<UserOutlined />} placeholder="Firstname" />
                         </Form.Item>
+
+                        <Form.Item
+                            name="lastName"
+                            rules={[
+                                { required: true, message: "Please input your last name!" },
+                            ]}
+                        >
+                            <Input prefix={<UserOutlined />} placeholder="Lastname" />
+                        </Form.Item>
+
                         <Form.Item
                             name="Username"
                             rules={[
                                 { required: true, message: "Please input Username!" },
                             ]}
                         >
-                            <Input placeholder="Username" />
+                            <Input prefix={<UserOutlined />} placeholder="Username" />
                         </Form.Item>
+
+                        <Form.Item
+                            name="email"
+                            rules={[{ required: true, message: "Please input your email!" }]}
+                        >
+                            <Input prefix={<UserOutlined />} placeholder="Email" />
+                        </Form.Item>
+
                         <Form.Item
                             name="password"
                             rules={[
@@ -74,28 +95,13 @@ class SignupForm extends React.Component {
                         >
                             <Input prefix={<LockOutlined />} placeholder="Password" />
                         </Form.Item>
-                        <Form.Item
-                            name="firstName"
-                            rules={[
-                                { required: true, message: "Please input your first name!" },
-                            ]}
-                        >
-                            <Input placeholder="firstname" />
-                        </Form.Item>
-                        <Form.Item
-                            name="lastName"
-                            rules={[
-                                { required: true, message: "Please input your last name!" },
-                            ]}
-                        >
-                            <Input placeholder="lastname" />
-                        </Form.Item>
 
                         <Form.Item>
                             <Button type="primary" htmlType="submit">
                                 Register
                             </Button>
                         </Form.Item>
+
                     </Form>
                 </Modal>
             </>
