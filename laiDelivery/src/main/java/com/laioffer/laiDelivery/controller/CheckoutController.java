@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @description: CheckoutController
  * @date 2021/12/21 12:20
  */
-
 @Controller
 public class CheckoutController {
     @Autowired
