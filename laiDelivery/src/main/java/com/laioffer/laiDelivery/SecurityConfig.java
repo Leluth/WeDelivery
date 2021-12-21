@@ -21,6 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .formLogin()
+                .usernameParameter("email")
+                .passwordParameter("password")
                 .failureForwardUrl("/login?error=true");
         http
                 .authorizeRequests()
