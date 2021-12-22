@@ -106,14 +106,14 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>5.3.14</version>
+            <version>5.3.9</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.5.0-b01</version>
+            <version>1.4.7</version>
         </dependency>
 
         <dependency>
