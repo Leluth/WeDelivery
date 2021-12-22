@@ -1,0 +1,109 @@
+
+/*.App-header {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: flex-start;*/
+/*    background-color: white;*/
+/*    color: white;*/
+/*    height: 50px;*/
+/*}*/
+
+/*.App-logo {*/
+/*    pointer-events: none;*/
+/*    height: 50px;*/
+/*}*/
+
+/*.App-title {*/
+/*    flex: 1;*/
+/*    text-align: left;*/
+/*    font-weight: bold;*/
+/*    font-size: 46px;*/
+/*    color: black;*/
+/*}*/
+
+.logout {
+    font-size: 20px;
+    padding-right: 20px;
+}
+
+.Menu {
+    position: absolute;
+    width: 364px;
+    height: 22px;
+    left: 277px;
+    top: 5px;
+    overflow: visible;
+}
+.logo {
+    position: absolute;
+    width: 92px;
+    height: 46px;
+    left: 61px;
+    top: 1px;
+    overflow: visible;
+}
+.LSD_A0_Text_20 {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: visible;
+    width: 93px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 46px;
+    color: rgba(40,40,40,1);
+}
+
+.Shipping_______Tracking_______ {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: visible;
+    width: 365px;
+    white-space: nowrap;
+    line-height: 36px;
+    margin-top: -8px;
+    text-align: left;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgba(40, 40, 40, 1);
+}
+
+.Grid {
+    position: absolute;
+    width: 35px;
+    height: 19px;
+    left: 192px;
+    top: 7px;
+    overflow: visible;
+}
+.Shape_2_copy {
+    position: absolute;
+    overflow: visible;
+    width: 25px;
+    height: 1px;
+    left: 0px;
+    top: 18px;
+}
+
+.Shape_2_copy_3 {
+    position: absolute;
+    overflow: visible;
+    width: 25px;
+    height: 1px;
+    left: 0px;
+    top: 0px;
+}
+.Shape_2_copy_2 {
+    position: absolute;
+    overflow: visible;
+    width: 35px;
+    height: 1px;
+    left: 0px;
+    top: 9px;
+}
