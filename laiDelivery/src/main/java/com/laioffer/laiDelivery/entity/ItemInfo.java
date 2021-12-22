@@ -1,8 +1,5 @@
 package com.laioffer.laiDelivery.entity;
 
-import org.hibernate.annotations.Entity;
-
-@Entity
 public class ItemInfo {
     private double weight;
 
