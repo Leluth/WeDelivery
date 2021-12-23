@@ -1,28 +1,27 @@
 import React from 'react'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import Stack from '@mui/material/Stack';
 
-export default function DatePicker(props) {
-
-    const { name, label, value, onChange } = props
-
-
-    const convertToDefEventPara = (name, value) => ({
-        target: {
-            name, value
-        }
-    })
+export default function CustomDateTimePicker() {
+    const [clearedDate, setClearedDate] = React.useState(null);
+    const [value, setValue] = React.useState(new Date('2019-01-01T18:54'));
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker disableToolbar variant="inline" inputVariant="outlined"
-                                label={label}
-                                format="MMM/dd/yyyy"
-                                name={name}
-                                value={value}
-                                onChange={date =>onChange(convertToDefEventPara(name,date))}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
 
-            />
-        </MuiPickersUtilsProvider>
+                <DateTimePicker
+                    clearable
+                    value={clearedDate}
+                    onChange={(newValue) => setClearedDate(newValue)}
+                    renderInput={(params) => (
+                        <TextField {...params} helperText="Pls click the icon to choose the exact time." />
+                    )}
+                />
+            </Stack>
+        </LocalizationProvider>
     )
 }
