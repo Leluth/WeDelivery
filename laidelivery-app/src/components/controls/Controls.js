@@ -1,7 +1,7 @@
 import Input from "./Input";
 import RadioGroup from "./RadioGroup";
 import Checkbox from "./Checkbox";
-import DatePicker from "./DatePicker";
+import CustomDateTimePicker from "./DatePicker";
 import Button from "./Button";
 import Select from "react-select";
 
@@ -10,7 +10,7 @@ const Controls = {
     RadioGroup,
     Select: Select,
     Checkbox,
-    DatePicker,
+    CustomDateTimePicker,
     Button
 
 }

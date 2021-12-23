@@ -37,8 +37,8 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
 const useStyles = makeStyles(theme => ({
     root: {
         '& .MuiFormControl-root': {
-            width: '50%',
-            margin: theme.spacing(0.5)
+            width: '60%',
+            margin: theme.spacing(0.3)
         }
     }
 }))

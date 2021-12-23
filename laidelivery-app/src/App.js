@@ -8,10 +8,39 @@ import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
 import SignupForm from "./components/SignupForm";
 import PackageList from './components/PackageList';
-
+import { CssBaseline, createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 const {Header, Content} = Layout;
 const {Title} = Typography;
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: "#626cf5",
+            light: '#3c44b126'
+        },
+        secondary: {
+            main: "#a7abee",
+            light: '#f8324526'
+        },
+        background: {
+            default: "#f4f5fd"
+        },
+    },
+    overrides:{
+        MuiAppBar:{
+            root:{
+                transform:'translateZ(0)'
+            }
+        }
+    },
+    props:{
+        MuiIconButton:{
+            disableRipple:true
+        }
+    }
+})
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: '100vh',
@@ -19,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
+    appMain: {
+        paddingLeft: '320px',
+        width: '100%'
+    }
 }));
 
 function App() {
@@ -62,6 +95,10 @@ function App() {
                     <LoginForm onSuccess={() => setAuthed(true)}/>
                 )}
             </Content>
+            <ThemeProvider theme={theme}>
+
+                <CssBaseline />
+            </ThemeProvider>
         </Layout>
     );
 }

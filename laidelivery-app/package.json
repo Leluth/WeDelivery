@@ -50,6 +50,7 @@
     "@ant-design/icons": "^4.7.0",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/pickers": "^3.3.10",
-    "@mui/lab": "^5.0.0-alpha.61"
+    "@mui/lab": "^5.0.0-alpha.61",
+    "@mui/material": "^5.2.5"
   }
 }
