@@ -1,0 +1,19 @@
+.main {
+    padding: 0
+}
+
+.left-side {
+    padding-left: 5px;
+    height: 800px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.right-side {
+    padding-top: 12px;
+    padding-left: 20px;
+    height: 760px;
+}
+
+::-webkit-scrollbar {
+    display: none; /* Chrome Safari */}
