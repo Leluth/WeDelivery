@@ -13,52 +13,52 @@ class LoginForm extends React.Component {
       loading: true,
     });
     login(data)
-      .then(() => {
-        this.setState({
-          displayModal: false,
+        .then(() => {
+          this.setState({
+            displayModal: false,
+          });
+          message.success(`Login Successful`);
+          this.props.onSuccess();
+        })
+        .catch((err) => {
+          message.error(err.message);
+        })
+        .finally(() => {
+          this.setState({
+            loading: false,
+          });
         });
-        message.success(`Login Successful`);
-        this.props.onSuccess();
-      })
-      .catch((err) => {
-        message.error(err.message);
-      })
-      .finally(() => {
-        this.setState({
-          loading: false,
-        });
-      });
   };
 
   render = () => {
     return (
-      <Form
-        name="normal_login"
-        onFinish={this.onFinish}
-        style={{
-          width: 300,
-          margin: "auto",
-        }}
-      >
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: "Please input your Username!" }]}
+        <Form
+            name="normal_login"
+            onFinish={this.onFinish}
+            style={{
+              width: 300,
+              margin: "auto",
+            }}
         >
-          <Input prefix={<UserOutlined />} placeholder="Username" />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: "Please input your Password!" }]}
-        >
-          <Input.Password prefix={<LockOutlined />} placeholder="Password" />
-        </Form.Item>
+          <Form.Item
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Username" />
+          </Form.Item>
+          <Form.Item
+              name="password"
+              rules={[{ required: true, message: "Please input your Password!" }]}
+          >
+            <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+          </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit" loading={this.state.loading}>
-            Login
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" loading={this.state.loading}>
+              Login
+            </Button>
+          </Form.Item>
+        </Form>
     );
   };
 }
