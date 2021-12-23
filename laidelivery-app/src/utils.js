@@ -1,5 +1,5 @@
 export const login = (credential) => {
-  const loginUrl = `/login?username=${credential.username}&password=${credential.password}`;
+  const loginUrl = `/login?email=${credential.email}&password=${credential.password}`;
 
   return fetch(loginUrl, {
     method: "POST",
