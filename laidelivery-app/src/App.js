@@ -8,7 +8,7 @@ import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
 import SignupForm from "./components/SignupForm";
 import PackageList from './components/PackageList';
-import MyOrders from "./components/MyOrders";
+
 
 const {Header, Content} = Layout;
 const {Title} = Typography;
