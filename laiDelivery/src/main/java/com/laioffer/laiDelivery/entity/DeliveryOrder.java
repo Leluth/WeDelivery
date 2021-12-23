@@ -33,9 +33,9 @@ public class DeliveryOrder implements Serializable {
 
     private String serviceType;
 
-    private double deliveryTime;
+    private String deliveryTime;
 
-    private double pickUpTime;
+    private String pickUpTime;
 
     private String centerId;
 
@@ -115,19 +115,19 @@ public class DeliveryOrder implements Serializable {
         this.serviceType = serviceType;
     }
 
-    public double getDeliveryTime() {
+    public String getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(double deliveryTime) {
+    public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
-    public double getPickUpTime() {
+    public String getPickUpTime() {
         return pickUpTime;
     }
 
-    public void setPickUpTime(double pickUpTime) {
+    public void setPickUpTime(String pickUpTime) {
         this.pickUpTime = pickUpTime;
     }
 

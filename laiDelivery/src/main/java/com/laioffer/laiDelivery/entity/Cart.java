@@ -27,7 +27,7 @@ public class Cart implements Serializable {
         this.orderItemList = orderItemList;
     }
 
-    private double totalPrice;
+//    private double totalPrice;
 
     public int getId() {
         return id;
@@ -37,11 +37,11 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+//    public double getTotalPrice() {
+//        return totalPrice;
+//    }
+//
+//    public void setTotalPrice(double totalPrice) {
+//        this.totalPrice = totalPrice;
+//    }
 }
