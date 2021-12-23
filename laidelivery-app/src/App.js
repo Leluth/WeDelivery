@@ -1,24 +1,23 @@
-import { Layout, Typography } from "antd";
-import React from "react";
-import { useState } from "react";
+import {Layout, Typography} from "antd";
+import React, {useState} from "react";
 import logo from './image/logo.svg';
 import {makeStyles} from '@material-ui/core/styles';
-import {CssBaseline} from '@material-ui/core';
 
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
 import SignupForm from "./components/SignupForm";
 import PackageList from './components/PackageList';
+import MyOrders from "./components/MyOrders";
 
-const { Header, Content } = Layout;
-const { Title } = Typography;
+const {Header, Content} = Layout;
+const {Title} = Typography;
 const useStyles = makeStyles((theme) => ({
-    root:{
-        minHeight :'100vh',
-        backgroundImage:`url(${process.env.PUBLIC_URL + '/assets/drone0.jpg'})`,
-        backgroundRepeat:'no-repeat',
-        backgroundSize:'cover',
+    root: {
+        minHeight: '100vh',
+        backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/drone0.jpg'})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
     },
 }));
 
@@ -27,33 +26,32 @@ function App() {
     const classes = useStyles();
 
     return (
-        <Layout style={{ height: "100vh" }}>
+        <Layout style={{height: "100vh"}}>
             <Header>
                 <div className="header">
                     <img height={40} src={logo} alt='logo'
-                    style ={{ marginBottom:5}} />
+                         style={{marginBottom: 5}}/>
                     <Title
-                        level = {2}
+                        level={2}
                         style={{
                             color: "white",
                             lineHeight: "inherit",
                             marginBottom: 0,
                             display: "inline",
                             marginLeft: 5
-                        }} >
+                        }}>
                         Lai Delivery
                     </Title>
 
-                    <div>{authed ? <MyCart /> : <SignupForm />}</div>
+                    <div>{authed ? <MyCart/> : <SignupForm/>}</div>
                 </div>
 
             </Header>
 
 
-
             <Content
                 style={{
-                    padding: "50px",
+                    padding: "40px 50px 50px 50px",
                     maxHeight: "calc(100% - 64px)",
                     overflowY: "auto",
                 }}
@@ -61,7 +59,7 @@ function App() {
                 {authed ? (
                     <PackageList />
                 ) : (
-                    <LoginForm onSuccess={() => setAuthed(true)} />
+                    <LoginForm onSuccess={() => setAuthed(true)}/>
                 )}
             </Content>
         </Layout>
