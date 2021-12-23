@@ -30,7 +30,9 @@ public class CustomerDao {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            if (session != null) session.getTransaction().rollback();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
         } finally {
             if (session != null) {
                 session.close();
