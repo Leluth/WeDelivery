@@ -2,7 +2,6 @@ import {Layout, Typography} from "antd";
 import React, {useState} from "react";
 import logo from './image/logo.svg';
 import {makeStyles} from '@material-ui/core/styles';
-
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
@@ -15,7 +14,7 @@ const {Title} = Typography;
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: "#626cf5",
+            main: "#959bf1",
             light: '#3c44b126'
         },
         secondary: {
@@ -43,20 +42,21 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight: '100vh',
+        minHeight: '60vh',
         backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/drone0.jpg'})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
     appMain: {
-        paddingLeft: '320px',
+        paddingLeft: '100px',
         width: '100%'
     }
 }));
 
 function App() {
-    const [authed, setAuthed] = useState(false);
     const classes = useStyles();
+    const [authed, setAuthed] = useState(false);
+
 
     return (
         <Layout style={{height: "100vh"}}>
@@ -71,7 +71,7 @@ function App() {
                             lineHeight: "inherit",
                             marginBottom: 0,
                             display: "inline",
-                            marginLeft: 5
+                            marginLeft: 1
                         }}>
                         Lai Delivery
                     </Title>
@@ -81,7 +81,7 @@ function App() {
 
             </Header>
 
-
+            <ThemeProvider theme={theme}>
             <Content
                 style={{
                     padding: "40px 50px 50px 50px",
@@ -89,13 +89,14 @@ function App() {
                     overflowY: "auto",
                 }}
             >
-                {authed ? (
-                    <PackageList />
-                ) : (
-                    <LoginForm onSuccess={() => setAuthed(true)}/>
-                )}
+                <div className={classes.appMain}>
+                    {authed ? (
+                        <PackageList />
+                    ) : (
+                        <LoginForm onSuccess={() => setAuthed(true)}/>
+                    )}
+                </div>
             </Content>
-            <ThemeProvider theme={theme}>
 
                 <CssBaseline />
             </ThemeProvider>

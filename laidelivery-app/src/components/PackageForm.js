@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Grid, } from '@material-ui/core';
 import Controls from "../components/controls/Controls";
-import { useForm, Form } from './useForm';
+import { useForm, Form } from '../components/useForm';
 import * as packageService from "../services/packageService";
-import {getCategoryCollection} from '../services/packageService'
-import CustomDateTimePicker from './controls/DatePicker'
 
 
 const modeItems= [
@@ -14,17 +12,18 @@ const modeItems= [
 ]
 
 const initialFValues = {
-    packageId: 0,
+    id: 0,
     size: '',
     weight: '',
     content: '',
     mode: 'pickup',
-    categoryId: '',
+    categoryId:'',
     PickupDate: new Date('December 22, 2021 03:24:00'),
     isMember: false,
 }
 
-export default function PackageForm() {
+export default function PackageForm(props) {
+    const { addOrEdit, recordForEdit } = props
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -45,7 +44,7 @@ export default function PackageForm() {
             ...temp
         })
 
-        if (fieldValues == values)
+        if (fieldValues === values)
             return Object.values(temp).every(x => x === "")
     }
 
@@ -57,15 +56,21 @@ export default function PackageForm() {
         handleInputChange,
         resetForm
     } = useForm(initialFValues, true, validate);
-    values.centerId = undefined
+
 
     const handleSubmit = e => {
         e.preventDefault()
-        if (validate()){
-            packageService.insertPackage(values)
-            resetForm()
+        if (validate()) {
+            addOrEdit(values, resetForm);
         }
     }
+
+    useEffect(() => {
+        if (recordForEdit != null)
+            setValues({
+                ...recordForEdit
+            })
+    }, [recordForEdit])
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -110,10 +115,9 @@ export default function PackageForm() {
                         onChange={handleInputChange}
                         error={errors.shipTo}
                     />
-
-
                 </Grid>
-                <Grid item xs={5}>
+
+                <Grid item xs={6}>
                     <Controls.RadioGroup
                         name="Mode"
                         label="Mode"
@@ -123,13 +127,13 @@ export default function PackageForm() {
                     />
                     <Controls.Select
                         name="categoryId"
-                        label="categoryId"
+                        label="Category"
                         value={values.categoryId}
                         onChange={handleInputChange}
                         options={packageService.getCategoryCollection()}
                         error={errors.categoryId}
                     />
-                    <Controls.CustomDateTimePicker
+                    <Controls.DatePicker
                         name="PickupDate"
                         label="Pickup Time"
                         value={values.PickupDate}

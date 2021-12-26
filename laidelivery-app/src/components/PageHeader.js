@@ -1,24 +1,18 @@
 import React from 'react'
-import { Paper, Card, Typography, makeStyles, Button } from '@material-ui/core'
+import { Paper, Card, Typography, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: '#fdfdff'
     },
     pageHeader:{
-        padding:theme.spacing(4),
-        display:'flex',
-        marginBottom:theme.spacing(2)
-    },
-    pageIcon:{
-        display:'inline-block',
         padding:theme.spacing(2),
-        color:'#a7abee'
+        marginBottom:theme.spacing(2)
     },
     pageTitle:{
         paddingLeft:theme.spacing(4),
         '& .MuiTypography-subtitle2':{
-            opacity:'0.6'
+            opacity:'0.5'
         }
     }
 }))

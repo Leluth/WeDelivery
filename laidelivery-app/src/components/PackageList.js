@@ -2,18 +2,41 @@ import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
 import { useEffect, useState } from "react";
 import { addItemToCart, getPackage, getOrder } from "../utils";
 import { PlusOutlined } from "@ant-design/icons";
-import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone'
 import PackageForm from "./PackageForm";
-import { Paper,makeStyles } from '@material-ui/core';
+import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import * as PackageService from '../services/packageService';
+import useTable from "../components/useTable";
+import * as packageService from "../services/packageService";
+import Controls from "../components/controls/Controls";
+import AddIcon from '@material-ui/icons/Add';
+import Popup from "../components/Popup";
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import CloseIcon from '@material-ui/icons/Close';
+import ConfirmDialog from "../components/ConfirmDialog";
 
 
 const { Option } = Select;
 const useStyles = makeStyles(theme => ({
     pageContent: {
-        margin: theme.spacing(2),
-        padding: theme.spacing(2)
+        margin: theme.spacing(1),
+        padding: theme.spacing(1)
+    },
+    newButton: {
+        position: 'absolute',
+        right: '10px'
     }
 }))
+const headCells = [
+    { id: 'content', label: 'Package Content' },
+    { id: 'weight', label: 'Weight(lb)' },
+    { id: 'size', label: 'Size' },
+    { id: 'categoryId', label: 'Category' },
+    { id: 'actions', label: 'Actions', disableSorting: true },
+    { id: 'options', label: 'Options' },
+    { id: 'submit', label: 'Submit' },
+
+]
 
 const AddToCartButton = ({ itemId }) => {
     const [loading, setLoading] = useState(false);
@@ -49,8 +72,8 @@ const PackageList = () => {
 
     const useStyles = makeStyles(theme => ({
         pageContent: {
-            margin: theme.spacing(5),
-            padding: theme.spacing(3)
+            margin: theme.spacing(3),
+            padding: theme.spacing(1)
         }
     }))
 
@@ -85,37 +108,138 @@ const PackageList = () => {
     }, [curPackage]);
 
     const classes = useStyles();
+    const [recordForEdit, setRecordForEdit] = useState(null)
+    const [records, setRecords] = useState(PackageService.getAllPackage())
+    const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+    const [openPopup, setOpenPopup] = useState(false)
+    const [setNotify] = useState({ isOpen: false, message: '', type: '' })
+    const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
+
+    const {
+        TblContainer,
+        TblHead,
+        TblPagination,
+        recordsAfterPagingAndSorting
+    } = useTable(records, headCells, filterFn);
+
+
+    const addOrEdit = (Package, resetForm) => {
+        if (Package.id === 0)
+            packageService.insertPackage(Package)
+        else
+            packageService.updatePackage(Package)
+        resetForm()
+        setRecordForEdit(null)
+        setOpenPopup(false)
+        setRecords(packageService.getAllPackage())
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully',
+            type: 'success'
+        })
+    }
+
+    const openInPopup = item => {
+        setRecordForEdit(item)
+        setOpenPopup(true)
+    }
+
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        packageService.deletePackage(id);
+        setRecords(packageService.getAllPackage())
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully',
+            type: 'error'
+        })
+    }
+
     return (
         <>
             <PageHeader
-                title="New Package"
+                title="Package List"
                 subTitle="(Information)"
                 icon={<PeopleOutlineTwoToneIcon fontSize="small" />}
             />
             <Paper className={classes.pageContent}>
-                <PackageForm />
+                <Toolbar>
+                    <Controls.Button
+                        text="Add New package"
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        className={classes.newButton}
+                        onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
+                    />
+                </Toolbar>
+                <TblContainer>
+                    <TblHead />
+                    <TableBody>
+                        {
+                            recordsAfterPagingAndSorting().map(item =>
+                                (<TableRow key={item.id}>
+                                    <TableCell>{item.content}</TableCell>
+                                    <TableCell>{item.weight}</TableCell>
+                                    <TableCell>{item.size}</TableCell>
+                                    <TableCell>{item.categories}</TableCell>
+                                    <TableCell>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            onClick={() => { openInPopup(item) }}>
+                                            <EditOutlinedIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="secondary"
+                                            onClick={() => {
+                                                setConfirmDialog({
+                                                    isOpen: true,
+                                                    title: 'Are you sure to delete this record?',
+                                                    subTitle: "You can't undo this operation",
+                                                    onConfirm: () => { onDelete(item.id) }
+                                                })
+                                            }}>
+                                            <CloseIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                    </TableCell>
+                                    <TableCell>
+                                        <select>
+                                            <option value='drone'> Drone</option>
+                                            <option value='robot'> Robot</option>
+                                            <option value='combination'> Combination</option>
+                                        </select>
+                                    </TableCell>
+                                </TableRow>)
+                            )
+                        }
+                    </TableBody>
+                </TblContainer>
+                <TblPagination />
             </Paper>
-
-            <Select
-                value={curPackage}
-                onSelect={(value) => setCurpackage(value)}
-                placeholder="Select an option"
-                loading={loadingPack}
-                style={{marginleft:20, width: 300 }}
-
-                onChange={() => {}}
+            <Popup
+                title="Package Form"
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
             >
-                {orders.map((item) => {
-                    return <Option value={item.id}>{item.name}</Option>;
-                })}
-            </Select>
+                <PackageForm
+                    recordForEdit={recordForEdit}
+                    addOrEdit={addOrEdit} />
+            </Popup>
+
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />
+
 
             {curPackage && (
                 <List
-                    style={{ marginTop: 20 }}
+                    style={{ marginTop: 10 }}
                     loading={loading}
                     grid={{
-                        gutter: 16,
+                        gutter: 10,
                         xs: 1,
                         sm: 2,
                         md: 4,
@@ -133,7 +257,7 @@ const PackageList = () => {
                                 <img
                                     src={item.imageUrl}
                                     alt={item.name}
-                                    style={{ height: 340, width: "100%", display: "block" }}
+                                    style={{ height: 300, width: "100%", display: "block" }}
                                 />
                                 {`Price: ${item.price}`}
                             </Card>

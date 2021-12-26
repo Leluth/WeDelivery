@@ -6,16 +6,16 @@
 }
 
 .header.img {
-  margin-top: 30px;
+  margin-top: 200px;
   background : none;
 
 }
-
 .App {
   text-align: left;
 }
+
 .App-logo {
-  height: 6vmin;
+  height: 15vmin;
   pointer-events: none;
 }
 
@@ -26,19 +26,19 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #a9ee56;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
-  font-size: 10vh;
+  font-size: 8vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(8px + 2vmin);
   color: white;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #9dbcf5;
 }
 
 @keyframes App-logo-spin {

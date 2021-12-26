@@ -1,6 +1,6 @@
 const KEYS ={
-    package:'package',
-    packageId:'packageId'
+    packages:'packages',
+    packageId:'packageId',
 }
 
 export const getCategoryCollection = ()=>([
@@ -11,12 +11,24 @@ export const getCategoryCollection = ()=>([
 ])
 
 export function insertPackage(data) {
-    let Package = getAllPackage();
+    let packages = getAllPackage();
     data['id'] = generatePackageId()
-    Package.push(data)
-    localStorage.setItem(KEYS.package,JSON.stringify(Package))
+    packages.push(data)
+    localStorage.setItem(KEYS.packages,JSON.stringify(packages))
 }
 
+export function updatePackage(data) {
+    let packages = getAllPackage();
+    let recordIndex = packages.findIndex(x => x.id === data.id);
+    packages[recordIndex] = { ...data }
+    localStorage.setItem(KEYS.packages, JSON.stringify(packages));
+}
+
+export function deletePackage(id) {
+    let packages = getAllPackage();
+    packages = packages.filter(x => x.id !== id)
+    localStorage.setItem(KEYS.packages, JSON.stringify(packages));
+}
 export function generatePackageId() {
     if (localStorage.getItem(KEYS.packageId) == null)
         localStorage.setItem(KEYS.packageId, '0')
@@ -25,8 +37,17 @@ export function generatePackageId() {
     return id;
 }
 
+
 export function getAllPackage() {
-    if (localStorage.getItem(KEYS.package) == null)
-        localStorage.setItem(KEYS.package, JSON.stringify([]))
-    return JSON.parse(localStorage.getItem(KEYS.package));
+    if (localStorage.getItem(KEYS.packages) == null)
+        localStorage.setItem(KEYS.packages, JSON.stringify([]))
+    let packages = JSON.parse(localStorage.getItem(KEYS.packages));
+    //map categoryID to category title
+    let categories = getCategoryCollection();
+    return packages.map(x => ({
+        ...x,
+        category: categories[x.categoryId - 1].title
+
+    }
+    ))
 }

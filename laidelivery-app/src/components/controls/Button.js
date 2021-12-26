@@ -20,7 +20,7 @@ export default function Button(props) {
         <MuiButton
             variant={variant || "contained"}
             size={size || "small"}
-            color={color || "inherit"}
+            color={color || "primary"}
             onClick={onClick}
             {...other}
             classes={{ root: classes.root, label: classes.label }}>
