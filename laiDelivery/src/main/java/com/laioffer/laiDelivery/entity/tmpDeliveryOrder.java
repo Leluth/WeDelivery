@@ -6,18 +6,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "deliverorder")
-public class DeliveryOrder implements Serializable {
-
-    private static final long serialVersionUID = -2455760938054036364L;
+@Table(name = "tmpdeliverorder")
+public class tmpDeliveryOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne
-    @JsonIgnore
-    private Cart cart;
+    // to be determined, I don't think we need to link the tmp DB with cart,
+    // need frontend/backend's feedback
+//    @ManyToOne
+//    @JsonIgnore
+//    private Cart cart;
 
     private double weight;
 
@@ -60,13 +60,13 @@ public class DeliveryOrder implements Serializable {
 
     //
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
+//    public Cart getCart() {
+//        return cart;
+//    }
+//
+//    public void setCart(Cart cart) {
+//        this.cart = cart;
+//    }
 
     public int getId() {
         return id;
