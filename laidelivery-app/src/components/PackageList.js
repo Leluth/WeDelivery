@@ -1,6 +1,6 @@
 import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
-import { useEffect, useState } from "react";
-import { addItemToCart, getPackage, getOrder } from "../utils";
+import React, { useEffect, useState } from "react";
+import {addItemToCart, getPackage, getOrder, getDeliveryOptions} from "../utils";
 import { PlusOutlined } from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -70,6 +70,9 @@ const PackageList = () => {
     const [loading, setLoading] = useState(false);
     const [loadingPack, setLoadingPack] = useState(false);
 
+    // const [deliveryOpt, setDeliveryOpt] = useState();
+    // const [deliveryParams, setDeliveryParams] = useState();
+
     const useStyles = makeStyles(theme => ({
         pageContent: {
             margin: theme.spacing(3),
@@ -106,6 +109,22 @@ const PackageList = () => {
                 });
         }
     }, [curPackage]);
+
+    // useEffect(() => {
+    //     if (deliveryOpt) {
+    //         setLoading(true);
+    //         getDeliveryOptions(deliveryParams)
+    //             .then((data) => {
+    //                 setDeliveryOpt(data);
+    //             })
+    //             .catch((err) => {
+    //                 message.error(err.message);
+    //             })
+    //             .finally(() => {
+    //                 setLoading(false);
+    //             });
+    //     }
+    // }, [deliveryOpt]);
 
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
@@ -184,13 +203,15 @@ const PackageList = () => {
                                     <TableCell>{item.content}</TableCell>
                                     <TableCell>{item.weight}</TableCell>
                                     <TableCell>{item.size}</TableCell>
-                                    <TableCell>{item.categories}</TableCell>
+                                    <TableCell>{item.category}</TableCell>
+
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
                                             onClick={() => { openInPopup(item) }}>
                                             <EditOutlinedIcon fontSize="small" />
                                         </Controls.ActionButton>
+
                                         <Controls.ActionButton
                                             color="secondary"
                                             onClick={() => {
@@ -204,12 +225,19 @@ const PackageList = () => {
                                             <CloseIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>
+
                                     <TableCell>
                                         <select>
                                             <option value='drone'> Drone</option>
                                             <option value='robot'> Robot</option>
                                             <option value='combination'> Combination</option>
                                         </select>
+                                    </TableCell>
+
+                                    <TableCell>
+                                        <Controls.Button
+                                            type="submit"
+                                            text="Submit" />
                                     </TableCell>
                                 </TableRow>)
                             )
