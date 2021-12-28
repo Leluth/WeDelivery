@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>Log In</title>
+<style id="applicationStylesheet" type="text/css">
+	.mediaViewInfo {
+		--web-view-name: Log In;
+		--web-view-id: Log_In;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Log_In;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	#Log_In {
+		position: absolute;
+		box-sizing: border-box;
+		background: #E5E5E5;
+		width: 1920px;
+		height: 1336px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+		--web-view-name: Log In;
+		--web-view-id: Log_In;
+		--web-enable-deep-linking: true;
+	}
+	#Banner {
+		position: absolute;
+		width: 1825px;
+		height: 874px;
+		left: 0px;
+		top: 8px;
+		overflow: visible;
+	}
+	#Get_started_button {
+		position: absolute;
+		width: 131px;
+		height: 60px;
+		left: 119px;
+		top: 422px;
+		overflow: visible;
+	}
+	.Rounded_Rectangle_10_copy {
+		position: absolute;
+		overflow: visible;
+		width: 131px;
+		height: 60px;
+		left: 0px;
+		top: 0px;
+	}
+	#Log_In_A1_Text_1 {
+		position: absolute;
+		left: 36px;
+		top: 19px;
+		overflow: visible;
+		width: 61px;
+		white-space: nowrap;
+		line-height: 30px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#logo {
+		position: absolute;
+		width: 92px;
+		height: 46px;
+		left: 61px;
+		top: 0px;
+		overflow: visible;
+	}
+	#LSD {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+		width: 93px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 46px;
+		color: rgba(40,40,40,1);
+	}
+	#other_style {
+		position: absolute;
+		width: 1541px;
+		height: 253px;
+		left: 0px;
+		top: 621px;
+		overflow: visible;
+	}
+	.Ellipse_ {
+		position: absolute;
+		overflow: visible;
+		width: 14px;
+		height: 14px;
+		left: 1527px;
+		top: 239px;
+	}
+	.Ellipse {
+		position: absolute;
+		overflow: visible;
+		width: 14px;
+		height: 14px;
+		left: 0px;
+		top: 0px;
+	}
+	#Grid {
+		position: absolute;
+		width: 35px;
+		height: 19.01px;
+		left: 192px;
+		top: 5.99px;
+		overflow: visible;
+	}
+	.Shape_2_copy {
+		position: absolute;
+		overflow: visible;
+		width: 25px;
+		height: 1px;
+		left: 0px;
+		top: 18.01px;
+	}
+	.Shape_2_copy_3 {
+		position: absolute;
+		overflow: visible;
+		width: 25px;
+		height: 1px;
+		left: 0px;
+		top: 0px;
+	}
+	.Shape_2_copy_2 {
+		position: absolute;
+		overflow: visible;
+		width: 35px;
+		height: 1px;
+		left: 0px;
+		top: 9.01px;
+	}
+	#Log_in {
+		position: absolute;
+		width: 48px;
+		height: 48px;
+		left: 1683px;
+		top: 0px;
+		overflow: visible;
+	}
+	.Ellipse_239 {
+		position: absolute;
+		overflow: visible;
+		width: 48px;
+		height: 48px;
+		left: 0px;
+		top: 0px;
+	}
+	.Ellipse_240 {
+		position: absolute;
+		overflow: visible;
+		width: 15px;
+		height: 15px;
+		left: 17px;
+		top: 7px;
+	}
+	.Ellipse_241 {
+		position: absolute;
+		overflow: visible;
+		width: 26px;
+		height: 15px;
+		left: 11px;
+		top: 25px;
+	}
+	#Login_New_to_LSD_ {
+		position: absolute;
+		left: 123px;
+		top: 116px;
+		overflow: visible;
+		width: 100px;
+		white-space: nowrap;
+		line-height: 30px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(40,40,40,1);
+	}
+	#Sign_Up {
+		position: absolute;
+		left: 1749px;
+		top: 13px;
+		overflow: visible;
+		width: 77px;
+		white-space: nowrap;
+		line-height: 30px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(40,40,40,1);
+	}
+	#SignUp {
+		position: absolute;
+		left: 239px;
+		top: 148px;
+		overflow: visible;
+		width: 57px;
+		white-space: nowrap;
+		line-height: 30px;
+		margin-top: -7px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px;
+		color: rgba(18,100,185,1);
+		text-decoration: true;
+	}
+	#Email_or_Username_ {
+		position: absolute;
+		left: 121px;
+		top: 209px;
+		overflow: visible;
+		width: 189px;
+		white-space: nowrap;
+		line-height: 30px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(40,40,40,1);
+	}
+	#Password_ {
+		position: absolute;
+		left: 121px;
+		top: 311px;
+		overflow: visible;
+		width: 102px;
+		white-space: nowrap;
+		line-height: 30px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(40,40,40,1);
+	}
+	.Rectangle_1 {
+		position: absolute;
+		overflow: visible;
+		width: 223px;
+		height: 37px;
+		left: 121px;
+		top: 248px;
+	}
+	.Rectangle_2 {
+		position: absolute;
+		overflow: visible;
+		width: 223px;
+		height: 36px;
+		left: 121px;
+		top: 360px;
+	}
+	#Footer {
+		position: absolute;
+		width: 1931px;
+		height: 764.463px;
+		left: -11px;
+		top: 572.768px;
+		overflow: visible;
+	}
+	#Bg_ {
+		position: absolute;
+		width: 1931px;
+		height: 764px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	.Rectangle_651 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 1931px;
+		height: 764px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Site_map {
+		position: absolute;
+		width: 183.314px;
+		height: 361.796px;
+		left: 743.1px;
+		top: 219.002px;
+		overflow: visible;
+	}
+	#This_Site {
+		position: absolute;
+		left: 1.377px;
+		top: 0px;
+		overflow: hidden;
+		width: 150.057px;
+		height: 64.667px;
+		line-height: 36px;
+		margin-top: -8px;
+		text-align: left;
+		font-family: Nunito;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(36,36,37,1);
+	}
+	#Tracking_Shipping_Contact_ {
+		opacity: 0.8;
+		position: absolute;
+		left: 0px;
+		top: 67.796px;
+		overflow: hidden;
+		width: 184.314px;
+		height: 294px;
+		line-height: 38px;
+		margin-top: -10px;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(36,36,37,1);
+	}
+	#Solution {
+		position: absolute;
+		width: 814px;
+		height: 436px;
+		left: 373px;
+		top: 219.002px;
+		overflow: visible;
+	}
+	#logo_ {
+		position: absolute;
+		width: 234px;
+		height: 436px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Logo {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: -2600px;
+		top: -791.77px;
+		overflow: visible;
+	}
+	#Text {
+		position: absolute;
+		width: 178px;
+		height: 16px;
+		left: 56px;
+		top: 420px;
+		overflow: visible;
+	}
+	#Copyrights__2021_UPCA {
+		opacity: 0.8;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+		width: 179px;
+		white-space: nowrap;
+		line-height: 36px;
+		margin-top: -10px;
+		text-align: center;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(36,36,37,1);
+	}
+	#LSD_A1_Text_11 {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+		width: 93px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 46px;
+		color: rgba(40,40,40,1);
+	}
+	#Connect_With_Us {
+		position: absolute;
+		left: 632.063px;
+		top: 0px;
+		overflow: hidden;
+		width: 175.057px;
+		height: 102.667px;
+		line-height: 36px;
+		margin-top: -8px;
+		text-align: left;
+		font-family: Nunito;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(36,36,37,1);
+	}
+	#Facebook_Twitter_Instagram_Lin {
+		opacity: 0.8;
+		position: absolute;
+		left: 630.686px;
+		top: 67.796px;
+		overflow: hidden;
+		width: 184.314px;
+		height: 238px;
+		line-height: 38px;
+		margin-top: -10px;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(36,36,37,1);
+	}
+	#Privacy {
+		position: absolute;
+		width: 327.656px;
+		height: 158px;
+		left: 374.686px;
+		top: 313.997px;
+		overflow: visible;
+	}
+	#San_Francisco__USA {
+		opacity: 0.8;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		overflow: hidden;
+		width: 314.064px;
+		height: 73.14px;
+		line-height: 28px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(36,36,37,1);
+	}
+	#Tel__xxx_xxx_xxxx {
+		opacity: 0.902;
+		position: absolute;
+		left: 0px;
+		top: 79px;
+		overflow: hidden;
+		width: 328.656px;
+		height: 46px;
+		line-height: 28px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(36,36,37,1);
+	}
+	#Email__xxxx_xxxx_com {
+		opacity: 0.8;
+		position: absolute;
+		left: 0px;
+		top: 112px;
+		overflow: hidden;
+		width: 328.656px;
+		height: 46px;
+		line-height: 28px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(36,36,37,1);
+	}
+	#Text_A1_Group_15 {
+		position: absolute;
+		width: 318px;
+		height: 16px;
+		left: 1231.12px;
+		top: 639.001px;
+		overflow: visible;
+	}
+	#Privacy_Policy___Customer_Supp {
+		opacity: 0.8;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+		width: 319px;
+		white-space: nowrap;
+		line-height: 36px;
+		margin-top: -10px;
+		text-align: center;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(36,36,37,1);
+	}
+	#other_style_A1_Group_16 {
+		position: absolute;
+		width: 14px;
+		height: 14px;
+		left: 146px;
+		top: 243.001px;
+		overflow: visible;
+	}
+	.Ellipse_16_copy_22 {
+		position: absolute;
+		overflow: visible;
+		width: 14px;
+		height: 14px;
+		left: 0px;
+		top: 0px;
+	}
+	#App_Store {
+		position: absolute;
+		width: 250.486px;
+		height: 55.996px;
+		left: 834.757px;
+		top: 627.003px;
+		overflow: visible;
+	}
+	#Mobile_Apps___ {
+		opacity: 0.902;
+		position: absolute;
+		left: 0px;
+		top: 9.996px;
+		overflow: hidden;
+		width: 119.822px;
+		height: 46px;
+		line-height: 28px;
+		margin-top: -5px;
+		text-align: left;
+		font-family: Overpass;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(36,36,37,1);
+	}
+	#Download_on_the_App_Store_Badg {
+		position: absolute;
+		width: 119.664px;
+		height: 40px;
+		left: 130.822px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_252 {
+		position: absolute;
+		width: 119.664px;
+		height: 40px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_250 {
+		position: absolute;
+		width: 119.664px;
+		height: 40px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	.Path_2830 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 119.664px;
+		height: 40px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2831 {
+		overflow: visible;
+		position: absolute;
+		top: 0.875px;
+		left: 0.873px;
+		width: 117.918px;
+		height: 38.252px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#_Group_ {
+		position: absolute;
+		width: 99.516px;
+		height: 24.771px;
+		left: 9.972px;
+		top: 8.72px;
+		overflow: visible;
+	}
+	#_Group__A1_Group_22 {
+		position: absolute;
+		width: 17.717px;
+		height: 21.776px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#_Group__A1_Group_23 {
+		position: absolute;
+		width: 17.717px;
+		height: 21.776px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	._Path_ {
+		overflow: visible;
+		position: absolute;
+		top: 5.253px;
+		left: 0px;
+		width: 17.717px;
+		height: 16.523px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	._Path__A1_Path_5 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 8.819px;
+		width: 4.375px;
+		height: 5.021px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_251 {
+		position: absolute;
+		width: 75.061px;
+		height: 15.62px;
+		left: 24.456px;
+		top: 9.151px;
+		overflow: visible;
+	}
+	.Path_2832 {
+		overflow: visible;
+		position: absolute;
+		top: 0.207px;
+		left: 0px;
+		width: 11.05px;
+		height: 12.418px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2833 {
+		overflow: visible;
+		position: absolute;
+		top: 3.475px;
+		left: 12.204px;
+		width: 8.528px;
+		height: 12.145px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2834 {
+		overflow: visible;
+		position: absolute;
+		top: 3.475px;
+		left: 22.169px;
+		width: 8.528px;
+		height: 12.145px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2835 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 35.381px;
+		width: 9.527px;
+		height: 12.832px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2836 {
+		overflow: visible;
+		position: absolute;
+		top: 1.429px;
+		left: 45.735px;
+		width: 4.905px;
+		height: 11.249px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2837 {
+		overflow: visible;
+		position: absolute;
+		top: 3.46px;
+		left: 51.638px;
+		width: 8.589px;
+		height: 9.277px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2838 {
+		overflow: visible;
+		position: absolute;
+		top: 3.475px;
+		left: 61.759px;
+		width: 4.63px;
+		height: 9.15px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2839 {
+		overflow: visible;
+		position: absolute;
+		top: 3.46px;
+		left: 66.79px;
+		width: 8.271px;
+		height: 9.277px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#_Group__A1_Group_25 {
+		position: absolute;
+		width: 69.144px;
+		height: 6.358px;
+		left: 35.671px;
+		top: 8.437px;
+		overflow: visible;
+	}
+	#Group_253 {
+		position: absolute;
+		width: 69.144px;
+		height: 6.358px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	.Path_2840 {
+		overflow: visible;
+		position: absolute;
+		top: 0.287px;
+		left: 0px;
+		width: 4.984px;
+		height: 5.974px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2841 {
+		overflow: visible;
+		position: absolute;
+		top: 1.671px;
+		left: 6px;
+		width: 4.267px;
+		height: 4.677px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2842 {
+		overflow: visible;
+		position: absolute;
+		top: 1.758px;
+		left: 10.898px;
+		width: 6.24px;
+		height: 4.503px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2843 {
+		overflow: visible;
+		position: absolute;
+		top: 1.666px;
+		left: 18.183px;
+		width: 3.84px;
+		height: 4.594px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2844 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 23.423px;
+		width: 0.889px;
+		height: 6.261px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2845 {
+		overflow: visible;
+		position: absolute;
+		top: 1.671px;
+		left: 25.537px;
+		width: 4.268px;
+		height: 4.677px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2846 {
+		overflow: visible;
+		position: absolute;
+		top: 1.671px;
+		left: 30.73px;
+		width: 3.779px;
+		height: 4.671px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2847 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 35.677px;
+		width: 4.205px;
+		height: 6.336px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2848 {
+		overflow: visible;
+		position: absolute;
+		top: 1.671px;
+		left: 43.549px;
+		width: 4.267px;
+		height: 4.677px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2849 {
+		overflow: visible;
+		position: absolute;
+		top: 1.666px;
+		left: 48.999px;
+		width: 3.84px;
+		height: 4.594px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2850 {
+		overflow: visible;
+		position: absolute;
+		top: 0.637px;
+		left: 56.24px;
+		width: 2.58px;
+		height: 5.649px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2851 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 60.034px;
+		width: 3.888px;
+		height: 6.261px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2852 {
+		overflow: visible;
+		position: absolute;
+		top: 1.671px;
+		left: 65.04px;
+		width: 4.104px;
+		height: 4.688px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.Path_2862 {
+		overflow: visible;
+		position: absolute;
+		top: 535.299px;
+		left: 8.578px;
+		width: 420.418px;
+		height: 229.164px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#noun_delivery_robot_3764162 {
+		transform: rotate(-11deg);
+		transform-origin: left;
+		position: absolute;
+		width: 291.409px;
+		height: 295.761px;
+		left: 52.46px;
+		top: 313.997px;
+		overflow: visible;
+	}
+	#Group_254 {
+		transform: rotate(36deg);
+		transform-origin: left;
+		position: absolute;
+		width: 200.347px;
+		height: 220.02px;
+		left: 33.964px;
+		top: 30.927px;
+		overflow: visible;
+	}
+	.Path_2865 {
+		overflow: visible;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 274.561px;
+		height: 284.076px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+</style>
+</head>
+<body>
+<div id="Log_In">
+	<div id="Banner">
+		<div id="Get_started_button">
+			<svg class="Rounded_Rectangle_10_copy">
+				<rect fill="rgba(242,207,43,1)" id="Rounded_Rectangle_10_copy" rx="30" ry="30" x="0" y="0" width="131" height="60">
+				</rect>
+			</svg>
+			<div id="Log_In_A1_Text_1">
+				<span>Log In</span>
+			</div>
+		</div>
+		<div id="logo">
+			<div id="LSD">
+				<span>LSD</span>
+			</div>
+		</div>
+		<div id="other_style">
+			<svg class="Ellipse_">
+				<ellipse fill="rgba(186,246,250,1)" id="Ellipse_" rx="7" ry="7" cx="7" cy="7">
+				</ellipse>
+			</svg>
+			<svg class="Ellipse">
+				<ellipse fill="rgba(186,246,250,0)" stroke="rgba(186,246,250,1)" stroke-width="3px" stroke-linejoin="round" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Ellipse" rx="7" ry="7" cx="7" cy="7">
+				</ellipse>
+			</svg>
+		</div>
+		<div id="Grid">
+			<svg class="Shape_2_copy">
+				<rect fill="rgba(242,207,43,1)" id="Shape_2_copy" rx="0" ry="0" x="0" y="0" width="25" height="1">
+				</rect>
+			</svg>
+			<svg class="Shape_2_copy_3">
+				<rect fill="rgba(242,207,43,1)" id="Shape_2_copy_3" rx="0" ry="0" x="0" y="0" width="25" height="1">
+				</rect>
+			</svg>
+			<svg class="Shape_2_copy_2">
+				<rect fill="rgba(242,207,43,1)" id="Shape_2_copy_2" rx="0" ry="0" x="0" y="0" width="35" height="1">
+				</rect>
+			</svg>
+		</div>
+		<div id="Log_in">
+			<svg class="Ellipse_239">
+				<ellipse fill="rgba(242,207,43,1)" id="Ellipse_239" rx="24" ry="24" cx="24" cy="24">
+				</ellipse>
+			</svg>
+			<svg class="Ellipse_240">
+				<ellipse fill="rgba(255,255,255,1)" stroke="rgba(112,112,112,1)" stroke-width="1px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Ellipse_240" rx="7.5" ry="7.5" cx="7.5" cy="7.5">
+				</ellipse>
+			</svg>
+			<svg class="Ellipse_241">
+				<ellipse fill="rgba(255,255,255,1)" stroke="rgba(112,112,112,1)" stroke-width="1px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Ellipse_241" rx="13" ry="7.5" cx="13" cy="7.5">
+				</ellipse>
+			</svg>
+		</div>
+		<div id="Login_New_to_LSD_">
+			<span>Login</span><br><span style="font-size:16px;">New to LSD?</span>
+		</div>
+		<div id="Sign_Up">
+			<span>Sign Up</span>
+		</div>
+		<div id="SignUp">
+			<span>SignUp</span>
+		</div>
+	</div>
+	<div id="Email_or_Username_">
+		<span>Email or Username:</span>
+	</div>
+	<div id="Password_">
+		<span>Password:</span>
+	</div>
+	<svg class="Rectangle_1">
+		<rect fill="rgba(255,255,255,1)" stroke="rgba(112,112,112,1)" stroke-width="1px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Rectangle_1" rx="0" ry="0" x="0" y="0" width="223" height="37">
+		</rect>
+	</svg>
+	<svg class="Rectangle_2">
+		<rect fill="rgba(255,255,255,1)" stroke="rgba(112,112,112,1)" stroke-width="1px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Rectangle_2" rx="0" ry="0" x="0" y="0" width="223" height="36">
+		</rect>
+	</svg>
+	<div id="Footer">
+		<div id="Bg_">
+			<svg class="Rectangle_651" viewBox="-8 9432.999 1931 764">
+				<path fill="rgba(242,207,43,0.647)" id="Rectangle_651" d="M -4.999899864196777 9521.9990234375 C 633.9998779296875 9345.9990234375 1286.999877929688 9619.9990234375 1919.999877929688 9432.9990234375 C 1922.999755859375 9774.3330078125 1923 9985.666015625 1922.999755859375 10196.9990234375 C 1279.333251953125 10196.9990234375 635.6666870117188 10196.9990234375 -7.999899864196777 10196.9990234375 C -7.999899864196777 9985.666015625 -7.999899864196777 9774.3330078125 -4.999899864196777 9521.9990234375 C -4.999899864196777 9521.9990234375 -4.999899864196777 9521.9990234375 -4.999899864196777 9521.9990234375 Z">
+				</path>
+			</svg>
+		</div>
+		<div id="Site_map">
+			<div id="This_Site">
+				<span>This Site</span>
+			</div>
+			<div id="Tracking_Shipping_Contact_">
+				<span>Tracking<br/>Shipping<br/>Contact</span><br>
+			</div>
+		</div>
+		<div id="Solution">
+			<div id="logo_">
+				<div id="Logo">
+				</div>
+				<div id="Text">
+					<div id="Copyrights__2021_UPCA">
+						<span>Copyrights ©2021 UPCA</span>
+					</div>
+				</div>
+				<div id="LSD_A1_Text_11">
+					<span>LSD</span>
+				</div>
+			</div>
+			<div id="Connect_With_Us">
+				<span>Connect With Us</span>
+			</div>
+			<div id="Facebook_Twitter_Instagram_Lin">
+				<span>Facebook<br/>Twitter<br/>Instagram<br/>LinkedIn</span>
+			</div>
+		</div>
+		<div id="Privacy">
+			<div id="San_Francisco__USA">
+				<span>San Francisco, USA</span>
+			</div>
+			<div id="Tel__xxx_xxx_xxxx">
+				<span>Tel: xxx-xxx-xxxx</span>
+			</div>
+			<div id="Email__xxxx_xxxx_com">
+				<span>Email: xxxx@xxxx.com</span>
+			</div>
+		</div>
+		<div id="Text_A1_Group_15">
+			<div id="Privacy_Policy___Customer_Supp">
+				<span>Privacy Policy   Customer Support   Careers </span>
+			</div>
+		</div>
+		<div id="other_style_A1_Group_16">
+			<svg class="Ellipse_16_copy_22">
+				<ellipse fill="rgba(236,186,250,0)" stroke="rgba(236,186,250,1)" stroke-width="3px" stroke-linejoin="round" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Ellipse_16_copy_22" rx="7" ry="7" cx="7" cy="7">
+				</ellipse>
+			</svg>
+		</div>
+		<div id="App_Store">
+			<div id="Mobile_Apps___">
+				<span>Mobile Apps :</span><br>
+			</div>
+			<div id="Download_on_the_App_Store_Badg">
+				<div id="Group_252">
+					<div id="Group_250">
+						<svg class="Path_2830" viewBox="0 0 119.664 40">
+							<path fill="rgba(166,166,166,1)" id="Path_2830" d="M 110.1347732543945 0 L 9.534680366516113 0 C 9.167980194091797 0 8.805680274963379 0 8.439949989318848 0.002000000094994903 C 8.13379955291748 0.004000000189989805 7.830090045928955 0.009809999726712704 7.520999908447266 0.01470000017434359 C 6.849514007568359 0.02260112762451172 6.179606914520264 0.08167552947998047 5.51710033416748 0.1914100646972656 C 4.855525016784668 0.303532600402832 4.214673042297363 0.5149154663085938 3.616220712661743 0.8184094429016113 C 3.018501281738281 1.124469757080078 2.472346782684326 1.52216625213623 1.99757194519043 1.997068405151367 C 1.520303249359131 2.470635652542114 1.122463226318359 3.018015623092651 0.8193492889404297 3.618160486221313 C 0.5154008865356445 4.217108726501465 0.3046407699584961 4.858937740325928 0.1943507194519043 5.52147912979126 C 0.08301067352294922 6.183180809020996 0.02309799194335938 6.852516651153564 0.01515007019042969 7.523477077484131 C 0.005869999993592501 7.830080032348633 0.004889999981969595 8.137700080871582 0 8.444339752197266 L 0 31.5585994720459 C 0.004889999981969595 31.86909866333008 0.005869999993592501 32.16989898681641 0.01515000034123659 32.48049926757812 C 0.02310276031494141 33.15143203735352 0.08301448822021484 33.82073211669922 0.1943511962890625 34.48240280151367 C 0.3043375015258789 35.14533233642578 0.515108585357666 35.78752899169922 0.8193492889404297 36.38669967651367 C 1.122326850891113 36.98490524291992 1.520222663879395 37.53006744384766 1.997572422027588 38.00099945068359 C 2.470546960830688 38.47801208496094 3.017053604125977 38.8759765625 3.616220235824585 39.17969512939453 C 4.214669227600098 39.48400497436523 4.855451583862305 39.69664764404297 5.517101287841797 39.81050109863281 C 6.179721832275391 39.91935729980469 6.849560260772705 39.97845077514648 7.521002292633057 39.98729705810547 C 7.830090045928955 39.99409866333008 8.13379955291748 39.99799728393555 8.439949989318848 39.99799728393555 C 8.805669784545898 40 9.168000221252441 40 9.534680366516113 40 L 110.1347732543945 40 C 110.4941711425781 40 110.859375 40 111.2187728881836 39.99800109863281 C 111.5234756469727 39.99800109863281 111.8359756469727 39.99410247802734 112.1406707763672 39.98730087280273 C 112.8108520507812 39.97892761230469 113.4794311523438 39.91982269287109 114.1406784057617 39.81050109863281 C 114.8044509887695 39.69584655761719 115.4475326538086 39.48326110839844 116.0488662719727 39.1796989440918 C 116.6474914550781 38.87579727172852 117.1935043334961 38.47784423828125 117.6660766601562 38.00099563598633 C 118.1421890258789 37.52821731567383 118.5409393310547 36.98345565795898 118.8476791381836 36.38669967651367 C 119.1496353149414 35.78709030151367 119.3584060668945 35.14494323730469 119.4667816162109 34.48240280151367 C 119.5782928466797 33.82064056396484 119.6403350830078 33.15148544311523 119.6523742675781 32.48050308227539 C 119.6562805175781 32.16990280151367 119.6562805175781 31.86910247802734 119.6562805175781 31.55860328674316 C 119.6640777587891 31.19530296325684 119.6640777587891 30.83400344848633 119.6640777587891 30.46480369567871 L 119.6640777587891 9.536129951477051 C 119.6640777587891 9.169919967651367 119.6640777587891 8.806639671325684 119.6562805175781 8.444339752197266 C 119.6562805175781 8.137700080871582 119.6562805175781 7.830079555511475 119.6523818969727 7.523439884185791 C 119.6403427124023 6.85242223739624 119.5783081054688 6.183235645294189 119.4667892456055 5.521439552307129 C 119.3581008911133 4.859281539916992 119.1493453979492 4.217503547668457 118.8476715087891 3.618121385574341 C 118.2304077148438 2.415196418762207 117.251594543457 1.436025142669678 116.0488891601562 0.8183183670043945 C 115.4475479125977 0.5155692100524902 114.8043975830078 0.3042416572570801 114.1406784057617 0.1913213729858398 C 113.4795455932617 0.08110332489013672 112.8108978271484 0.02200698852539062 112.1406860351562 0.01455974578857422 C 111.8359756469727 0.009679820388555527 111.5234756469727 0.00381982047110796 111.2187805175781 0.001869820058345795 C 110.8593826293945 -0.0001301800366491079 110.4941787719727 -0.0001301800366491079 110.1347808837891 -0.0001301800366491079 Z">
+							</path>
+						</svg>
+						<svg class="Path_2831" viewBox="0.873 0.875 117.918 38.252">
+							<path fill="rgba(0,0,0,1)" id="Path_2831" d="M 8.444829940795898 39.125 C 8.14015007019043 39.125 7.842829704284668 39.12110137939453 7.540539741516113 39.11429977416992 C 6.914322853088379 39.10614013671875 6.289568424224854 39.0516242980957 5.671401977539062 38.95120239257812 C 5.094992637634277 38.8519287109375 4.536605834960938 38.66726684570312 4.014660835266113 38.40329742431641 C 3.497503995895386 38.14152145385742 3.025813817977905 37.79827117919922 2.617661952972412 37.38669586181641 C 2.203601837158203 36.97997283935547 1.858877658843994 36.50823974609375 1.597150325775146 35.99019622802734 C 1.332539081573486 35.46878814697266 1.149412631988525 34.90989685058594 1.054149627685547 34.3329963684082 C 0.9512739181518555 33.71311569213867 0.8956136703491211 33.08631134033203 0.8876495361328125 32.45800018310547 C 0.8813101053237915 32.24709701538086 0.8730101585388184 31.54489707946777 0.8730101585388184 31.54489707946777 L 0.8730101585388184 8.444339752197266 C 0.8730101585388184 8.444339752197266 0.881850004196167 7.752930164337158 0.8877000212669373 7.549799919128418 C 0.89532470703125 6.922481536865234 0.9506616592407227 6.296652793884277 1.053229331970215 5.677729606628418 C 1.14866828918457 5.099249362945557 1.331936836242676 4.538748264312744 1.59669017791748 4.015629768371582 C 1.857454776763916 3.497943878173828 2.200264453887939 3.02586030960083 2.611830234527588 2.617679834365845 C 3.022934198379517 2.205620288848877 3.496133327484131 1.860602855682373 4.014171600341797 1.595209121704102 C 4.534915924072266 1.332092761993408 5.092246055603027 1.14873218536377 5.667490005493164 1.05126953125 C 6.287689208984375 0.9498367309570312 6.914612770080566 0.8949966430664062 7.543002128601074 0.8872108459472656 L 8.445320129394531 0.875 L 111.2138671875 0.875 L 112.1269683837891 0.8877000212669373 C 112.749641418457 0.8950996398925781 113.3708648681641 0.9494514465332031 113.9853668212891 1.050292015075684 C 114.5664367675781 1.148975849151611 115.1295700073242 1.333615779876709 115.6562652587891 1.598139762878418 C 116.6940841674805 2.132987022399902 117.5385360717773 2.979164600372314 118.0712585449219 4.018071174621582 C 118.331787109375 4.537577629089355 118.5122299194336 5.093506813049316 118.6064682006836 5.666990280151367 C 118.7102508544922 6.290992259979248 118.7683334350586 6.921739101409912 118.7802581787109 7.554200172424316 C 118.7831649780273 7.837399959564209 118.7831649780273 8.141600608825684 118.7831649780273 8.444339752197266 C 118.7910614013672 8.819339752197266 118.7910614013672 9.17626953125 118.7910614013672 9.536129951477051 L 118.7910614013672 30.46479988098145 C 118.7910614013672 30.82810020446777 118.7910614013672 31.1826000213623 118.7831649780273 31.53999900817871 C 118.7831649780273 31.86519813537598 118.7831649780273 32.1630973815918 118.7792663574219 32.46969985961914 C 118.7676086425781 33.09087753295898 118.7104873657227 33.71036529541016 118.6083679199219 34.32320404052734 C 118.5150527954102 34.90426254272461 118.3329238891602 35.46751022338867 118.068359375 35.99319458007812 C 117.8047866821289 36.505615234375 117.462043762207 36.97326278686523 117.0527648925781 37.37889862060547 C 116.6442489624023 37.79268264770508 116.1717300415039 38.13794326782227 115.6533737182617 38.40139770507812 C 115.1281356811523 38.66738891601562 114.5658187866211 38.85273742675781 113.9853668212891 38.95119476318359 C 113.3672485351562 39.05215454101562 112.742431640625 39.1066780090332 112.1161651611328 39.11429977416992 C 111.8232650756836 39.12110137939453 111.5165634155273 39.125 111.2187652587891 39.125 L 110.134765625 39.12699890136719 L 8.444829940795898 39.125 Z">
+							</path>
+						</svg>
+					</div>
+					<div id="_Group_">
+						<div id="_Group__A1_Group_22">
+							<div id="_Group__A1_Group_23">
+								<svg class="_Path_" viewBox="9.972 13.973 17.717 16.523">
+									<path fill="rgba(255,255,255,1)" id="_Path_" d="M 24.76888084411621 20.30068016052246 C 24.79073715209961 18.60420799255371 25.68012428283691 17.03718566894531 27.12544059753418 16.14862060546875 C 26.20951461791992 14.84051418304443 24.73039436340332 14.04087924957275 23.1342830657959 13.99094009399414 C 21.45504188537598 13.8146800994873 19.82709121704102 14.99577045440674 18.97138214111328 14.99577045440674 C 18.09911155700684 14.99577045440674 16.78161239624023 14.0084400177002 15.36288261413574 14.03763008117676 C 13.49620628356934 14.09793949127197 11.7981424331665 15.13352584838867 10.88996505737305 16.76549911499023 C 8.955963134765625 20.11391830444336 10.39855289459229 25.03496932983398 12.25116348266602 27.74157905578613 C 13.17806339263916 29.06692886352539 14.26134300231934 30.54737854003906 15.67879295349121 30.4948787689209 C 17.06585311889648 30.43734931945801 17.58389282226562 29.61039924621582 19.25819396972656 29.61039924621582 C 20.91695404052734 29.61039924621582 21.40298461914062 30.4948787689209 22.84919357299805 30.46150016784668 C 24.33757400512695 30.43733978271484 25.27532386779785 29.1302604675293 26.16970443725586 27.79236030578613 C 26.83568382263184 26.84799957275391 27.3481502532959 25.80427551269531 27.6881275177002 24.69985008239746 C 25.92038154602051 23.95218467712402 24.77094459533691 22.22003555297852 24.76888084411621 20.30068016052246 Z">
+									</path>
+								</svg>
+								<svg class="_Path__A1_Path_5" viewBox="18.791 8.72 4.375 5.021">
+									<path fill="rgba(255,255,255,1)" id="_Path__A1_Path_5" d="M 22.03725051879883 12.21088981628418 C 22.84877777099609 11.23668193817139 23.24858665466309 9.984502792358398 23.15177154541016 8.720270156860352 C 21.91193771362305 8.850490570068359 20.76667976379395 9.443050384521484 19.94418907165527 10.37988090515137 C 19.13201713562012 11.30418872833252 18.72057342529297 12.51343250274658 18.80047988891602 13.74127101898193 C 20.05693817138672 13.75420951843262 21.24991798400879 13.19015502929688 22.03725051879883 12.21088981628418 Z">
+									</path>
+								</svg>
+							</div>
+						</div>
+						<div id="Group_251">
+							<svg class="Path_2832" viewBox="34.427 18.078 11.05 12.418">
+								<path fill="rgba(255,255,255,1)" id="Path_2832" d="M 42.30226898193359 27.13965034484863 L 37.56887054443359 27.13965034484863 L 36.43215179443359 30.49610137939453 L 34.42726898193359 30.49610137939453 L 38.91066741943359 18.07810211181641 L 40.99366760253906 18.07810211181641 L 45.47706604003906 30.49610137939453 L 43.4379997253418 30.49610137939453 L 42.30226898193359 27.13965034484863 Z M 38.05910110473633 25.5908203125 L 41.81110000610352 25.5908203125 L 39.96149063110352 20.14355087280273 L 39.90972900390625 20.14355087280273 L 38.05910110473633 25.5908203125 Z">
+								</path>
+							</svg>
+							<svg class="Path_2833" viewBox="46.631 21.346 8.528 12.145">
+								<path fill="rgba(255,255,255,1)" id="Path_2833" d="M 55.15969085693359 25.96973037719727 C 55.15969085693359 28.78321075439453 53.65383148193359 30.5908203125 51.38137054443359 30.5908203125 C 50.20675277709961 30.65226364135742 49.1003303527832 30.03702926635742 48.53273773193359 29.0068187713623 L 48.48974227905273 29.00682067871094 L 48.48974227905273 33.4911994934082 L 46.63134384155273 33.4911994934082 L 46.63134384155273 21.44238090515137 L 48.43019866943359 21.44238090515137 L 48.43019866943359 22.94824028015137 L 48.46437835693359 22.94824028015137 C 49.05718231201172 21.92448806762695 50.16479873657227 21.30951881408691 51.34718322753906 21.3476505279541 C 53.64500045776367 21.34766006469727 55.15969085693359 23.16406059265137 55.15969085693359 25.96973037719727 Z M 53.24953079223633 25.96973037719727 C 53.24953079223633 24.1367301940918 52.30226135253906 22.931640625 50.85694885253906 22.931640625 C 49.43702697753906 22.931640625 48.48194885253906 24.16211128234863 48.48194885253906 25.96973037719727 C 48.48194885253906 27.7939510345459 49.43702697753906 29.0156307220459 50.85694885253906 29.0156307220459 C 52.30226898193359 29.0156307220459 53.24953079223633 27.81933975219727 53.24953079223633 25.96973037719727 Z">
+								</path>
+							</svg>
+							<svg class="Path_2834" viewBox="56.596 21.346 8.528 12.145">
+								<path fill="rgba(255,255,255,1)" id="Path_2834" d="M 65.12452697753906 25.96973037719727 C 65.12452697753906 28.78321075439453 63.61866760253906 30.5908203125 61.34620666503906 30.5908203125 C 60.17159271240234 30.65226364135742 59.06517028808594 30.03702926635742 58.49757766723633 29.0068187713623 L 58.4545783996582 29.00682067871094 L 58.4545783996582 33.4911994934082 L 56.5961799621582 33.4911994934082 L 56.5961799621582 21.44238090515137 L 58.39500045776367 21.44238090515137 L 58.39500045776367 22.94824028015137 L 58.42918014526367 22.94824028015137 C 59.02199172973633 21.92448616027832 60.12961578369141 21.30952072143555 61.31200408935547 21.34766006469727 C 63.60987854003906 21.34766006469727 65.12452697753906 23.16406059265137 65.12452697753906 25.96973037719727 Z M 63.2143669128418 25.96973037719727 C 63.2143669128418 24.1367301940918 62.26709747314453 22.931640625 60.82178497314453 22.931640625 C 59.40186309814453 22.931640625 58.44678497314453 24.16211128234863 58.44678497314453 25.96973037719727 C 58.44678497314453 27.7939510345459 59.40186309814453 29.0156307220459 60.82178497314453 29.0156307220459 C 62.26710891723633 29.0156307220459 63.21437835693359 27.81933975219727 63.21437835693359 25.96973037719727 Z">
+								</path>
+							</svg>
+							<svg class="Path_2835" viewBox="69.808 17.871 9.527 12.832">
+								<path fill="rgba(255,255,255,1)" id="Path_2835" d="M 71.71047210693359 27.03613090515137 C 71.84817504882812 28.26758003234863 73.04447174072266 29.07612991333008 74.67922210693359 29.07612991333008 C 76.24562835693359 29.07612991333008 77.37258148193359 28.26753997802734 77.37258148193359 27.15718078613281 C 77.37258148193359 26.19331169128418 76.69289398193359 25.61618041992188 75.08351898193359 25.22066116333008 L 73.47415161132812 24.83296203613281 C 71.19387817382812 24.28218269348145 70.13528442382812 23.21577262878418 70.13528442382812 21.48530197143555 C 70.13528442382812 19.34272193908691 72.00247192382812 17.87104225158691 74.65383148193359 17.87104225158691 C 77.27783203125 17.87104225158691 79.07668304443359 19.34272193908691 79.13722991943359 21.48530197143555 L 77.26123046875 21.48530197143555 C 77.14893341064453 20.24604225158691 76.12451171875 19.49800109863281 74.62744140625 19.49800109863281 C 73.13037109375 19.49800109863281 72.10596466064453 20.25484085083008 72.10596466064453 21.35640144348145 C 72.10596466064453 22.23433113098145 72.76026153564453 22.75093078613281 74.36084747314453 23.14640045166016 L 75.72900390625 23.48233985900879 C 78.27685546875 24.08488082885742 79.33545684814453 25.10833930969238 79.33545684814453 26.92472076416016 C 79.33545684814453 29.24796104431152 77.48486328125 30.70304107666016 74.54150390625 30.70304107666016 C 71.78759765625 30.70304107666016 69.92822265625 29.28214073181152 69.80810546875 27.03604125976562 L 71.71047210693359 27.03613090515137 Z">
+								</path>
+							</svg>
+							<svg class="Path_2836" viewBox="80.163 19.3 4.905 11.249">
+								<path fill="rgba(255,255,255,1)" id="Path_2836" d="M 83.34620666503906 19.29980087280273 L 83.34620666503906 21.44238090515137 L 85.06788635253906 21.44238090515137 L 85.06788635253906 22.91406059265137 L 83.34620666503906 22.91406059265137 L 83.34620666503906 27.90526962280273 C 83.34620666503906 28.68066024780273 83.69093322753906 29.04199028015137 84.44776916503906 29.04199028015137 C 84.65216064453125 29.03842926025391 84.85622406005859 29.02407455444336 85.05909729003906 28.99899291992188 L 85.05909729003906 30.46188163757324 C 84.71882629394531 30.52546310424805 84.37297058105469 30.55425834655762 84.02687072753906 30.54782485961914 C 82.19387054443359 30.54782104492188 81.47901916503906 29.85934066772461 81.47901916503906 28.10348129272461 L 81.47901916503906 22.91406059265137 L 80.16262054443359 22.91406059265137 L 80.16262054443359 21.44238090515137 L 81.47899627685547 21.44238090515137 L 81.47899627685547 19.29980087280273 L 83.34620666503906 19.29980087280273 Z">
+								</path>
+							</svg>
+							<svg class="Path_2837" viewBox="86.065 21.331 8.589 9.277">
+								<path fill="rgba(255,255,255,1)" id="Path_2837" d="M 86.06500244140625 25.96973037719727 C 86.06500244140625 23.12110137939453 87.74272918701172 21.3310604095459 90.35895538330078 21.3310604095459 C 92.98395538330078 21.3310604095459 94.65387725830078 23.12105941772461 94.65387725830078 25.96973037719727 C 94.65387725830078 28.82617950439453 92.99274444580078 30.60840034484863 90.35895538330078 30.60840034484863 C 87.72608947753906 30.60840034484863 86.06500244140625 28.82616996765137 86.06500244140625 25.96973037719727 Z M 92.76031494140625 25.96973037719727 C 92.76031494140625 24.0156307220459 91.86480712890625 22.8623104095459 90.35894775390625 22.8623104095459 C 88.85308837890625 22.8623104095459 87.95855712890625 24.0244197845459 87.95855712890625 25.96973037719727 C 87.95855712890625 27.931640625 88.85308837890625 29.07617950439453 90.35894775390625 29.07617950439453 C 91.86480712890625 29.07617950439453 92.76026916503906 27.931640625 92.76026916503906 25.96973037719727 Z">
+								</path>
+							</svg>
+							<svg class="Path_2838" viewBox="96.186 21.346 4.63 9.15">
+								<path fill="rgba(255,255,255,1)" id="Path_2838" d="M 96.18605804443359 21.44238090515137 L 97.95851898193359 21.44238090515137 L 97.95851898193359 22.9833812713623 L 98.00151824951172 22.9833812713623 C 98.24870300292969 21.99137306213379 99.15765380859375 21.30863761901855 100.1792449951172 21.34764099121094 C 100.3934020996094 21.34689331054688 100.6069793701172 21.37015151977539 100.8159561157227 21.4169807434082 L 100.8159637451172 23.15526008605957 C 100.5455932617188 23.07264137268066 100.2635498046875 23.03470802307129 99.98095703125 23.0429573059082 C 99.43460845947266 23.02079582214355 98.90586090087891 23.23853492736816 98.53355407714844 23.63900566101074 C 98.16123962402344 24.03947639465332 97.98256683349609 24.58267021179199 98.04444122314453 25.1259593963623 L 98.04444122314453 30.49607849121094 L 96.18604278564453 30.49607849121094 L 96.18605804443359 21.44238090515137 Z">
+								</path>
+							</svg>
+							<svg class="Path_2839" viewBox="101.217 21.331 8.271 9.277">
+								<path fill="rgba(255,255,255,1)" id="Path_2839" d="M 109.3843002319336 27.83691024780273 C 109.1343002319336 29.48046112060547 107.5337066650391 30.60839080810547 105.4858627319336 30.60839080810547 C 102.8520736694336 30.60839080810547 101.2173156738281 28.84374046325684 101.2173156738281 26.01269149780273 C 101.2173156738281 23.1728515625 102.8608627319336 21.33105087280273 105.4077453613281 21.33105087280273 C 107.9126281738281 21.33105087280273 109.4878234863281 23.05175018310547 109.4878234863281 25.79687118530273 L 109.4878234863281 26.43359184265137 L 103.0932922363281 26.43359184265137 L 103.0932922363281 26.5458927154541 C 103.0335845947266 27.21992492675781 103.2663269042969 27.88712310791016 103.7323150634766 28.37777519226074 C 104.1983108520508 28.8684253692627 104.8526306152344 29.13523864746094 105.5288391113281 29.11034393310547 C 106.4306793212891 29.1948413848877 107.2809371948242 28.67697906494141 107.6196517944336 27.8369026184082 L 109.3843002319336 27.83691024780273 Z M 103.1020736694336 25.1347599029541 L 107.6284408569336 25.1347599029541 C 107.6621704101562 24.52909660339355 107.4417037963867 23.93682289123535 107.0201568603516 23.50063133239746 C 106.5986099243164 23.06443977355957 106.0142059326172 22.82387924194336 105.4077453613281 22.83691024780273 C 104.7964859008789 22.83326530456543 104.209098815918 23.07394027709961 103.7761306762695 23.50543785095215 C 103.3431701660156 23.93693542480469 103.1005096435547 24.52350425720215 103.1020812988281 25.13476943969727 Z">
+								</path>
+							</svg>
+						</div>
+					</div>
+				</div>
+				<div id="_Group__A1_Group_25">
+					<div id="Group_253">
+						<svg class="Path_2840" viewBox="35.671 8.724 4.984 5.974">
+							<path fill="rgba(255,255,255,1)" id="Path_2840" d="M 37.82619094848633 8.730999946594238 C 38.61513900756836 8.674383163452148 39.38789749145508 8.974545478820801 39.93176651000977 9.548870086669922 C 40.47563552856445 10.12319469451904 40.73329162597656 10.91114330291748 40.63381576538086 11.69583892822266 C 40.63381195068359 13.60208988189697 39.60354232788086 14.69783973693848 37.82619094848633 14.69783973693848 L 35.67092132568359 14.69783973693848 L 35.67092132568359 8.730999946594238 L 37.82619094848633 8.730999946594238 Z M 36.59767150878906 13.85400009155273 L 37.72267150878906 13.85400009155273 C 38.28649139404297 13.88770198822021 38.83548736572266 13.66555881500244 39.21721649169922 13.24925136566162 C 39.59894943237305 12.83294486999512 39.77277755737305 12.26679420471191 39.69043731689453 11.70800018310547 C 39.76678848266602 11.15152645111084 39.5904541015625 10.59004878997803 39.20967102050781 10.17713642120361 C 38.82888793945312 9.764225006103516 38.28349685668945 9.543087959289551 37.72267150878906 9.574211120605469 L 36.59767150878906 9.574210166931152 L 36.59767150878906 13.85400009155273 Z">
+							</path>
+						</svg>
+						<svg class="Path_2841" viewBox="41.671 10.108 4.267 4.677">
+							<path fill="rgba(255,255,255,1)" id="Path_2841" d="M 41.68067932128906 12.44433975219727 C 41.60347366333008 11.63722610473633 41.9904899597168 10.85611724853516 42.67942047119141 10.42860507965088 C 43.36835098266602 10.00109386444092 44.24008178710938 10.0010929107666 44.92901229858398 10.42860507965088 C 45.61794281005859 10.85611724853516 46.00496292114258 11.63722610473633 45.92775344848633 12.44433879852295 C 46.00643157958984 13.25231838226318 45.61976623535156 14.03494071960449 44.93022537231445 14.46337127685547 C 44.24068450927734 14.89180278778076 43.36775207519531 14.89180374145508 42.6782112121582 14.46337223052979 C 41.98867034912109 14.03494071960449 41.60200500488281 13.2523193359375 41.68068313598633 12.44433975219727 Z M 45.01367950439453 12.44433975219727 C 45.01367950439453 11.46826934814453 44.57519912719727 10.89746952056885 43.80567932128906 10.89746952056885 C 43.03321838378906 10.89746952056885 42.59867858886719 11.46826934814453 42.59867858886719 12.44434928894043 C 42.59867858886719 13.42823886871338 43.03324890136719 13.99463939666748 43.80567932128906 13.99463939666748 C 44.57521820068359 13.99462985992432 45.01369094848633 13.42432022094727 45.01369094848633 12.44433975219727 Z">
+							</path>
+						</svg>
+						<svg class="Path_2842" viewBox="46.569 10.195 6.24 4.503">
+							<path fill="rgba(255,255,255,1)" id="Path_2842" d="M 51.57326126098633 14.69775009155273 L 50.65139007568359 14.69775009155273 L 49.72072982788086 11.38134002685547 L 49.65042114257812 11.38134002685547 L 48.72365951538086 14.69775009155273 L 47.81056976318359 14.69775009155273 L 46.56935882568359 10.19482040405273 L 47.47072982788086 10.19482040405273 L 48.27737045288086 13.63082027435303 L 48.34378051757812 13.63082027435303 L 49.26956176757812 10.19482040405273 L 50.12210083007812 10.19482040405273 L 51.04788208007812 13.63082027435303 L 51.11819076538086 13.63082027435303 L 51.92092132568359 10.19482040405273 L 52.80959320068359 10.19482040405273 L 51.57326126098633 14.69775009155273 Z">
+							</path>
+						</svg>
+						<svg class="Path_2843" viewBox="53.854 10.103 3.84 4.594">
+							<path fill="rgba(255,255,255,1)" id="Path_2843" d="M 53.85353851318359 10.19482040405273 L 54.70899963378906 10.19482040405273 L 54.70899963378906 10.9101505279541 L 54.77540969848633 10.9101505279541 C 55.00634384155273 10.38347721099854 55.54597091674805 10.06130790710449 56.11915588378906 10.10790061950684 C 56.56297302246094 10.07453060150146 56.99788665771484 10.24478721618652 57.30109405517578 10.57060050964355 C 57.60429763793945 10.89641284942627 57.74289703369141 11.3424243927002 57.67775344848633 11.78270149230957 L 57.67774963378906 14.69770050048828 L 56.78907775878906 14.69770050048828 L 56.78907775878906 12.00586032867432 C 56.78907775878906 11.28223037719727 56.47462844848633 10.92236042022705 55.81739807128906 10.92236042022705 C 55.51636505126953 10.90833950042725 55.22422027587891 11.0264835357666 55.01755523681641 11.24581718444824 C 54.81089019775391 11.4651517868042 54.7103157043457 11.76380252838135 54.74220275878906 12.0634708404541 L 54.7421989440918 14.69775104522705 L 53.8535270690918 14.69775104522705 L 53.85353851318359 10.19482040405273 Z">
+							</path>
+						</svg>
+						<svg class="Path_2844" viewBox="59.094 8.437 0.889 6.261">
+							<path fill="rgba(255,255,255,1)" id="Path_2844" d="M 59.09376907348633 8.437000274658203 L 59.98244094848633 8.437000274658203 L 59.98244094848633 14.69774055480957 L 59.09376907348633 14.69774055480957 L 59.09376907348633 8.437000274658203 Z">
+							</path>
+						</svg>
+						<svg class="Path_2845" viewBox="61.208 10.108 4.268 4.677">
+							<path fill="rgba(255,255,255,1)" id="Path_2845" d="M 61.21778869628906 12.44433975219727 C 61.14063262939453 11.63716983795166 61.5277099609375 10.85603427886963 62.21669387817383 10.42851066589355 C 62.90567779541016 10.0009880065918 63.77745819091797 10.00098705291748 64.46644592285156 10.42851066589355 C 65.15542602539062 10.85603427886963 65.54250335693359 11.63716983795166 65.46534729003906 12.44433975219727 C 65.54393005371094 13.25235080718994 65.15719604492188 14.03495693206787 64.46762084960938 14.4633731842041 C 63.77804183959961 14.89178943634033 62.90509414672852 14.89178943634033 62.21551513671875 14.4633731842041 C 61.52593994140625 14.03495693206787 61.13920593261719 13.25235080718994 61.21778869628906 12.44433975219727 Z M 64.55078887939453 12.44433975219727 C 64.55078887939453 11.46826934814453 64.11231231689453 10.89746952056885 63.34278869628906 10.89746952056885 C 62.57032775878906 10.89746952056885 62.13578796386719 11.46826934814453 62.13578796386719 12.44434928894043 C 62.13578796386719 13.42823886871338 62.57035827636719 13.99463939666748 63.34278869628906 13.99463939666748 C 64.11231994628906 13.99462985992432 64.55079650878906 13.42432022094727 64.55079650878906 12.44433975219727 Z">
+							</path>
+						</svg>
+						<svg class="Path_2846" viewBox="66.401 10.108 3.779 4.671">
+							<path fill="rgba(255,255,255,1)" id="Path_2846" d="M 66.40090179443359 13.42432022094727 C 66.40090179443359 12.61377048492432 67.00442504882812 12.1464900970459 68.07569885253906 12.08008003234863 L 69.29542541503906 12.00977039337158 L 69.29542541503906 11.62110042572021 C 69.29542541503906 11.14551067352295 68.98097229003906 10.87696075439453 68.37355804443359 10.87696075439453 C 67.87746429443359 10.87696075439453 67.53371429443359 11.05909061431885 67.43508148193359 11.37745094299316 L 66.57472991943359 11.37745094299316 C 66.66555023193359 10.60401058197021 67.39308929443359 10.10792064666748 68.41457366943359 10.10792064666748 C 69.54347991943359 10.10792064666748 70.18020629882812 10.66992092132568 70.18020629882812 11.62110042572021 L 70.18020629882812 14.69776058197021 L 69.32473754882812 14.69776058197021 L 69.32473754882812 14.06495094299316 L 69.25442504882812 14.06495094299316 C 68.96387481689453 14.52707481384277 68.44718170166016 14.79716300964355 67.90188598632812 14.77195167541504 C 67.51961517333984 14.81171417236328 67.13837432861328 14.68791389465332 66.85239410400391 14.43115520477295 C 66.56642150878906 14.17439651489258 66.40240478515625 13.80864524841309 66.40089416503906 13.42432022094727 Z M 69.29543304443359 13.03954982757568 L 69.29543304443359 12.66308975219727 L 68.19582366943359 12.73339939117432 C 67.57570648193359 12.77489948272705 67.29445648193359 12.98583984375 67.29445648193359 13.38280963897705 C 67.29445648193359 13.78807926177979 67.64601898193359 14.0239200592041 68.12945556640625 14.0239200592041 C 68.41564178466797 14.05288887023926 68.70133209228516 13.96447372436523 68.92112731933594 13.7789134979248 C 69.14091491699219 13.59335422515869 69.27599334716797 13.32653999328613 69.29543304443359 13.03954887390137 Z">
+							</path>
+						</svg>
+						<svg class="Path_2847" viewBox="71.348 8.437 4.205 6.336">
+							<path fill="rgba(255,255,255,1)" id="Path_2847" d="M 71.34815979003906 12.44433975219727 C 71.34815979003906 11.0214900970459 72.07961273193359 10.12012004852295 73.21730041503906 10.12012004852295 C 73.79177856445312 10.09365272521973 74.329833984375 10.40147495269775 74.59815979003906 10.91012096405029 L 74.66456604003906 10.91012001037598 L 74.66456604003906 8.437000274658203 L 75.55323791503906 8.437000274658203 L 75.55323791503906 14.69774055480957 L 74.70167541503906 14.69774055480957 L 74.70167541503906 13.9863109588623 L 74.63136291503906 13.9863109588623 C 74.34274291992188 14.49073696136475 73.79806518554688 14.79335689544678 73.21730041503906 14.77194976806641 C 72.07180023193359 14.77200031280518 71.34815979003906 13.87061023712158 71.34815979003906 12.44433975219727 Z M 72.26615905761719 12.44433975219727 C 72.26615905761719 13.3994197845459 72.71636199951172 13.97412967681885 73.46929168701172 13.97412967681885 C 74.21829223632812 13.97412967681885 74.68119812011719 13.39112949371338 74.68119812011719 12.44824981689453 C 74.68119812011719 11.50976943969727 74.21342468261719 10.91845989227295 73.46929168701172 10.91845989227295 C 72.72120666503906 10.91845989227295 72.26612854003906 11.4970703125 72.26612854003906 12.44433975219727 Z">
+							</path>
+						</svg>
+						<svg class="Path_2848" viewBox="79.22 10.108 4.267 4.677">
+							<path fill="rgba(255,255,255,1)" id="Path_2848" d="M 79.23000335693359 12.44433975219727 C 79.15280151367188 11.63723087310791 79.53981781005859 10.85613059997559 80.22875213623047 10.42862319946289 C 80.91767883300781 10.00111675262451 81.78939819335938 10.00111675262451 82.47832489013672 10.42862319946289 C 83.16725921630859 10.85613059997559 83.55427551269531 11.63723087310791 83.47707366943359 12.44433879852295 C 83.55574798583984 13.25231838226318 83.16908264160156 14.03494071960449 82.47954559326172 14.46337127685547 C 81.79000091552734 14.89180278778076 80.91707611083984 14.89180374145508 80.22753143310547 14.46337223052979 C 79.53799438476562 14.03494071960449 79.15132904052734 13.2523193359375 79.23000335693359 12.44433975219727 Z M 82.56300354003906 12.44433975219727 C 82.56300354003906 11.46826934814453 82.12452697753906 10.89746952056885 81.35500335693359 10.89746952056885 C 80.58254241943359 10.89746952056885 80.14800262451172 11.46826934814453 80.14800262451172 12.44434928894043 C 80.14800262451172 13.42823886871338 80.58257293701172 13.99463939666748 81.35500335693359 13.99463939666748 C 82.12452697753906 13.99462985992432 82.56300354003906 13.42432022094727 82.56300354003906 12.44433975219727 Z">
+							</path>
+						</svg>
+						<svg class="Path_2849" viewBox="84.669 10.103 3.84 4.594">
+							<path fill="rgba(255,255,255,1)" id="Path_2849" d="M 84.66944885253906 10.19482040405273 L 85.52491760253906 10.19482040405273 L 85.52491760253906 10.9101505279541 L 85.59132385253906 10.9101505279541 C 85.82225036621094 10.3834753036499 86.36188507080078 10.06130504608154 86.93507385253906 10.10790061950684 C 87.37889099121094 10.07453060150146 87.81380462646484 10.24478721618652 88.11701202392578 10.57060050964355 C 88.42021942138672 10.89641284942627 88.55881500244141 11.34242343902588 88.49366760253906 11.78270053863525 L 88.49366760253906 14.69770050048828 L 87.60500335693359 14.69770050048828 L 87.60500335693359 12.00586032867432 C 87.60500335693359 11.28223037719727 87.29055023193359 10.92236042022705 86.63332366943359 10.92236042022705 C 86.33229827880859 10.90833950042725 86.04015350341797 11.0264835357666 85.83348846435547 11.24581718444824 C 85.62682342529297 11.4651517868042 85.5262451171875 11.76380157470703 85.55812835693359 12.0634708404541 L 85.55812072753906 14.69775104522705 L 84.66944885253906 14.69775104522705 L 84.66944885253906 10.19482040405273 Z">
+							</path>
+						</svg>
+						<svg class="Path_2850" viewBox="91.911 9.074 2.58 5.649">
+							<path fill="rgba(255,255,255,1)" id="Path_2850" d="M 93.51515960693359 9.07373046875 L 93.51515960693359 10.21533012390137 L 94.49075317382812 10.21533012390137 L 94.49075317382812 10.96387004852295 L 93.51515960693359 10.96387004852295 L 93.51515960693359 13.27929973602295 C 93.51515960693359 13.75097942352295 93.70950317382812 13.95751953125 94.15187835693359 13.95751953125 C 94.26513671875 13.95715808868408 94.37827301025391 13.95030975341797 94.49074554443359 13.93701076507568 L 94.49074554443359 14.67723941802979 C 94.33116149902344 14.70578956604004 94.16947174072266 14.72097969055176 94.00735473632812 14.72264957427979 C 93.01906585693359 14.72264957427979 92.62550354003906 14.37498950958252 92.62550354003906 13.50682926177979 L 92.62550354003906 10.96382904052734 L 91.91065979003906 10.96382904052734 L 91.91065979003906 10.21528911590576 L 92.62550354003906 10.21528911590576 L 92.62550354003906 9.07373046875 L 93.51515960693359 9.07373046875 Z">
+							</path>
+						</svg>
+						<svg class="Path_2851" viewBox="95.705 8.437 3.888 6.261">
+							<path fill="rgba(255,255,255,1)" id="Path_2851" d="M 95.70461273193359 8.437000274658203 L 96.58547210693359 8.437000274658203 L 96.58547210693359 10.91845035552979 L 96.65578460693359 10.91845035552979 C 96.89781188964844 10.38716983795166 97.44688415527344 10.06458759307861 98.02878570556641 10.1118106842041 C 98.47007751464844 10.08779621124268 98.89910125732422 10.26180267333984 99.19898986816406 10.58643341064453 C 99.49888610839844 10.9110631942749 99.63841247558594 11.35250568389893 99.57956695556641 11.79052066802979 L 99.57956695556641 14.69775009155273 L 98.69000244140625 14.69775009155273 L 98.69000244140625 12.00975036621094 C 98.69000244140625 11.2905101776123 98.35500335693359 10.92625045776367 97.72711181640625 10.92625045776367 C 97.41793823242188 10.90089511871338 97.11334228515625 11.01329326629639 96.89474487304688 11.23339557647705 C 96.6761474609375 11.45349788665771 96.56584930419922 11.75886154174805 96.59332275390625 12.06785011291504 L 96.59332275390625 14.69773006439209 L 95.70465087890625 14.69773006439209 L 95.70461273193359 8.437000274658203 Z">
+							</path>
+						</svg>
+						<svg class="Path_2852" viewBox="100.711 10.108 4.104 4.688">
+							<path fill="rgba(255,255,255,1)" id="Path_2852" d="M 104.7612533569336 13.48192977905273 C 104.5120544433594 14.33131122589111 103.6900939941406 14.88010597229004 102.8100738525391 14.78466033935547 C 102.2096405029297 14.80050659179688 101.6325912475586 14.55162525177002 101.2320251464844 14.10404968261719 C 100.8314666748047 13.65647602081299 100.6478881835938 13.05545425415039 100.7300033569336 12.46045017242432 C 100.6500625610352 11.86379051208496 100.8329620361328 11.26180076599121 101.2312927246094 10.81044292449951 C 101.6296310424805 10.35908603668213 102.2042083740234 10.10277366638184 102.8061828613281 10.10791015625 C 104.0591049194336 10.10791015625 104.8149642944336 10.96391010284424 104.8149642944336 12.37791061401367 L 104.8149642944336 12.6879997253418 L 101.6352767944336 12.6879997253418 L 101.6352767944336 12.73779964447021 C 101.6071319580078 13.07194042205811 101.7212524414062 13.4024486541748 101.9495620727539 13.64804172515869 C 102.1778717041016 13.89363479614258 102.4991912841797 14.03152465820312 102.8344955444336 14.02779960632324 C 103.2692718505859 14.07999324798584 103.6924896240234 13.86433219909668 103.9057846069336 13.48190116882324 L 104.7612533569336 13.48192977905273 Z M 101.63525390625 12.03075981140137 L 103.9096603393555 12.03075981140137 C 103.9323120117188 11.72515869140625 103.8248596191406 11.42420291900635 103.6137771606445 11.20205688476562 C 103.4026947021484 10.97990989685059 103.1076126098633 10.85723400115967 102.8012542724609 10.86425971984863 C 102.4907531738281 10.86035823822021 102.1918258666992 10.98201942443848 101.9722900390625 11.20164775848389 C 101.7527618408203 11.42127513885498 101.6312255859375 11.72025299072266 101.6352691650391 12.03075981140137 Z">
+							</path>
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+		<svg class="Path_2862" viewBox="148.234 -25.164 420.418 229.164">
+			<path fill="rgba(52,28,22,1)" stroke="rgba(112,112,112,1)" stroke-width="1px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Path_2862" d="M 148.2342529296875 -19.4638671875 C 148.2342529296875 -19.4638671875 169.0086822509766 -38.6187744140625 261.0906677246094 -6.6988525390625 C 353.1726379394531 25.2210693359375 397.8046875 58.03631591796875 464.15380859375 108.939453125 C 530.5029907226562 159.8425903320312 568.652099609375 204 568.652099609375 204 L 148.2342529296875 204 L 148.2342529296875 -19.4638671875 Z">
+			</path>
+		</svg>
+		<div id="noun_delivery_robot_3764162">
+			<div id="Group_254">
+				<svg class="Path_2865" viewBox="114.625 21.527 200.347 220.02">
+					<path fill="rgba(0,0,0,1)" id="Path_2865" d="M 291.3031616210938 189.5644683837891 L 291.3031616210938 125.4034271240234 C 291.3031616210938 117.2801895141602 284.7010498046875 110.6683044433594 276.5829467773438 110.6683044433594 L 275.873046875 110.6683044433594 L 275.873046875 104.0713119506836 C 284.7827758789062 101.3064956665039 291.31298828125 93.08839416503906 291.31298828125 83.28781890869141 C 291.31298828125 81.97276306152344 290.24560546875 80.90370941162109 288.9288330078125 80.90370941162109 C 287.6138000488281 80.90370941162109 286.5447387695312 81.97106170654297 286.5447387695312 83.28781890869141 C 286.5447387695312 92.7113037109375 278.8803100585938 100.3770065307617 269.450439453125 100.3770065307617 L 256.6173706054688 100.3770065307617 L 256.6190490722656 23.91150665283203 C 256.6190490722656 22.59645080566406 255.5516815185547 21.52739715576172 254.2349395751953 21.52739715576172 L 175.3732604980469 21.52739715576172 C 174.0581970214844 21.52739715576172 172.9891510009766 22.59474754333496 172.9891510009766 23.91150665283203 L 172.9891510009766 100.3812561035156 L 160.1607666015625 100.3812561035156 C 150.7372894287109 100.3812561035156 143.0664825439453 92.71683502197266 143.0664825439453 83.29207611083984 C 143.0664825439453 81.97702026367188 141.9991455078125 80.90797424316406 140.682373046875 80.90797424316406 C 139.3673248291016 80.90797424316406 138.2982788085938 81.97531890869141 138.2982788085938 83.29207611083984 C 138.2982788085938 93.09776306152344 144.8335418701172 101.3159027099609 153.7433166503906 104.080680847168 L 153.7433166503906 110.6725692749023 L 153.0333862304688 110.6725692749023 C 144.91015625 110.6725692749023 138.2982788085938 117.2844543457031 138.2982788085938 125.4076843261719 L 138.2982788085938 189.5644836425781 C 125.0459899902344 190.7748413085938 114.6252899169922 201.9387359619141 114.6252899169922 215.4970245361328 C 114.6252899169922 229.8648529052734 126.3130340576172 241.5474853515625 140.6808471679688 241.5474853515625 C 154.2421264648438 241.5474853515625 165.4063720703125 231.1314697265625 166.6134033203125 217.8796234130859 L 188.8648376464844 217.8796234130859 C 190.0701599121094 231.1319122314453 201.2390899658203 241.5474853515625 214.7973785400391 241.5474853515625 C 228.36376953125 241.5474853515625 239.527587890625 231.1314697265625 240.7333374023438 217.8796234130859 L 262.9898681640625 217.8796234130859 C 264.1951904296875 231.1319122314453 275.3560180664062 241.5474853515625 288.9122009277344 241.5474853515625 C 303.28515625 241.5474853515625 314.972412109375 229.8631591796875 314.972412109375 215.4970397949219 C 314.9790649414062 201.9391632080078 304.559814453125 190.7749328613281 291.3028564453125 189.5627899169922 Z M 262.99658203125 213.1127471923828 L 240.7400207519531 213.1127471923828 C 239.5296630859375 199.8604583740234 228.3657684326172 189.4397583007812 214.8040771484375 189.4397583007812 C 201.2423706054688 189.4397583007812 190.0785522460938 199.8604583740234 188.8715209960938 213.1127471923828 L 166.6200866699219 213.1127471923828 C 165.4862213134766 200.6469879150391 155.5375671386719 190.6983032226562 143.0718078613281 189.5644683837891 L 143.0718078613281 184.6499176025391 L 286.5414428710938 184.6499176025391 L 286.5414428710938 189.5644683837891 C 274.077392578125 190.6999969482422 264.1384887695312 200.648681640625 262.9982604980469 213.1127471923828 Z M 286.5367431640625 145.6617126464844 L 267.6451110839844 145.6617126464844 L 267.6451110839844 139.1081237792969 L 286.5367431640625 139.1081237792969 L 286.5367431640625 145.6617126464844 Z M 286.5367431640625 179.8817901611328 L 143.067138671875 179.8817901611328 L 143.067138671875 173.8419189453125 L 286.5367431640625 173.8419189453125 L 286.5367431640625 179.8817901611328 Z M 286.5367431640625 125.4076843261719 L 286.5367431640625 134.3404388427734 L 265.262939453125 134.3404388427734 C 263.9478759765625 134.3404388427734 262.8788452148438 135.4077911376953 262.8788452148438 136.7245483398438 L 262.8788452148438 148.0466766357422 C 262.8788452148438 149.3617401123047 263.9461975097656 150.4307708740234 265.262939453125 150.4307708740234 L 286.5367431640625 150.4307708740234 L 286.5367431640625 169.0777130126953 L 143.067138671875 169.0760498046875 L 143.067138671875 158.5455474853516 C 166.0433959960938 157.3202514648438 184.4813232421875 138.677978515625 185.679443359375 115.4395446777344 L 276.5774536132812 115.4395446777344 C 282.0669860839844 115.4395446777344 286.5346069335938 119.9118728637695 286.5346069335938 125.4082336425781 Z M 222.3629455566406 26.29536628723145 L 222.3629455566406 41.74892044067383 L 216.3145751953125 36.81096649169922 C 215.4367523193359 36.09606552124023 214.1748962402344 36.09108734130859 213.3020477294922 36.81096649169922 L 207.2485809326172 41.74892044067383 L 207.2469177246094 26.29536628723145 L 222.3629455566406 26.29536628723145 Z M 177.7587890625 82.42936706542969 L 204.8681488037109 82.42936706542969 C 206.1832122802734 82.42936706542969 207.2522583007812 81.36201477050781 207.2522583007812 80.04525756835938 C 207.2522583007812 78.73020172119141 206.1849060058594 77.66115570068359 204.8681488037109 77.66115570068359 L 177.7587890625 77.66115570068359 L 177.7587890625 26.29401016235352 L 202.4842987060547 26.29401016235352 L 202.4842987060547 46.77149200439453 C 202.4842987060547 47.69089889526367 203.0129852294922 48.53046035766602 203.8475646972656 48.92615509033203 C 204.1717681884766 49.07910919189453 204.5242156982422 49.15558624267578 204.8683624267578 49.15558624267578 C 205.4070129394531 49.15558624267578 205.9406890869141 48.96937942504883 206.3746490478516 48.61692810058594 L 214.8119812011719 41.73392868041992 L 223.2442169189453 48.61692810058594 C 223.9541320800781 49.19882583618164 224.9466705322266 49.31684875488281 225.7746124267578 48.92283630371094 C 226.6042175292969 48.52715301513672 227.1329193115234 47.68758392333984 227.1329193115234 46.7681770324707 L 227.1329193115234 26.29409790039062 L 251.8533325195312 26.29409790039062 L 251.8533325195312 100.3804244995117 L 177.7584991455078 100.3804244995117 L 177.7587890625 82.42936706542969 Z M 158.5096130371094 105.1481170654297 L 271.0968017578125 105.1481170654297 L 271.0968017578125 110.6725692749023 L 158.5096130371094 110.6725692749023 L 158.5096130371094 105.1481170654297 Z M 153.0332641601562 115.4394302368164 L 180.9108581542969 115.4394302368164 C 179.7238006591797 136.0467224121094 163.4207611083984 152.5643005371094 143.0662841796875 153.7794189453125 L 143.0662841796875 125.4064178466797 C 143.0662841796875 119.9117584228516 147.5369110107422 115.4394302368164 153.0332641601562 115.4394302368164 Z M 140.6819915771484 236.7814788818359 C 128.9461669921875 236.7814788818359 119.3928680419922 227.2333068847656 119.3928680419922 215.4974670410156 C 119.3928680419922 203.7565307617188 128.9410552978516 194.2083435058594 140.6819915771484 194.2083435058594 C 152.4229431152344 194.2083435058594 161.9711303710938 203.7565307617188 161.9711303710938 215.4974670410156 C 161.9711303710938 227.2333068847656 152.4229431152344 236.7814788818359 140.6819915771484 236.7814788818359 Z M 214.8023529052734 236.7814788818359 C 203.0665283203125 236.7814788818359 193.5132446289062 227.2333068847656 193.5132446289062 215.4974670410156 C 193.5132446289062 203.7565307617188 203.0614166259766 194.2083435058594 214.8023529052734 194.2083435058594 C 226.5432891845703 194.2083435058594 236.0961608886719 203.7565307617188 236.0961608886719 215.4974670410156 C 236.0961608886719 227.2333068847656 226.5432891845703 236.7814788818359 214.8023529052734 236.7814788818359 Z M 288.91845703125 236.7814788818359 C 277.187744140625 236.7814788818359 267.6446533203125 227.2333068847656 267.6446533203125 215.4974670410156 C 267.6446533203125 203.7565307617188 277.187744140625 194.2083435058594 288.91845703125 194.2083435058594 C 300.6593933105469 194.2083435058594 310.2122802734375 203.7565307617188 310.2122802734375 215.4974670410156 C 310.2122802734375 227.2333068847656 300.6593933105469 236.7814788818359 288.91845703125 236.7814788818359 Z">
+					</path>
+				</svg>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
