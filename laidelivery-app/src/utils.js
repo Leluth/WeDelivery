@@ -32,7 +32,7 @@ export const signup = (data) => {
 
 
 export const getDeliveryOptions = (data) => {
-  return fetch(`/getDeliveryOptions`, {
+  return fetch(`/options`, {
     method: "POST",
     headers:{
       "Content-Type": "application/json",

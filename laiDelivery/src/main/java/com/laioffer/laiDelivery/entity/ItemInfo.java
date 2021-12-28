@@ -1,11 +1,14 @@
 package com.laioffer.laiDelivery.entity;
 
+
 public class ItemInfo {
     private double weight;
 
-    private String origin;
+    private String size;
 
-    private String destination;
+    private String shippingFrom;
+
+    private String shippingTo;
 
     public void setWeight(double weight) {
         this.weight = weight;
@@ -15,19 +18,23 @@ public class ItemInfo {
         return weight;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setSize(String size) { this.size = size; }
+
+    public String getSize() { return size; }
+
+    public void setShippingFrom(String origin) {
+        this.shippingFrom = origin;
     }
 
-    public String getOrigin() {
-        return origin;
+    public String getShippingFrom() {
+        return shippingFrom;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public void setShippingTo(String destination) {
+        this.shippingTo = destination;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getShippingTo() {
+        return shippingTo;
     }
 }

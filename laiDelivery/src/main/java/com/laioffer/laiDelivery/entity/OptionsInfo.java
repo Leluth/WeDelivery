@@ -15,6 +15,20 @@ public class OptionsInfo {
 
     private boolean enable;
 
+    private String errorMessage;
+
+    private double centerLat;
+
+    private double centerLng;
+
+    private double originLat;
+
+    private double originLng;
+
+    private double destinationLat;
+
+    private double destinationLng;
+
     public void setDeliveryType(String deliveryType) {
         this.deliveryType = deliveryType;
     }
@@ -70,4 +84,30 @@ public class OptionsInfo {
     public boolean getEnable() {
         return enable;
     }
+
+    public void setErrorMessage(String err) { this.errorMessage = err; }
+
+    public String getErrorMessage() { return errorMessage; }
+
+    public void setCenterLat(double centerLat) { this.centerLat = centerLat; }
+
+    public double getCenterLat() {return centerLat; }
+
+    public void setCenterLng(double centerLng) { this.centerLng = centerLng; }
+
+    public double getCenterLng() { return centerLng; }
+
+    public void setOriginLat(double originLat) { this.originLat = originLat; }
+
+    public double getOriginLat() { return originLat; }
+
+    public void setOriginLng(double originLng) {this.originLng = originLng; }
+
+    public void setDestinationLat(double destinationLat) {this.destinationLat = destinationLat; }
+
+    public double getDestinationLat() {return destinationLat;}
+
+    public void setDestinationLng(double destinationLng) {this.destinationLng = destinationLng;}
+
+    public double getDestinationLng() {return destinationLng;}
 }
