@@ -30,6 +30,21 @@ export const signup = (data) => {
   });
 };
 
+
+export const getDeliveryOptions = (data) => {
+  return fetch(`/getDeliveryOptions`, {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to get delivery options");
+    }
+  });
+}
+
 export const getPackage = (packageId) => {
   return fetch(`/orders/${packageId}/package`).then((response) => {
     if (response.status < 200 || response.status >= 300) {
