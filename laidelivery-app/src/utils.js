@@ -42,6 +42,7 @@ export const getDeliveryOptions = (data) => {
     if (response.status < 200 || response.status >= 300) {
       throw Error("Fail to get delivery options");
     }
+    return response.json();
   });
 }
 

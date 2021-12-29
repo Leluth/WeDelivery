@@ -1,42 +1,55 @@
-import React, { useEffect } from 'react'
-import { Grid, } from '@material-ui/core';
+import React, {useEffect, useState} from 'react'
+import {Grid,} from '@material-ui/core';
 import Controls from "../components/controls/Controls";
-import { useForm, Form } from '../components/useForm';
+import {Form, useForm} from '../components/useForm';
 import * as packageService from "../services/packageService";
+import {InboxOutlined, SmileOutlined, UsbOutlined} from '@ant-design/icons';
+import {Button, Card, Descriptions, message, Radio, Space, Spin, Steps} from 'antd';
+import {getDeliveryOptions} from "../utils";
 
+const {Step} = Steps;
+const {Meta} = Card;
 
-const modeItems= [
-    { id: 'pickup', title: 'Pickup' },
-    { id: 'dropoff', title: 'Dropoff' },
-    { id: 'other', title: 'Other' },
+const modeItems = [
+    {id: 'pickup', title: 'Pickup'},
+    {id: 'dropoff', title: 'Dropoff'},
+    {id: 'other', title: 'Other'},
 ]
 
 const initialFValues = {
     id: 0,
     size: '',
-    weight: '',
+    weight: 0,
     content: '',
     mode: 'pickup',
-    categoryId:'',
+    categoryId: '',
     PickupDate: new Date('December 22, 2021 03:24:00'),
     isMember: false,
+    shippingFrom: 'The Marina at Pier 39',
+    shippingTo: 'Marina Middle School'
 }
 
 export default function PackageForm(props) {
-    const { addOrEdit, recordForEdit } = props
+    const {addOrEdit, recordForEdit, close} = props
+    const [current, setCurrent] = useState(0);
+    const [select, setSelect] = useState(0);
+    const [options, setOptions] = useState([{}]);
+    const [fetching, setFetching] = useState(true);
+    const [saving, setSaving] = useState(true);
+    const [order, setOrder] = useState({});
 
     const validate = (fieldValues = values) => {
-        let temp = { ...errors }
+        let temp = {...errors}
         if ('content' in fieldValues)
             temp.content = fieldValues.content ? "" : "This field is required."
         if ('weight' in fieldValues)
             temp.weight = fieldValues.weight.length > 0 ? "" : "Minimum 2 numbers required."
         if ('size' in fieldValues)
             temp.size = fieldValues.size ? "" : "This field is required."
-        if ('shipFrom' in fieldValues)
-            temp.shipFrom = fieldValues.shipFrom ? "" : "This field is required."
-        if ('shipTo' in fieldValues)
-            temp.shipTo = fieldValues.shipTo ? "" : "This field is required."
+        if ('shippingFrom' in fieldValues)
+            temp.shippingFrom = fieldValues.shippingFrom ? "" : "This field is required."
+        if ('shippingTo' in fieldValues)
+            temp.shippingTo = fieldValues.shippingTo ? "" : "This field is required."
 
         if ('categoryId' in fieldValues)
             temp.categoryId = fieldValues.categoryId.length !== 0 ? "" : "This field is required."
@@ -57,12 +70,40 @@ export default function PackageForm(props) {
         resetForm
     } = useForm(initialFValues, true, validate);
 
-
     const handleSubmit = e => {
         e.preventDefault()
         if (validate()) {
-            addOrEdit(values, resetForm);
+            setOrder(values)
+            setCurrent(1);
+            setFetching(true)
+            getDeliveryOptions(values)
+                .then((data) => {
+                    setOptions(data)
+                    setOptions(prevOptions => {
+                        return prevOptions;
+                    });
+                })
+                .catch((err) => {
+                    message.error(err.message);
+                    setCurrent(0);
+                })
+                .finally(() => {
+                    setFetching(false)
+                });
         }
+    }
+
+    const onSelectChange = e => {
+        setSelect(e.target.value)
+    };
+
+    const onChoose = () => {
+        setSaving(true)
+        setCurrent(2)
+        const newOrder = {...order, ...options[select]};
+        setSaving(false)
+        resetForm()
+        close()
     }
 
     useEffect(() => {
@@ -72,91 +113,155 @@ export default function PackageForm(props) {
             })
     }, [recordForEdit])
 
-    return (
-        <Form onSubmit={handleSubmit}>
-            <Grid container>
-                <Grid item xs={6}>
+    const steps = [
+        {
+            title: 'First',
+            content:
+                <Form onSubmit={handleSubmit}>
+                    <Grid container>
+                        <Grid item xs={6}>
 
-                    <Controls.Input
-                        name="content"
-                        label="Package Content"
-                        value={values.content}
-                        onChange={handleInputChange}
-                        error={errors.content}
-                    />
-                    <Controls.Input
-                        label="Weight(lb)"
-                        name="weight"
-                        value={values.weight}
-                        onChange={handleInputChange}
-                        error={errors.weight}
-                    />
-                    <Controls.Input
-                        name="size"
-                        label="Size"
-                        value={values.size}
-                        onChange={handleInputChange}
-                        error={errors.size}
-                    />
+                            <Controls.Input
+                                name="content"
+                                label="Package Content"
+                                value={values.content}
+                                onChange={handleInputChange}
+                                error={errors.content}
+                            />
+                            <Controls.Input
+                                label="Weight(lb)"
+                                name="weight"
+                                value={values.weight}
+                                onChange={handleInputChange}
+                                error={errors.weight}
+                            />
+                            <Controls.Input
+                                name="size"
+                                label="Size"
+                                value={values.size}
+                                onChange={handleInputChange}
+                                error={errors.size}
+                            />
+                            <Controls.Input
+                                label="Ship from "
+                                name="shippingFrom"
+                                value={values.shippingFrom}
+                                onChange={handleInputChange}
+                                error={errors.shippingFrom}
+                            />
+                            <Controls.Input
+                                label="Ship to "
+                                name="shippingTo"
+                                value={values.shippingTo}
+                                onChange={handleInputChange}
+                                error={errors.shippingTo}
+                            />
+                        </Grid>
 
+                        <Grid item xs={6}>
+                            <Controls.RadioGroup
+                                name="Mode"
+                                label="Mode"
+                                value={values.mode}
+                                onChange={handleInputChange}
+                                items={modeItems}
+                            />
+                            <Controls.Select
+                                name="categoryId"
+                                label="Category"
+                                value={values.categoryId}
+                                onChange={handleInputChange}
+                                options={packageService.getCategoryCollection()}
+                                error={errors.categoryId}
+                            />
+                            <Controls.DatePicker
+                                name="PickupDate"
+                                label="Pickup Time"
+                                value={values.PickupDate}
+                                onChange={handleInputChange}
+                            />
+                            <Controls.Checkbox
+                                name="isMember"
+                                label="I am a member"
+                                value={values.isMember}
+                                onChange={handleInputChange}
+                            />
 
+                            <div>
+                                <Controls.Button
+                                    type="submit"
+                                    text="Get delivery options"/>
+                                <Controls.Button
+                                    text="Reset"
+                                    color="default"
+                                    onClick={resetForm}/>
+                            </div>
+                        </Grid>
+                    </Grid>
+                </Form>,
+            icon: <InboxOutlined/>,
+        },
+        {
+            title: 'Second',
+            content:
+                <div>
+                    <Space direction="vertical">
+                        <Radio.Group onChange={onSelectChange} value={select}>
 
-                    <Controls.Input
-                        label="Ship from "
-                        name="shipFrom"
-                        value={values.shipFrom}
-                        onChange={handleInputChange}
-                        error={errors.shipFrom}
-                    />
-                    <Controls.Input
-                        label="Ship to "
-                        name="shipTo"
-                        value={values.shipTo}
-                        onChange={handleInputChange}
-                        error={errors.shipTo}
-                    />
-                </Grid>
-
-                <Grid item xs={6}>
-                    <Controls.RadioGroup
-                        name="Mode"
-                        label="Mode"
-                        value={values.mode}
-                        onChange={handleInputChange}
-                        items={modeItems}
-                    />
-                    <Controls.Select
-                        name="categoryId"
-                        label="Category"
-                        value={values.categoryId}
-                        onChange={handleInputChange}
-                        options={packageService.getCategoryCollection()}
-                        error={errors.categoryId}
-                    />
-                    <Controls.DatePicker
-                        name="PickupDate"
-                        label="Pickup Time"
-                        value={values.PickupDate}
-                        onChange={handleInputChange}
-                    />
-                    <Controls.Checkbox
-                        name="isMember"
-                        label="I am a member"
-                        value={values.isMember}
-                        onChange={handleInputChange}
-                    />
-
-                    <div>
-                        <Controls.Button
-                            type="submit"
-                            text="Submit" />
-                        <Controls.Button
-                            text="Reset"
-                            color="default"
-                            onClick={resetForm} />
+                            {options.map((item, index) => (
+                                <Radio value={index}>
+                                    <Card
+                                        style={{width: 300, marginTop: 16}}
+                                        loading={fetching}
+                                        title={"Options " + index}
+                                        extra={<h1>${item.price}</h1>}>
+                                        <Descriptions column={1} labelStyle={{fontWeight: 'bold'}}>
+                                            <Descriptions.Item
+                                                label="Delivery Type">{item.deliveryType}</Descriptions.Item>
+                                            <Descriptions.Item
+                                                label="Service Type">{item.serviceType}</Descriptions.Item>
+                                            <Descriptions.Item label="PickUp Time">{item.pickUpTime}</Descriptions.Item>
+                                            <Descriptions.Item
+                                                label="Delivery Time">{item.deliveryTime}</Descriptions.Item>
+                                            <Descriptions.Item
+                                                label="Pick Up Center">{item.centerId}</Descriptions.Item>
+                                        </Descriptions>
+                                    </Card>
+                                </Radio>
+                            ))}
+                        </Radio.Group>
+                    </Space>
+                    <div style={{textAlign: "center", marginTop: 20}}>
+                        <Space size="large">
+                            <Button onClick={() => setCurrent(0)}>
+                                Prev
+                            </Button>
+                            <Button type="primary" onClick={onChoose}>
+                                Done!
+                            </Button>
+                        </Space>
                     </div>
-                </Grid>
-            </Grid>
-        </Form>
+                </div>,
+            icon: <UsbOutlined/>,
+        },
+        {
+            title: 'Done',
+            content:
+                <Spin spinning={saving} size="large">
+                    <div style={{width: 900, height: 400}}/>
+                </Spin>,
+            icon: <SmileOutlined/>
+        }
+    ];
+
+    return (
+        <>
+            <Steps current={current}>
+                {steps.map(item => (
+                    <Step key={item.title} title={item.title} icon={item.icon}/>
+                ))}
+            </Steps>
+            <div>{steps[current].content}</div>
+        </>
     )
 }

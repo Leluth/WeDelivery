@@ -110,22 +110,6 @@ const PackageList = () => {
         }
     }, [curPackage]);
 
-    // useEffect(() => {
-    //     if (deliveryOpt) {
-    //         setLoading(true);
-    //         getDeliveryOptions(deliveryParams)
-    //             .then((data) => {
-    //                 setDeliveryOpt(data);
-    //             })
-    //             .catch((err) => {
-    //                 message.error(err.message);
-    //             })
-    //             .finally(() => {
-    //                 setLoading(false);
-    //             });
-    //     }
-    // }, [deliveryOpt]);
-
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(PackageService.getAllPackage())
@@ -253,7 +237,8 @@ const PackageList = () => {
             >
                 <PackageForm
                     recordForEdit={recordForEdit}
-                    addOrEdit={addOrEdit} />
+                    addOrEdit={addOrEdit}
+                    close={()=>{setOpenPopup(false)}}/>
             </Popup>
 
             <ConfirmDialog

@@ -1,4 +1,4 @@
-import {Button, Drawer, List, message, Typography} from "antd";
+import {Button, Drawer, List, message, Space, Typography} from "antd";
 import {useEffect, useState} from "react";
 import {checkout, getCart} from "../utils";
 
@@ -64,21 +64,23 @@ const MyCart = (props) => {
 
     return (
         <>
-            {
-                showPackageList ?
-                    (
-                        <Button type="primary" shape="round" onClick={onShowOrders} style={{marginRight: 10}}>
-                            Orders
-                        </Button>
-                    ) : (
-                        <Button type="primary" shape="round" onClick={onShowPackageList} style={{marginRight: 10}}>
-                            Packages
-                        </Button>
-                    )
-            }
-            <Button type="primary" shape="round" onClick={onOpenDrawer}>
-                Cart
-            </Button>
+            <Space>
+                {
+                    showPackageList ?
+                        (
+                            <Button type="primary" shape="round" onClick={onShowOrders} style={{marginRight: 10}}>
+                                Orders
+                            </Button>
+                        ) : (
+                            <Button type="primary" shape="round" onClick={onShowPackageList} style={{marginRight: 10}}>
+                                Packages
+                            </Button>
+                        )
+                }
+                <Button type="primary" shape="round" onClick={onOpenDrawer}>
+                    Cart
+                </Button>
+            </Space>
             <Drawer
                 title="My Shopping Cart"
                 onClose={onCloseDrawer}
