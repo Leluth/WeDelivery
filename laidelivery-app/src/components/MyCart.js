@@ -69,11 +69,11 @@ const MyCart = (props) => {
                     showPackageList ?
                         (
                             <Button type="primary" shape="round" onClick={onShowOrders} style={{marginRight: 10}}>
-                                Orders
+                                Track
                             </Button>
                         ) : (
                             <Button type="primary" shape="round" onClick={onShowPackageList} style={{marginRight: 10}}>
-                                Packages
+                                Manage Packages
                             </Button>
                         )
                 }

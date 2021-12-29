@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import PackageList from "./PackageList";
 import MyOrders from "./MyOrders";
+import OrderStepper from "./OrderStepper";
+
 
 class Main extends Component {
     constructor(props) {
@@ -11,6 +13,7 @@ class Main extends Component {
         return (
             this.props.showPackageList ? (
                 <PackageList/>
+                // <OrderStepper/>
             ) : (
                 <MyOrders/>
             )

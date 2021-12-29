@@ -15,7 +15,6 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import ConfirmDialog from "../components/ConfirmDialog";
 
-
 const { Option } = Select;
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -27,6 +26,7 @@ const useStyles = makeStyles(theme => ({
         right: '10px'
     }
 }))
+
 const headCells = [
     {id: 'weight', label: 'Weight(lb)'},
     {id: 'size', label: 'Size'},
@@ -196,10 +196,10 @@ const PackageList = () => {
                                     <TableRow key={item.id}>
                                         <TableCell>{item.weight}</TableCell>
                                         <TableCell>{item.size}</TableCell>
-                                        <TableCell>{item.shippingFrom}</TableCell>
-                                        <TableCell>{item.shippingTo}</TableCell>
+                                        <TableCell>{item.shipFrom}</TableCell>
+                                        <TableCell>{item.shipTo}</TableCell>
                                         <TableCell> {item.serviceType}</TableCell>
-                                        <TableCell> {item.deliveryType}</TableCell>
+                                        <TableCell> {item.serviceType}</TableCell>
                                         <TableCell> {item.pickUpTime}</TableCell>
                                         <TableCell> {item.deliveryTime}</TableCell>
                                         <TableCell> ${item.price}</TableCell>
