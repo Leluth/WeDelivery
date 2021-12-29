@@ -1,5 +1,7 @@
 package com.laioffer.laiDelivery.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OptionsInfo {
     private String deliveryType;
 
@@ -23,6 +25,7 @@ public class OptionsInfo {
 
     private double originLat;
 
+    @JsonProperty("originLng")
     private double originLng;
 
     private double destinationLat;
@@ -105,7 +108,7 @@ public class OptionsInfo {
 
     private double getOriginLng() {return originLng;}
 
-    public void setDestinationLat(double destinationLat) {this.destinationLat = destinationLat; }
+    public void setDestinationLat(double destinationLat) {this.destinationLat = destinationLat;}
 
     public double getDestinationLat() {return destinationLat;}
 
