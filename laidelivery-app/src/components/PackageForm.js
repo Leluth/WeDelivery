@@ -115,7 +115,7 @@ export default function PackageForm(props) {
 
     const steps = [
         {
-            title: 'First',
+            title: 'Input package Info',
             content:
                 <Form onSubmit={handleSubmit}>
                     <Grid container>
@@ -202,7 +202,7 @@ export default function PackageForm(props) {
             icon: <InboxOutlined/>,
         },
         {
-            title: 'Second',
+            title: 'Select delivery option',
             content:
                 <div>
                     <Space direction="vertical">
