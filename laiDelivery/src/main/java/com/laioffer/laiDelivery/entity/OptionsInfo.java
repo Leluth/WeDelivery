@@ -103,6 +103,8 @@ public class OptionsInfo {
 
     public void setOriginLng(double originLng) {this.originLng = originLng; }
 
+    private double getOriginLng() {return originLng;}
+
     public void setDestinationLat(double destinationLat) {this.destinationLat = destinationLat; }
 
     public double getDestinationLat() {return destinationLat;}
