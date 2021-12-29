@@ -1,13 +1,13 @@
 import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
-import React, { useEffect, useState } from "react";
-import {addItemToCart, getPackage, getOrder, getDeliveryOptions} from "../utils";
-import { PlusOutlined } from "@ant-design/icons";
+import React, {useEffect, useState} from "react";
+import {addItemToCart, getOrder, getPackage} from "../utils";
+import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
-import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
+import {makeStyles, Paper, TableBody, TableCell, TableRow, Toolbar} from '@material-ui/core';
 import * as PackageService from '../services/packageService';
+import * as packageService from '../services/packageService';
 import useTable from "../components/useTable";
-import * as packageService from "../services/packageService";
 import Controls from "../components/controls/Controls";
 import AddIcon from '@material-ui/icons/Add';
 import Popup from "../components/Popup";
@@ -28,17 +28,20 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 const headCells = [
-    { id: 'content', label: 'Package Content' },
-    { id: 'weight', label: 'Weight(lb)' },
-    { id: 'size', label: 'Size' },
-    { id: 'categoryId', label: 'Category' },
-    { id: 'actions', label: 'Actions', disableSorting: true },
-    { id: 'options', label: 'Options' },
-    { id: 'submit', label: 'Submit' },
-
+    {id: 'weight', label: 'Weight(lb)'},
+    {id: 'size', label: 'Size'},
+    {id: 'shippingFrom', label: 'Origin'},
+    {id: 'shippingTo', label: 'Destination'},
+    {id: 'deliveryType', label: 'Delivery Type'},
+    {id: 'serviceType', label: 'Service Type'},
+    {id: 'pickUpTime', label: 'Pick Up Time(hrs)'},
+    {id: 'deliveryTime', label: 'Delivery Time(hrs)'},
+    {id: 'price', label: 'Price'},
+    {id: 'actions', label: 'Actions', disableSorting: true},
+    {id: 'submit', label: 'Submit'},
 ]
 
-const AddToCartButton = ({ itemId }) => {
+const AddToCartButton = ({itemId}) => {
     const [loading, setLoading] = useState(false);
 
     const AddToCart = () => {
@@ -56,7 +59,7 @@ const AddToCartButton = ({ itemId }) => {
             <Button
                 loading={loading}
                 type="primary"
-                icon={<PlusOutlined />}
+                icon={<PlusOutlined/>}
                 onClick={AddToCart}
             />
         </Tooltip>
@@ -65,13 +68,10 @@ const AddToCartButton = ({ itemId }) => {
 
 const PackageList = () => {
     const [packageId, setPackageId] = useState([]);
-    const [curPackage, setCurpackage ] = useState();
+    const [curPackage, setCurpackage] = useState();
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingPack, setLoadingPack] = useState(false);
-
-    // const [deliveryOpt, setDeliveryOpt] = useState();
-    // const [deliveryParams, setDeliveryParams] = useState();
 
     const useStyles = makeStyles(theme => ({
         pageContent: {
@@ -113,10 +113,14 @@ const PackageList = () => {
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(PackageService.getAllPackage())
-    const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+    const [filterFn, setFilterFn] = useState({
+        fn: items => {
+            return items;
+        }
+    })
     const [openPopup, setOpenPopup] = useState(false)
-    const [setNotify] = useState({ isOpen: false, message: '', type: '' })
-    const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
+    const [setNotify] = useState({isOpen: false, message: '', type: ''})
+    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
 
     const {
         TblContainer,
@@ -142,11 +146,13 @@ const PackageList = () => {
         })
     }
 
+    // edit
     const openInPopup = item => {
         setRecordForEdit(item)
         setOpenPopup(true)
     }
 
+    // delete
     const onDelete = id => {
         setConfirmDialog({
             ...confirmDialog,
@@ -166,70 +172,76 @@ const PackageList = () => {
             <PageHeader
                 title="Package List"
                 subTitle="(Information)"
-                icon={<PeopleOutlineTwoToneIcon fontSize="small" />}
+                icon={<PeopleOutlineTwoToneIcon fontSize="small"/>}
             />
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Button
                         text="Add New package"
                         variant="outlined"
-                        startIcon={<AddIcon />}
+                        startIcon={<AddIcon/>}
                         className={classes.newButton}
-                        onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
+                        onClick={() => {
+                            setOpenPopup(true);
+                            setRecordForEdit(null);
+                        }}
                     />
                 </Toolbar>
                 <TblContainer>
-                    <TblHead />
+                    <TblHead/>
                     <TableBody>
                         {
                             recordsAfterPagingAndSorting().map(item =>
-                                (<TableRow key={item.id}>
-                                    <TableCell>{item.content}</TableCell>
-                                    <TableCell>{item.weight}</TableCell>
-                                    <TableCell>{item.size}</TableCell>
-                                    <TableCell>{item.category}</TableCell>
+                                (
+                                    <TableRow key={item.id}>
+                                        <TableCell>{item.weight}</TableCell>
+                                        <TableCell>{item.size}</TableCell>
+                                        <TableCell>{item.shippingFrom}</TableCell>
+                                        <TableCell>{item.shippingTo}</TableCell>
+                                        <TableCell> {item.serviceType}</TableCell>
+                                        <TableCell> {item.deliveryType}</TableCell>
+                                        <TableCell> {item.pickUpTime}</TableCell>
+                                        <TableCell> {item.deliveryTime}</TableCell>
+                                        <TableCell> ${item.price}</TableCell>
 
-                                    <TableCell>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            onClick={() => { openInPopup(item) }}>
-                                            <EditOutlinedIcon fontSize="small" />
-                                        </Controls.ActionButton>
+                                        <TableCell>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                onClick={() => {
+                                                    openInPopup(item)
+                                                }}>
+                                                <EditOutlinedIcon fontSize="small"/>
+                                            </Controls.ActionButton>
 
-                                        <Controls.ActionButton
-                                            color="secondary"
-                                            onClick={() => {
-                                                setConfirmDialog({
-                                                    isOpen: true,
-                                                    title: 'Are you sure to delete this record?',
-                                                    subTitle: "You can't undo this operation",
-                                                    onConfirm: () => { onDelete(item.id) }
-                                                })
-                                            }}>
-                                            <CloseIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                    </TableCell>
+                                            <Controls.ActionButton
+                                                color="secondary"
+                                                onClick={() => {
+                                                    setConfirmDialog({
+                                                        isOpen: true,
+                                                        title: 'Are you sure to delete this record?',
+                                                        subTitle: "You can't undo this operation",
+                                                        onConfirm: () => {
+                                                            onDelete(item.id)
+                                                        }
+                                                    })
+                                                }}>
+                                                <CloseIcon fontSize="small"/>
+                                            </Controls.ActionButton>
+                                        </TableCell>
 
-                                    <TableCell>
-                                        <select>
-                                            <option value='drone'> Drone</option>
-                                            <option value='robot'> Robot</option>
-                                            <option value='combination'> Combination</option>
-                                        </select>
-                                    </TableCell>
-
-                                    <TableCell>
-                                        <Controls.Button
-                                            type="submit"
-                                            text="Submit" />
-                                    </TableCell>
-                                </TableRow>)
+                                        <TableCell>
+                                            <Controls.Button
+                                                type="submit"
+                                                text="Submit"/>
+                                        </TableCell>
+                                    </TableRow>)
                             )
                         }
                     </TableBody>
                 </TblContainer>
-                <TblPagination />
+                <TblPagination/>
             </Paper>
+
             <Popup
                 title="Package Form"
                 openPopup={openPopup}
@@ -238,7 +250,9 @@ const PackageList = () => {
                 <PackageForm
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
-                    close={()=>{setOpenPopup(false)}}/>
+                    close={() => {
+                        setOpenPopup(false)
+                    }}/>
             </Popup>
 
             <ConfirmDialog
@@ -246,10 +260,9 @@ const PackageList = () => {
                 setConfirmDialog={setConfirmDialog}
             />
 
-
             {curPackage && (
                 <List
-                    style={{ marginTop: 10 }}
+                    style={{marginTop: 10}}
                     loading={loading}
                     grid={{
                         gutter: 10,
@@ -265,12 +278,12 @@ const PackageList = () => {
                         <List.Item>
                             <Card
                                 title={item.name}
-                                extra={<AddToCartButton itemId={item.id} />}
+                                extra={<AddToCartButton itemId={item.id}/>}
                             >
                                 <img
                                     src={item.imageUrl}
                                     alt={item.name}
-                                    style={{ height: 300, width: "100%", display: "block" }}
+                                    style={{height: 300, width: "100%", display: "block"}}
                                 />
                                 {`Price: ${item.price}`}
                             </Card>
