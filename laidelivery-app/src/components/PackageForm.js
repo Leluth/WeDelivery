@@ -32,7 +32,7 @@ const initialFValues = {
 export default function PackageForm(props) {
     const {addOrEdit, recordForEdit, close} = props
     const [current, setCurrent] = useState(0);
-    const [select, setSelect] = useState(0);
+    const [select, setSelect] = useState();
     const [options, setOptions] = useState([{}]);
     const [fetching, setFetching] = useState(true);
     const [saving, setSaving] = useState(true);
@@ -257,7 +257,7 @@ export default function PackageForm(props) {
                             <Button onClick={() => setCurrent(0)}>
                                 Prev
                             </Button>
-                            <Button type="primary" onClick={onChoose}>
+                            <Button type="primary" disabled={select == null} onClick={onChoose}>
                                 Done!
                             </Button>
                         </Space>
