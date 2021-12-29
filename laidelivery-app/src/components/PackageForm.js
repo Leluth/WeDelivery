@@ -207,25 +207,46 @@ export default function PackageForm(props) {
                 <div>
                     <Space direction="vertical">
                         <Radio.Group onChange={onSelectChange} value={select}>
-
                             {options.map((item, index) => (
-                                <Radio value={index}>
+                                <Radio value={index} disabled={!item.enable}>
                                     <Card
                                         style={{width: 300, marginTop: 16}}
                                         loading={fetching}
                                         title={"Options " + index}
-                                        extra={<h1>${item.price}</h1>}>
-                                        <Descriptions column={1} labelStyle={{fontWeight: 'bold'}}>
-                                            <Descriptions.Item
-                                                label="Delivery Type">{item.deliveryType}</Descriptions.Item>
-                                            <Descriptions.Item
-                                                label="Service Type">{item.serviceType}</Descriptions.Item>
-                                            <Descriptions.Item label="PickUp Time">{item.pickUpTime}</Descriptions.Item>
-                                            <Descriptions.Item
-                                                label="Delivery Time">{item.deliveryTime}</Descriptions.Item>
-                                            <Descriptions.Item
-                                                label="Pick Up Center">{item.centerId}</Descriptions.Item>
-                                        </Descriptions>
+                                        extra={
+                                            item.enable ?
+                                                (
+                                                    <h1>${item.price}</h1>
+                                                ) : (<></>)
+                                        }>
+                                        {
+                                            item.enable ?
+                                                (
+                                                    <Descriptions column={1} labelStyle={{fontWeight: 'bold'}}>
+                                                        <Descriptions.Item
+                                                            label="Delivery Type">{item.deliveryType}</Descriptions.Item>
+                                                        <Descriptions.Item
+                                                            label="Service Type">{item.serviceType}</Descriptions.Item>
+                                                        <Descriptions.Item
+                                                            label="PickUp Time">{item.pickUpTime}</Descriptions.Item>
+                                                        <Descriptions.Item
+                                                            label="Delivery Time">{item.deliveryTime}</Descriptions.Item>
+                                                        <Descriptions.Item
+                                                            label="Pick Up Center">{item.centerId}</Descriptions.Item>
+                                                    </Descriptions>
+                                                ) : (
+                                                    <Descriptions column={1} labelStyle={{fontWeight: 'bold'}}>
+                                                        <Descriptions.Item
+                                                            label="Delivery Type">{item.deliveryType}</Descriptions.Item>
+                                                        <Descriptions.Item
+                                                            label="Service Type">{item.serviceType}</Descriptions.Item>
+                                                        <Descriptions.Item
+                                                            label="Error Message">{item.errorMessage}</Descriptions.Item>
+                                                    </Descriptions>
+                                                )
+                                        }
+
+
                                     </Card>
                                 </Radio>
                             ))}
