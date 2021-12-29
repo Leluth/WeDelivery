@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 // reques
@@ -41,7 +42,7 @@ public class OptionsService {
     private static int STATIC_DRONE_MAX_WEIGHT = 2;          //kg
     private static int STATIC_ROBOT_MAX_SPEED = 40;          //kmph
     private static int STATIC_ROBOT_MAX_WEIGHT = 200;        //kg
-    private static double STATIC_DRONE_PRICE = 1;            //(per dollar per min)
+    private static int STATIC_DRONE_PRICE = 1;            //(per dollar per min)
     private static double STATIC_ROBOT_PRICE = 0.1;          //$ 0.1 (per min)
     private static final  double EARTH_RADIUS = 6378137;     //赤道半径
     private static String API_KEY = "AIzaSyBKeoqUYuYx2LOxcxZZzHsExPEIXBgdI5c";
@@ -53,6 +54,7 @@ public class OptionsService {
         OptionsInfo robot = new OptionsInfo();
 
         double weight = itemInfo.getWeight();
+        weight = round(weight, 2);
         String start = itemInfo.getShippingFrom();
         String end = itemInfo.getShippingTo();
 
@@ -72,12 +74,14 @@ public class OptionsService {
 
 
         // step2.1.1: shortest drone path
+        double finalLng = lng1;
+        double finalLat = lat1;
         PriorityQueue<DistributionCenter> droneCenter = new PriorityQueue<>(10, new Comparator<DistributionCenter>() {
             @Override
             public int compare(DistributionCenter o1, DistributionCenter o2) {
-                if (GetDistance(lng1, lat1, Double.valueOf(o1.getLongtitue()), Double.valueOf(o1.getLatitute())) < GetDistance(lng1, lat1, Double.valueOf(o2.getLongtitue()), Double.valueOf(o2.getLatitute()))) {
+                if (GetDistance(finalLng, finalLat, Double.valueOf(o1.getLongtitue()), Double.valueOf(o1.getLatitute())) < GetDistance(finalLng, finalLat, Double.valueOf(o2.getLongtitue()), Double.valueOf(o2.getLatitute()))) {
                     return -1;
-                } else if (GetDistance(lng1, lat1, Double.valueOf(o1.getLongtitue()), Double.valueOf(o1.getLatitute())) > GetDistance(lng1, lat1, Double.valueOf(o2.getLongtitue()), Double.valueOf(o2.getLatitute()))) {
+                } else if (GetDistance(finalLng, finalLat, Double.valueOf(o1.getLongtitue()), Double.valueOf(o1.getLatitute())) > GetDistance(finalLng, finalLat, Double.valueOf(o2.getLongtitue()), Double.valueOf(o2.getLatitute()))) {
                     return 1;
                 } else {
                     return 0;
@@ -89,8 +93,10 @@ public class OptionsService {
             droneCenter.offer(center);
         }
         DistributionCenter shortest = droneCenter.poll();
-        double shortestPickUpTime = GetDistance(lng1, lat1, Double.valueOf(shortest.getLongtitue()), Double.valueOf(shortest.getLatitute())) / STATIC_DRONE_MAX_SPEED * 60;
+        double shortestPickUpTime = div(GetDistance(lng1, lat1, Double.valueOf(shortest.getLongtitue()), Double.valueOf(shortest.getLatitute())), STATIC_DRONE_MAX_SPEED, 2) * 60;
+        shortestPickUpTime = round(shortestPickUpTime, 2);
         double pickUpPrice = shortestPickUpTime * STATIC_DRONE_PRICE;
+        pickUpPrice = round(pickUpPrice,2);
         drone.setPickUpTime(shortestPickUpTime);
         drone.setPrice(pickUpPrice);
         drone.setCenterId(shortest.getCenterId());
@@ -106,11 +112,12 @@ public class OptionsService {
                     .await();
             DirectionsLeg leg = routes.routes[0].legs[0];
             long durationInSeconds = leg.duration.inSeconds;
-            double durationInMinutes = durationInSeconds / 60;
+            double durationInMinutes = round(durationInSeconds / 60, 2) ;
             map.put(center, durationInMinutes);
         }
         DistributionCenter shortestRobot = centers.get(0);
         double shortestMinutes = map.get(shortestRobot);
+        shortestMinutes = round(shortestMinutes, 2);
         for (Map.Entry<DistributionCenter, Double> entry : map.entrySet()) {
             if (entry.getValue() < shortestMinutes) {
                 shortestRobot = entry.getKey();
@@ -118,6 +125,7 @@ public class OptionsService {
             }
         }
         double priceRobot = shortestMinutes * STATIC_ROBOT_PRICE;
+        priceRobot = round(priceRobot, 2);
         robot.setCenterId(shortestRobot.getCenterId());
         robot.setPickUpTime(shortestMinutes);
         robot.setPrice(priceRobot);
@@ -130,11 +138,11 @@ public class OptionsService {
             drone.setEnable(true);
 
             double distance = GetDistance(lng1, lat1, lng2, lat2);
-            double durationInMinutes = distance / STATIC_DRONE_MAX_SPEED * 60;
+            double durationInMinutes = round(div(distance, STATIC_DRONE_MAX_SPEED, 2) * 60, 2);
             drone.setDeliveryTime(durationInMinutes);
 
             // update price
-            double price = drone.getPrice() + durationInMinutes * STATIC_DRONE_PRICE;
+            double price = round(drone.getPrice() + durationInMinutes * STATIC_DRONE_PRICE, 2);
             drone.setPrice(price);
             drone.setCenterLat(Double.valueOf(shortest.getLatitute()));
             drone.setCenterLng(Double.valueOf(shortest.getLongtitue()));
@@ -160,11 +168,11 @@ public class OptionsService {
                     .await();
             DirectionsLeg leg = routes.routes[0].legs[0];
             long durationInSeconds = leg.duration.inSeconds;
-            double durationInMinutes = durationInSeconds / 60;
+            double durationInMinutes = div(durationInSeconds, 60, 2);
             robot.setDeliveryTime(durationInMinutes);
 
             // update price
-            double price = robot.getPrice() + durationInMinutes * STATIC_ROBOT_PRICE;
+            double price = round(robot.getPrice() + durationInMinutes * STATIC_ROBOT_PRICE, 2);
             robot.setPrice(price);
 
             // store frontend asked data, avoid repeat calculation in tracking page
@@ -183,6 +191,8 @@ public class OptionsService {
         return result;
     }
 
+
+
     public double GetDistance(double lon1,double lat1,double lon2, double lat2) {
         double radLat1 = rad(lat1);
         double radLat2 = rad(lat2);
@@ -195,6 +205,26 @@ public class OptionsService {
 
     private double rad(double d){
         return d * Math.PI / 180.0;
+    }
+
+    public double div(double v1,double v2,int scale){
+        if(scale<0){
+            throw new IllegalArgumentException(
+                    "The scale must be a positive integer or zero");
+        }
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    public double round(double v,int scale){
+        if(scale<0){
+            throw new IllegalArgumentException(
+                    "The scale must be a positive integer or zero");
+        }
+        BigDecimal b = new BigDecimal(Double.toString(v));
+        BigDecimal one = new BigDecimal("1");
+        return b.divide(one,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
 }
