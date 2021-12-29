@@ -6,8 +6,8 @@ import "./App.css";
 import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
 import SignupForm from "./components/SignupForm";
-import PackageList from './components/PackageList';
-import { CssBaseline, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import {createMuiTheme, CssBaseline, ThemeProvider} from '@material-ui/core';
+import Main from "./components/Main";
 
 const {Header, Content} = Layout;
 const {Title} = Typography;
@@ -25,16 +25,16 @@ const theme = createMuiTheme({
             default: "#f4f5fd"
         },
     },
-    overrides:{
-        MuiAppBar:{
-            root:{
-                transform:'translateZ(0)'
+    overrides: {
+        MuiAppBar: {
+            root: {
+                transform: 'translateZ(0)'
             }
         }
     },
-    props:{
-        MuiIconButton:{
-            disableRipple:true
+    props: {
+        MuiIconButton: {
+            disableRipple: true
         }
     }
 })
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
     },
     appMain: {
-        paddingLeft: '100px',
+        // paddingLeft: '100px',
         width: '100%'
     }
 }));
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
     const classes = useStyles();
     const [authed, setAuthed] = useState(false);
-
+    const [showPackageList, setShowPackageList] = useState(true);
 
     return (
         <Layout style={{height: "100vh"}}>
@@ -76,29 +76,29 @@ function App() {
                         Lai Delivery
                     </Title>
 
-                    <div>{authed ? <MyCart/> : <SignupForm/>}</div>
+                    <div>{authed ? <MyCart setShowPackageList = {setShowPackageList}/> : <SignupForm/>}</div>
                 </div>
 
             </Header>
 
             <ThemeProvider theme={theme}>
-            <Content
-                style={{
-                    padding: "40px 50px 50px 50px",
-                    maxHeight: "calc(100% - 64px)",
-                    overflowY: "auto",
-                }}
-            >
-                <div className={classes.appMain}>
-                    {authed ? (
-                        <PackageList />
-                    ) : (
-                        <LoginForm onSuccess={() => setAuthed(true)}/>
-                    )}
-                </div>
-            </Content>
+                <Content
+                    style={{
+                        padding: "40px 50px 50px 50px",
+                        maxHeight: "calc(100% - 64px)",
+                        overflowY: "auto",
+                    }}
+                >
+                    <div className={classes.appMain}>
+                        {authed ? (
+                            <Main showPackageList ={showPackageList}/>
+                        ) : (
+                            <LoginForm onSuccess={() => setAuthed(true)}/>
+                        )}
+                    </div>
+                </Content>
 
-                <CssBaseline />
+                <CssBaseline/>
             </ThemeProvider>
         </Layout>
     );

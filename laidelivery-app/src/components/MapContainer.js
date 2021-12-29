@@ -147,7 +147,11 @@ class MapContainer extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.geoInfo !== this.props.geoInfo) {
             const {createTime, deliveryTime, pickUpTime,
-                serviceType, centerAddress, shippingFromAddress, shippingToAddress} = this.props.geoInfo;
+                serviceType, centerLat, centerLng, originLat, originLng, destinationLat, destinationLng}
+                = this.props.geoInfo;
+            const centerAddress = {lat: centerLat, lng: centerLng}
+            const shippingFromAddress = {lat: originLat, lng: originLng}
+            const shippingToAddress = {lat: destinationLat, lng: destinationLng}
             this.deleteMarkers()
             if (this.flightPath != null) {
                 this.removeLine()

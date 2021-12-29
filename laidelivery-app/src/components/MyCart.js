@@ -1,14 +1,15 @@
-import { Button, Drawer, List, message, Typography } from "antd";
-import { useEffect, useState } from "react";
-import { checkout, getCart } from "../utils";
+import {Button, Drawer, List, message, Typography} from "antd";
+import {useEffect, useState} from "react";
+import {checkout, getCart} from "../utils";
 
-const { Text } = Typography;
+const {Text} = Typography;
 
-const MyCart = () => {
+const MyCart = (props) => {
     const [cartVisible, setCartVisible] = useState(false);
     const [cartData, setCartData] = useState();
     const [loading, setLoading] = useState(false);
     const [checking, setChecking] = useState(false);
+    const [showPackageList, setShowPackageList] = useState(true);
 
     useEffect(() => {
         if (!cartVisible) {
@@ -51,8 +52,30 @@ const MyCart = () => {
         setCartVisible(true);
     };
 
+    const onShowOrders = () => {
+        setShowPackageList(false);
+        props.setShowPackageList(false);
+    };
+
+    const onShowPackageList = () => {
+        setShowPackageList(true);
+        props.setShowPackageList(true);
+    };
+
     return (
         <>
+            {
+                showPackageList ?
+                    (
+                        <Button type="primary" shape="round" onClick={onShowOrders} style={{marginRight: 10}}>
+                            Orders
+                        </Button>
+                    ) : (
+                        <Button type="primary" shape="round" onClick={onShowPackageList} style={{marginRight: 10}}>
+                            Packages
+                        </Button>
+                    )
+            }
             <Button type="primary" shape="round" onClick={onOpenDrawer}>
                 Cart
             </Button>
@@ -70,7 +93,7 @@ const MyCart = () => {
                     >
                         <Text strong={true}>{`Total price: $${cartData?.totalPrice}`}</Text>
                         <div>
-                            <Button onClick={onCloseDrawer} style={{ marginRight: 8 }}>
+                            <Button onClick={onCloseDrawer} style={{marginRight: 8}}>
                                 Cancel
                             </Button>
                             <Button
@@ -101,6 +124,6 @@ const MyCart = () => {
             </Drawer>
         </>
     );
-};
+}
 
 export default MyCart;
