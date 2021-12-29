@@ -102,7 +102,7 @@ export default function PackageForm(props) {
         setCurrent(2)
         const newOrder = {...order, ...options[select]};
         setSaving(false)
-        resetForm()
+        addOrEdit(newOrder, resetForm)
         close()
     }
 
