@@ -196,9 +196,9 @@ const PackageList = () => {
                                     <TableRow key={item.id}>
                                         <TableCell>{item.weight}</TableCell>
                                         <TableCell>{item.size}</TableCell>
-                                        <TableCell>{item.shipFrom}</TableCell>
-                                        <TableCell>{item.shipTo}</TableCell>
-                                        <TableCell> {item.serviceType}</TableCell>
+                                        <TableCell>{item.shippingFrom}</TableCell>
+                                        <TableCell>{item.shippingTo}</TableCell>
+                                        <TableCell> {item.deliveryType}</TableCell>
                                         <TableCell> {item.serviceType}</TableCell>
                                         <TableCell> {item.pickUpTime}</TableCell>
                                         <TableCell> {item.deliveryTime}</TableCell>
