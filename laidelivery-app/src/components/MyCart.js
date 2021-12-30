@@ -5,12 +5,12 @@ import {checkout, getCart} from "../utils";
 const {Text} = Typography;
 
 const MyCart = (props) => {
+
     const [cartVisible, setCartVisible] = useState(false);
     const [cartData, setCartData] = useState();
     const [loading, setLoading] = useState(false);
     const [checking, setChecking] = useState(false);
     const [showPackageList, setShowPackageList] = useState(true);
-
     useEffect(() => {
         if (!cartVisible) {
             return;
@@ -19,7 +19,9 @@ const MyCart = (props) => {
         setLoading(true);
         getCart()
             .then((data) => {
+                // console.log(data)
                 setCartData(data);
+                console.log(cartData);
             })
             .catch((err) => {
                 message.error(err.message);
@@ -37,12 +39,22 @@ const MyCart = (props) => {
                 setCartVisible(false);
             })
             .catch((err) => {
+                // message.success("Successfully checkout");
                 message.error(err.message);
             })
             .finally(() => {
                 setChecking(false);
             });
     };
+
+    function sum(obj) {
+        var sum = 0.0;
+        for(var index in obj ) {
+            // console.log(obj[index])
+            sum += obj[index].price;
+        }
+        return sum;
+    }
 
     const onCloseDrawer = () => {
         setCartVisible(false);
@@ -93,7 +105,7 @@ const MyCart = (props) => {
                             justifyContent: "space-between",
                         }}
                     >
-                        <Text strong={true}>{`Total price: $${cartData?.totalPrice}`}</Text>
+                        <Text strong={true}>{`Total price: $${sum(cartData)}`}</Text>
                         <div>
                             <Button onClick={onCloseDrawer} style={{marginRight: 8}}>
                                 Cancel
@@ -102,7 +114,7 @@ const MyCart = (props) => {
                                 onClick={onCheckOut}
                                 type="primary"
                                 loading={checking}
-                                disabled={loading || cartData?.orderItemList.length === 0}
+                                // disabled={loading || cartData?.orderItemList.length === 0}
                             >
                                 Checkout
                             </Button>
@@ -113,15 +125,18 @@ const MyCart = (props) => {
                 <List
                     loading={loading}
                     itemLayout="horizontal"
-                    dataSource={cartData?.orderItemList}
+                    // dataSource={cartData?.orderItemList}
+                    dataSource={cartData}
+                    // how do we create list based on the list of cartdata?
                     renderItem={(item) => (
                         <List.Item>
                             <List.Item.Meta
-                                title={item.menuItem.name}
+                                title={item.packageType}
                                 description={`$${item.price}`}
                             />
                         </List.Item>
                     )}
+
                 />
             </Drawer>
         </>

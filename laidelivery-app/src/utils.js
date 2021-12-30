@@ -67,7 +67,8 @@ export const getOrder = () => {
 };
 
 export const getCart = () => {
-  return fetch("/cart").then((response) => {
+  console.log("got the tmp cart from tmpDeliveryOrder table")
+  return fetch("/tmpcart").then((response) => {
     if (response.status < 200 || response.status >= 300) {
       throw Error("Fail to get shopping cart data");
     }

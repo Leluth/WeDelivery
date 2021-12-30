@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "tmpdeliverorder")
-public class tmpDeliveryOrder implements Serializable {
+public class TmpDeliveryOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
