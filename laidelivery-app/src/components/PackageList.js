@@ -30,6 +30,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
+
+    {id: 'packageContent', label: 'Package Content'},
     {id: 'weight', label: 'Weight(lb)'},
     {id: 'size', label: 'Size'},
     {id: 'shippingFrom', label: 'Origin'},
@@ -231,6 +233,7 @@ const PackageList = () => {
                             recordsAfterPagingAndSorting().map(item =>
                                 (
                                     <TableRow key={item.id}>
+                                        <TableCell>{item.packageContent}</TableCell>
                                         <TableCell>{item.weight}</TableCell>
                                         <TableCell>{item.size}</TableCell>
                                         <TableCell>{item.shippingFrom}</TableCell>
