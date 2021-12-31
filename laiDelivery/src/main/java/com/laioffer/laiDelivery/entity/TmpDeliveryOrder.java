@@ -42,6 +42,10 @@ public class TmpDeliveryOrder implements Serializable {
     private double price;
 
     private String orderId;
+    // newly add int status: 1 is added into cart, 0 is non
+    private int status;
+    // newly add package content for display
+    private String packageContent;
 
     // newly added 7 attributes requested by Shaoshuai on 12/26/2021 - Hung-Hsi
     private double centerLat;
@@ -226,5 +230,21 @@ public class TmpDeliveryOrder implements Serializable {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getPackageContent() {
+        return packageContent;
+    }
+
+    public void setPackageContent(String packageContent) {
+        this.packageContent = packageContent;
     }
 }

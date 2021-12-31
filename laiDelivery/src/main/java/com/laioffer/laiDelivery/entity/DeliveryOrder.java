@@ -43,6 +43,17 @@ public class DeliveryOrder implements Serializable {
 
     private String orderId;
 
+    public String getPackageContent() {
+        return packageContent;
+    }
+
+    public void setPackageContent(String packageContent) {
+        this.packageContent = packageContent;
+    }
+
+    // newly add package content for display
+    private String packageContent;
+
     // newly added 7 attributes requested by Shaoshuai on 12/26/2021 - Hung-Hsi
     private double centerLat;
 

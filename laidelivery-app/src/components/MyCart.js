@@ -126,12 +126,13 @@ const MyCart = (props) => {
                 <List
                     loading={loading}
                     itemLayout="horizontal"
-                    // dataSource={cartData?.orderItemList}
+                    // dataSource={cartData?.orderItemList} array=>objects
                     dataSource={cartData}
                     // how do we create list based on the list of cartdata?
                     renderItem={(item) => (
                         <List.Item>
                             <List.Item.Meta
+                                // add more if needed
                                 title={item.packageType}
                                 description={`$${item.price}`}
                             />
