@@ -17,6 +17,7 @@ const modeItems = [
 ]
 
 const initialFValues = {
+
     id: 0,
     size: '',
     weight: 0,
