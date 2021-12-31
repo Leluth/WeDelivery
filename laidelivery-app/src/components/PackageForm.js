@@ -25,8 +25,8 @@ const initialFValues = {
     categoryId: '',
     PickupDate: new Date('December 22, 2021 03:24:00'),
     isMember: false,
-    shippingFrom: 'The Marina at Pier 39',
-    shippingTo: 'Marina Middle School'
+    shippingFrom: '', //The Marina at Pier 39
+    shippingTo: '' //Marina Middle School
 }
 
 export default function PackageForm(props) {
@@ -104,6 +104,12 @@ export default function PackageForm(props) {
         setSaving(false)
         addOrEdit(newOrder, resetForm)
         close()
+    }
+
+    const onPre = () => {
+        setCurrent(0)
+        setSelect(null)
+        setOptions([{}])
     }
 
     useEffect(() => {
@@ -254,7 +260,7 @@ export default function PackageForm(props) {
                     </Space>
                     <div style={{textAlign: "center", marginTop: 20}}>
                         <Space size="large">
-                            <Button onClick={() => setCurrent(0)}>
+                            <Button onClick={onPre}>
                                 Prev
                             </Button>
                             <Button type="primary" disabled={select == null} onClick={onChoose}>
