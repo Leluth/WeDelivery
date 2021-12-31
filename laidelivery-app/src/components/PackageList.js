@@ -1,12 +1,10 @@
-import {Button, Card, Col, List, message, PageHeader, Row, Select, Tooltip} from "antd";
-import React, {Component, useEffect, useState} from "react";
-import {addItemToCart, getCart, getOptions, getPackage} from "../utils";
+import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
+import React, {useEffect, useState} from "react";
+import {addItemToCart, getCart, getPackage} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
 import {makeStyles, Paper, TableBody, TableCell, TableRow, Toolbar} from '@material-ui/core';
-import * as PackageService from '../services/packageService';
-import * as packageService from '../services/packageService';
 import useTable from "../components/useTable";
 import Controls from "../components/controls/Controls";
 import AddIcon from '@material-ui/icons/Add';
@@ -14,10 +12,8 @@ import Popup from "../components/Popup";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import ConfirmDialog from "../components/ConfirmDialog";
-import OrderCard from './OrderCard'
-import MapContainer from './MapContainer'
 
-const { Option } = Select;
+const {Option} = Select;
 const useStyles = makeStyles(theme => ({
     pageContent: {
         margin: theme.spacing(1),
@@ -30,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const headCells = [
-
     {id: 'content', label: 'Package Content'},
     {id: 'weight', label: 'Weight(lb)'},
     {id: 'size', label: 'Size'},
@@ -52,7 +47,7 @@ const AddToCartButton = ({itemId}) => {
     console.log(cart);
 
     const AddToCart = (item) => {
-        setCart([...cart,item]);
+        setCart([...cart, item]);
         setLoading(true);
         addItemToCart(itemId)
             .then(() => message.success(`Successfully add item`))
@@ -106,29 +101,12 @@ const PackageList = () => {
     const [loading, setLoading] = useState(false);
     const [loadingPack, setLoadingPack] = useState(false);
 
-
-
     const useStyles = makeStyles(theme => ({
         pageContent: {
             margin: theme.spacing(3),
             padding: theme.spacing(1)
         }
     }))
-
-
-    useEffect(() => {
-        setLoadingPack(true);
-        getOptions()
-            .then((data) => {
-                setOptions(data);
-            })
-            .catch((err) => {
-                message.error(err.message);
-            })
-            .finally(() => {
-                setLoadingPack(false);
-            });
-    }, []);
 
     useEffect(() => {
         if (curPackage) {
@@ -146,9 +124,13 @@ const PackageList = () => {
         }
     }, [curPackage]);
 
+    useEffect(() => {
+        updateList()
+    }, []);
+
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(PackageService.getAllPackage())
+    const [records, setRecords] = useState([])
     const [filterFn, setFilterFn] = useState({
         fn: items => {
             return items;
@@ -165,21 +147,27 @@ const PackageList = () => {
         recordsAfterPagingAndSorting
     } = useTable(records, headCells, filterFn);
 
-
     const addOrEdit = (Package, resetForm) => {
-        if (Package.id === 0)
-            packageService.insertPackage(Package)
-        else
-            packageService.updatePackage(Package)
+        // if (Package.id === 0)
+        //     packageService.insertPackage(Package)
+        // else
+        //     packageService.updatePackage(Package)
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
-        setRecords(packageService.getAllPackage())
-        setNotify({
-            isOpen: true,
-            message: 'Submitted Successfully',
-            type: 'success'
-        })
+        updateList();
+        message.success('Submitted Successfully');
+    }
+
+    const updateList = () => {
+        getCart()
+            .then((data) => {
+                console.log(data)
+                setRecords(data)
+            })
+            .catch((err) => {
+                message.error(err.message);
+            });
     }
 
     // edit
@@ -194,8 +182,8 @@ const PackageList = () => {
             ...confirmDialog,
             isOpen: false
         })
-        packageService.deletePackage(id);
-        setRecords(packageService.getAllPackage())
+        // packageService.deletePackage(id);
+        updateList();
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',
@@ -283,8 +271,6 @@ const PackageList = () => {
                                                 </TableCell>
                                             </TableRow>
                                         ))}
-
-
                                     </TableRow>)
                             )
                         }
@@ -332,18 +318,19 @@ const PackageList = () => {
                                 title={item.name}
                                 extra={<AddToCartButton itemId={item.id}/>}
                             >   {`Price: ${item.price}`}
-                            <Select
-                                value={curPackage}
-                                onSelect={(value) => setCurPackage(value)}
-                                placeholder="Select a package"
-                                loading={loadingPack}
-                                style={{ width: 300 }}
-                                onChange={() => {}}
-                            >
-                                {options.map((item) => {
-                                    return <Option value={item.id}>{item.name}</Option>;
-                                })}
-                            </Select>
+                                <Select
+                                    value={curPackage}
+                                    onSelect={(value) => setCurPackage(value)}
+                                    placeholder="Select a package"
+                                    loading={loadingPack}
+                                    style={{width: 300}}
+                                    onChange={() => {
+                                    }}
+                                >
+                                    {options.map((item) => {
+                                        return <Option value={item.id}>{item.name}</Option>;
+                                    })}
+                                </Select>
                             </Card>
                         </List.Item>
                     )}
