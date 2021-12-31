@@ -17,6 +17,7 @@ import com.laioffer.laiDelivery.entity.DeliveryOrder;
 import com.laioffer.laiDelivery.entity.DistributionCenter;
 import com.laioffer.laiDelivery.entity.ItemInfo;
 import com.laioffer.laiDelivery.entity.OptionsInfo;
+import com.sun.xml.bind.v2.TODO;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -39,43 +40,75 @@ public class OptionsService {
     private DistributionCenterDao distributionCenterDao;
 
     private static int STATIC_DRONE_MAX_SPEED = 54;          //kmph (DJI Mavic 2pro’s max speed)
-    private static int STATIC_DRONE_MAX_WEIGHT = 2;          //kg
+    private static int STATIC_DRONE_MAX_RADIUS = 20;         //km
+    private static int STATIC_DRONE_MAX_WEIGHT = 20;         //lbs
+    private static int STATIC_DRONE_PRICE = 1;               //(per dollar per min)
+
     private static int STATIC_ROBOT_MAX_SPEED = 40;          //kmph
-    private static int STATIC_ROBOT_MAX_WEIGHT = 200;        //kg
-    private static int STATIC_DRONE_PRICE = 1;            //(per dollar per min)
-    private static double STATIC_ROBOT_PRICE = 0.1;          //$ 0.1 (per min)
+    private static int STATIC_ROBOT_MAX_RADIUS = 50;         //km
+    private static int STATIC_ROBOT_MAX_WEIGHT = 2000;       //lbs
+    private static double STATIC_ROBOT_PRICE = 0.1;          //$0.1 (per min)
+
+    private static double STATIC_MEMBER_DISCOUNT = 0.8;      //if users has high volume of inventory needs to transfer, we will give him a discount.
+
     private static final  double EARTH_RADIUS = 6378137;     //赤道半径
     private static String API_KEY = "AIzaSyBKeoqUYuYx2LOxcxZZzHsExPEIXBgdI5c";
 
     public List<OptionsInfo> getOptions(ItemInfo itemInfo) throws IOException, InterruptedException, ApiException {
         // step1: initialize
+        // initialize options
         List<OptionsInfo> result = new ArrayList<>();
-        OptionsInfo drone = new OptionsInfo();
-        OptionsInfo robot = new OptionsInfo();
+        OptionsInfo expressDrone = new OptionsInfo();
+        expressDrone.setServiceType("drone");
+        expressDrone.setDeliveryType("express");
+        OptionsInfo expressRobot = new OptionsInfo();
+        expressRobot.setServiceType("robot");
+        expressRobot.setDeliveryType("express");
 
+        // initialize item info
         double weight = itemInfo.getWeight();
         weight = round(weight, 2);
+        String size = itemInfo.getSize();
         String start = itemInfo.getShippingFrom();
         String end = itemInfo.getShippingTo();
+        boolean isMember = itemInfo.isMember();
+        String pickUpDate = itemInfo.getPickupDate();
 
+        // initialize google map api
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(API_KEY)
                 .build();
 
-        // step2: calculate different option's price
-        // step2.1: calculate the shortest path from distribution center to start point
+        // initialize start, end geocoding info and distribution center info
         List<DistributionCenter> centers = distributionCenterDao.getDistributionCenters();
         GeocodingResult[] results1 =  GeocodingApi.geocode(context, start).await();
-        double lat1 = results1[0].geometry.location.lat;
-        double lng1 = results1[0].geometry.location.lng;
+        double orgLat = results1[0].geometry.location.lat;
+        double orgLng = results1[0].geometry.location.lng;
         GeocodingResult[] results2 =  GeocodingApi.geocode(context, end).await();
-        double lat2 = results2[0].geometry.location.lat;
-        double lng2 = results2[0].geometry.location.lng;
+        double dstLat = results2[0].geometry.location.lat;
+        double dstLng = results2[0].geometry.location.lng;
 
 
+        // step 2: calculate different options info
+        expressDrone = expressDrone(expressDrone, context, weight, size, start, end, isMember, centers, orgLat, orgLng, dstLat, dstLng);
+        result.add(expressDrone);
+
+        expressRobot = expressRobot(expressRobot, context, weight, size, start, end, isMember, centers, orgLat, orgLng, dstLat, dstLng);
+        result.add(expressRobot);
+
+        // step 3: finish
+        context.shutdown();
+        return result;
+    }
+
+    public OptionsInfo expressDrone(OptionsInfo drone, GeoApiContext context,
+                                    double weight, String size, String start, String end, boolean isMember,
+                                    List<DistributionCenter> centers, double orgLat, double orgLng, double dstLat, double dstLng) {
+        // step2: calculate different option's price
+        // step2.1: calculate the shortest path from distribution center to start point
         // step2.1.1: shortest drone path
-        double finalLng = lng1;
-        double finalLat = lat1;
+        double finalLng = orgLng;
+        double finalLat = orgLng;
         PriorityQueue<DistributionCenter> droneCenter = new PriorityQueue<>(10, new Comparator<DistributionCenter>() {
             @Override
             public int compare(DistributionCenter o1, DistributionCenter o2) {
@@ -93,15 +126,51 @@ public class OptionsService {
             droneCenter.offer(center);
         }
         DistributionCenter shortest = droneCenter.poll();
-        double shortestPickUpTime = div(GetDistance(lng1, lat1, Double.valueOf(shortest.getLongtitue()), Double.valueOf(shortest.getLatitute())), STATIC_DRONE_MAX_SPEED, 2) * 60;
+        double shortestPickUpDistance = GetDistance(orgLng, orgLat, Double.valueOf(shortest.getLongtitue()), Double.valueOf(shortest.getLatitute()));
+        double shortestPickUpTime = div(shortestPickUpDistance, STATIC_DRONE_MAX_SPEED, 2) * 60;
         shortestPickUpTime = round(shortestPickUpTime, 2);
         double pickUpPrice = shortestPickUpTime * STATIC_DRONE_PRICE;
         pickUpPrice = round(pickUpPrice,2);
-        drone.setPickUpTime(shortestPickUpTime);
-        drone.setPrice(pickUpPrice);
-        drone.setCenterId(shortest.getCenterId());
 
 
+        // step2.2: calculate the path from origin to destination
+
+        double deliveryDistance = GetDistance(orgLng, orgLat, dstLng, dstLat);
+        double durationInMinutes = round(div(deliveryDistance, STATIC_DRONE_MAX_SPEED, 2) * 60, 2);
+
+        // update price
+        double deliveryPrice = round(durationInMinutes * STATIC_DRONE_PRICE, 2);
+        double finalPrice = pickUpPrice + deliveryPrice;
+
+        double finalDistance = shortestPickUpDistance + deliveryDistance;
+
+        // step 3: validation and finish
+        if (weight > STATIC_DRONE_MAX_WEIGHT) {
+            drone.setErrorMessage("input weight is above drone's max capacity.");
+        } else if (shortestPickUpDistance > STATIC_DRONE_MAX_RADIUS) {
+            drone.setErrorMessage("input origin is out of service.");
+        } else if (finalDistance > STATIC_DRONE_MAX_RADIUS) {
+            drone.setErrorMessage("input service distance is unable to reach");
+        } else {
+            drone.setEnable(true);
+            drone.setPrice(finalPrice);
+            drone.setCenterLat(Double.valueOf(shortest.getLatitute()));
+            drone.setCenterLng(Double.valueOf(shortest.getLongtitue()));
+            drone.setOriginLat(orgLat);
+            drone.setOriginLng(orgLng);
+            drone.setDestinationLat(dstLat);
+            drone.setDestinationLng(dstLng);
+            drone.setDeliveryTime(durationInMinutes);
+            drone.setPickUpTime(shortestPickUpTime);
+            drone.setCenterId(shortest.getCenterId());
+        }
+        return drone;
+    }
+
+    public OptionsInfo expressRobot(OptionsInfo robot, GeoApiContext context,
+                                    double weight, String size, String start, String end, boolean isMember,
+                                    List<DistributionCenter> centers, double orgLat, double orgLng, double dstLat, double dstLng) throws IOException, InterruptedException, ApiException {
+        // step 2.1: calculate shortest path from 3 distribution center to origin
         // step2.1.2: shortest robot path
         Map<DistributionCenter, Double> map = new HashMap<>();
         for (DistributionCenter center : centers) {
@@ -126,74 +195,57 @@ public class OptionsService {
         }
         double priceRobot = shortestMinutes * STATIC_ROBOT_PRICE;
         priceRobot = round(priceRobot, 2);
-        robot.setCenterId(shortestRobot.getCenterId());
-        robot.setPickUpTime(shortestMinutes);
-        robot.setPrice(priceRobot);
+
+        String centerPosition = shortestRobot.getLatitute()+","+shortestRobot.getLongtitue();
+        DirectionsResult shortestRoutes = DirectionsApi.newRequest(context)
+                .origin(centerPosition)
+                .destination(start)
+                .await();
+        DirectionsLeg shortestLeg = shortestRoutes.routes[0].legs[0];
+        double shortestDistance = shortestLeg.distance.inMeters / 1000;
 
 
-        // step2.2: calculate the path from origin to destination
-        drone.setServiceType("drone");
-        drone.setDeliveryType("express");
-        if (weight <= STATIC_DRONE_MAX_WEIGHT) {
-            drone.setEnable(true);
+        // google map service
+        DirectionsResult routes = DirectionsApi.newRequest(context)
+                .origin(start)
+                .destination(end)
+                .await();
+        DirectionsLeg leg = routes.routes[0].legs[0];
+        long durationInSeconds = leg.duration.inSeconds;
+        double durationInMinutes = div(durationInSeconds, 60, 2);
+        double deliveryDistance = leg.distance.inMeters / 1000;
 
-            double distance = GetDistance(lng1, lat1, lng2, lat2);
-            double durationInMinutes = round(div(distance, STATIC_DRONE_MAX_SPEED, 2) * 60, 2);
-            drone.setDeliveryTime(durationInMinutes);
+        // update price
+        double deliveryPrice = round(durationInMinutes * STATIC_ROBOT_PRICE, 2);
+        double finalPrice = deliveryPrice + priceRobot;
 
-            // update price
-            double price = round(drone.getPrice() + durationInMinutes * STATIC_DRONE_PRICE, 2);
-            drone.setPrice(price);
-            drone.setCenterLat(Double.valueOf(shortest.getLatitute()));
-            drone.setCenterLng(Double.valueOf(shortest.getLongtitue()));
-            drone.setOriginLat(lat1);
-            drone.setOriginLng(lng1);
-            drone.setDestinationLat(lat2);
-            drone.setDestinationLng(lng2);
+        double finalDistance = shortestDistance + deliveryDistance;
+
+        if (weight > STATIC_ROBOT_MAX_WEIGHT) {
+            robot.setErrorMessage("input weight is above robot's max capacity.");
+        } else if (shortestDistance > STATIC_ROBOT_MAX_RADIUS) {
+            robot.setErrorMessage("input origin is out of service.");
+        } else if (finalDistance > STATIC_ROBOT_MAX_RADIUS) {
+            robot.setErrorMessage("input service distance is unable to reach");
         } else {
-            drone.setErrorMessage("input weight is above drone's max capacity");
-        }
-        result.add(drone);
-
-
-
-        robot.setServiceType("robot");
-        robot.setDeliveryType("express");
-        if (weight <= STATIC_ROBOT_MAX_WEIGHT) { // 1. weight, 2. location, 3. size
             robot.setEnable(true);
-            // google map service
-            DirectionsResult routes = DirectionsApi.newRequest(context)
-                    .origin(start)
-                    .destination(end)
-                    .await();
-            DirectionsLeg leg = routes.routes[0].legs[0];
-            long durationInSeconds = leg.duration.inSeconds;
-            double durationInMinutes = div(durationInSeconds, 60, 2);
-            robot.setDeliveryTime(durationInMinutes);
-
-            // update price
-            double price = round(robot.getPrice() + durationInMinutes * STATIC_ROBOT_PRICE, 2);
-            robot.setPrice(price);
-
-            // store frontend asked data, avoid repeat calculation in tracking page
+            robot.setPrice(finalPrice);
             robot.setCenterLat(Double.valueOf(shortestRobot.getLatitute()));
             robot.setCenterLng(Double.valueOf(shortestRobot.getLongtitue()));
-            robot.setOriginLat(lat1);
-            robot.setOriginLng(lng1);
-            robot.setDestinationLat(lat2);
-            robot.setDestinationLng(lng2);
-        } else {
-            robot.setErrorMessage("input weight is above robot's max capacity");
+            robot.setOriginLat(orgLat);
+            robot.setOriginLng(orgLng);
+            robot.setDestinationLat(dstLat);
+            robot.setDestinationLng(dstLng);
+            robot.setCenterId(shortestRobot.getCenterId());
+            robot.setPickUpTime(shortestMinutes);
+            robot.setDeliveryTime(durationInMinutes);
         }
-
-        result.add(robot);
-        context.shutdown();
-        return result;
+        return robot;
     }
+    // some helper functions
 
-
-
-    public double GetDistance(double lon1,double lat1,double lon2, double lat2) {
+    // this one is for drone's straight line distance calculation.
+    private double GetDistance(double lon1,double lat1,double lon2, double lat2) {
         double radLat1 = rad(lat1);
         double radLat2 = rad(lat2);
         double a = radLat1 - radLat2;
@@ -207,7 +259,7 @@ public class OptionsService {
         return d * Math.PI / 180.0;
     }
 
-    public double div(double v1,double v2,int scale){
+    private double div(double v1,double v2,int scale){
         if(scale<0){
             throw new IllegalArgumentException(
                     "The scale must be a positive integer or zero");
@@ -217,7 +269,7 @@ public class OptionsService {
         return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
-    public double round(double v,int scale){
+    private double round(double v,int scale){
         if(scale<0){
             throw new IllegalArgumentException(
                     "The scale must be a positive integer or zero");
