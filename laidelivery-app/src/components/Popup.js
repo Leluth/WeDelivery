@@ -23,7 +23,7 @@ export default function Popup(props) {
         <Dialog open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
             <DialogTitle className={classes.dialogTitle}>
                 <div style={{ display: 'flex' }}>
-                    <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
+                    <Typography variant="h7" component="div" style={{ flexGrow: 0.5 }}>
                         {title}
                     </Typography>
                     <Controls.ActionButton

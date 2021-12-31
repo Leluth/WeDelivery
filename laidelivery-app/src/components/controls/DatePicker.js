@@ -11,15 +11,17 @@ export default function CustomDateTimePicker() {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={3}>
+            <Stack spacing={5}>
 
                 <DateTimePicker
                     clearable
+                    renderInput={(params) => (
+                        <TextField {...params} helperText="Pls choose the pickup time." />
+                    )}
+
                     value={clearedDate}
                     onChange={(newValue) => setClearedDate(newValue)}
-                    renderInput={(params) => (
-                        <TextField {...params} helperText="Pls click the icon to choose the exact time." />
-                    )}
+
                 />
             </Stack>
         </LocalizationProvider>

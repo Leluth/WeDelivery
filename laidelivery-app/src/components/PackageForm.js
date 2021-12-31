@@ -13,7 +13,6 @@ const {Meta} = Card;
 const modeItems = [
     {id: 'pickup', title: 'Pickup'},
     {id: 'dropoff', title: 'Dropoff'},
-    {id: 'other', title: 'Other'},
 ]
 
 const initialFValues = {
@@ -161,7 +160,7 @@ export default function PackageForm(props) {
 
                         <Grid item xs={6}>
                             <Controls.RadioGroup
-                                name="Mode"
+                                name="mode"
                                 label="Mode"
                                 value={values.mode}
                                 onChange={handleInputChange}

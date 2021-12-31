@@ -271,7 +271,7 @@ const PackageList = () => {
                                         <TableCell onClick={handleCellClick}>
                                             <Controls.Button
                                                 type="AddToCart"
-                                                text="Add to cart"/>
+                                                text="Add"/>
                                             {item.request}
                                         </TableCell>
                                         {packageData.map((item) => (
