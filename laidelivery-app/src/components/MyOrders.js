@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Col, List, message, Row} from "antd";
 import OrderCard from "./OrderCard";
 import MapContainer from "./MapContainer";
-import {getCart} from "../utils";
+import {getOrders} from "../utils";
 
 class MyOrders extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class MyOrders extends Component {
     }
 
     componentDidMount() {
-        getCart()
+        getOrders()
             .then((data) => {
                 this.setState({
                     data: data.orderItemList.reverse()

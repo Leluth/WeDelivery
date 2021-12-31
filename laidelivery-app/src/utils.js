@@ -66,6 +66,16 @@ export const getOptions = () => {
   });
 };
 
+export const getOrders = () => {
+  return fetch("/cart").then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to get shopping cart data");
+    }
+
+    return response.json();
+  });
+};
+
 export const getCart = () => {
   console.log("got the tmp cart from tmpDeliveryOrder table")
   return fetch("/tmpcart").then((response) => {
