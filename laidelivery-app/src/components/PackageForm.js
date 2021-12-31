@@ -259,7 +259,7 @@ export default function PackageForm(props) {
                         </Radio.Group>
                     </Space>
                     <div style={{textAlign: "center", marginTop: 20}}>
-                        <Space size="large">
+                        <Space size="middle">
                             <Button onClick={onPre}>
                                 Prev
                             </Button>
