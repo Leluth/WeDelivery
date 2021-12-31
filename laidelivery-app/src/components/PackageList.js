@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 const headCells = [
 
-    {id: 'packageContent', label: 'Package Content'},
+    {id: 'packageContent', label: 'Content'},
     {id: 'weight', label: 'Weight(lb)'},
     {id: 'size', label: 'Size'},
     {id: 'shippingFrom', label: 'Origin'},
