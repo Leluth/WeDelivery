@@ -1,6 +1,6 @@
-import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
-import React, {useEffect, useState} from "react";
-import {addItemToCart, getOrder, getPackage} from "../utils";
+import {Button, Card, Col, List, message, PageHeader, Row, Select, Tooltip} from "antd";
+import React, {Component, useEffect, useState} from "react";
+import {addItemToCart, getCart, getOptions, getPackage} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -14,6 +14,8 @@ import Popup from "../components/Popup";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import ConfirmDialog from "../components/ConfirmDialog";
+import OrderCard from './OrderCard'
+import MapContainer from './MapContainer'
 
 const { Option } = Select;
 const useStyles = makeStyles(theme => ({
@@ -37,14 +39,18 @@ const headCells = [
     {id: 'pickUpTime', label: 'Pick Up Time(hrs)'},
     {id: 'deliveryTime', label: 'Delivery Time(hrs)'},
     {id: 'price', label: 'Price'},
-    {id: 'actions', label: 'Actions', disableSorting: true},
-    {id: 'submit', label: 'Submit'},
+    {id: 'editDelete', label: 'Edit/Delete', disableSorting: true},
+    {id: 'AddToCart', label: 'Add to cart'},
 ]
+
 
 const AddToCartButton = ({itemId}) => {
     const [loading, setLoading] = useState(false);
+    const [cart, setCart] = useState([]);
+    console.log(cart);
 
-    const AddToCart = () => {
+    const AddToCart = (item) => {
+        setCart([...cart,item]);
         setLoading(true);
         addItemToCart(itemId)
             .then(() => message.success(`Successfully add item`))
@@ -53,6 +59,30 @@ const AddToCartButton = ({itemId}) => {
                 setLoading(false);
             });
     };
+    /*
+    const removeFromCart = (packageItem) => {
+       let hardCopy = [...cart];
+       hardCopy = hardCopy.filter(cartItem => cartItems.packageId !== packageItem.packageId);
+       setCart(hardCopy);
+   };
+
+    const listItems = items.map(packageItem=>(
+        <div key={ packageItem.packageId}>
+         {`${packageItem.weight}: $${packageItem.price}`}
+       <input type= "submit" value = "add" onClick={() =>
+           addItemToCart(packageItem)} />
+           </div>
+
+           ));
+
+   const cartItems = cart.map(packageItem=>(
+       <div key={ packageItem.packageId}>
+           {`${packageItem.weight}: $${packageItem.price}`}
+           <input type= "submit" value = "add" onClick={() =>
+               removeFromCart(packageItem)} />
+       </div>
+
+   ));*/
 
     return (
         <Tooltip title="Add to shopping cart">
@@ -63,15 +93,18 @@ const AddToCartButton = ({itemId}) => {
                 onClick={AddToCart}
             />
         </Tooltip>
+
     );
 };
 
 const PackageList = () => {
-    const [packageId, setPackageId] = useState([]);
-    const [curPackage, setCurpackage] = useState();
-    const [orders, setOrders] = useState([]);
+    const [packageData, setPackageData] = useState([]);
+    const [curPackage, setCurPackage] = useState();
+    const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingPack, setLoadingPack] = useState(false);
+
+
 
     const useStyles = makeStyles(theme => ({
         pageContent: {
@@ -80,11 +113,12 @@ const PackageList = () => {
         }
     }))
 
+
     useEffect(() => {
         setLoadingPack(true);
-        getOrder()
+        getOptions()
             .then((data) => {
-                setOrders(data);
+                setOptions(data);
             })
             .catch((err) => {
                 message.error(err.message);
@@ -99,7 +133,7 @@ const PackageList = () => {
             setLoading(true);
             getPackage(curPackage)
                 .then((data) => {
-                    setPackageId(data);
+                    setPackageData(data);
                 })
                 .catch((err) => {
                     message.error(err.message);
@@ -167,6 +201,9 @@ const PackageList = () => {
         })
     }
 
+    const handleCellClick = (e) => {
+        console.log(e.target.textContent);
+    }
     return (
         <>
             <PageHeader
@@ -228,12 +265,23 @@ const PackageList = () => {
                                                 <CloseIcon fontSize="small"/>
                                             </Controls.ActionButton>
                                         </TableCell>
-
-                                        <TableCell>
+                                        <TableCell onClick={handleCellClick}>
                                             <Controls.Button
-                                                type="submit"
-                                                text="Submit"/>
+                                                type="AddToCart"
+                                                text="Add to cart"/>
+                                            {item.request}
                                         </TableCell>
+                                        {packageData.map((item) => (
+                                            <TableRow key={item.id}>
+                                                <TableCell>
+                                                    <Button>
+                                                        {item.info}
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+
+
                                     </TableRow>)
                             )
                         }
@@ -273,19 +321,26 @@ const PackageList = () => {
                         xl: 3,
                         xxl: 3,
                     }}
-                    dataSource={packageId}
+
+                    dataSource={packageData}
                     renderItem={(item) => (
                         <List.Item>
                             <Card
                                 title={item.name}
                                 extra={<AddToCartButton itemId={item.id}/>}
+                            >   {`Price: ${item.price}`}
+                            <Select
+                                value={curPackage}
+                                onSelect={(value) => setCurPackage(value)}
+                                placeholder="Select a package"
+                                loading={loadingPack}
+                                style={{ width: 300 }}
+                                onChange={() => {}}
                             >
-                                <img
-                                    src={item.imageUrl}
-                                    alt={item.name}
-                                    style={{height: 300, width: "100%", display: "block"}}
-                                />
-                                {`Price: ${item.price}`}
+                                {options.map((item) => {
+                                    return <Option value={item.id}>{item.name}</Option>;
+                                })}
+                            </Select>
                             </Card>
                         </List.Item>
                     )}

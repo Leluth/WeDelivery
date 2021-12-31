@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {Col, List, message, Row} from "antd";
 import OrderCard from "./OrderCard";
 import MapContainer from "./MapContainer";

@@ -47,19 +47,19 @@ export const getDeliveryOptions = (data) => {
 }
 
 export const getPackage = (packageId) => {
-  return fetch(`/orders/${packageId}/package`).then((response) => {
+  return fetch(`/PackageList/${packageId}/package`).then((response) => {
     if (response.status < 200 || response.status >= 300) {
-      throw Error("Fail to get orders");
+      throw Error("Fail to get packages");
     }
 
     return response.json();
   });
 };
 
-export const getOrder = () => {
-  return fetch("/package").then((response) => {
+export const getOptions = () => {
+  return fetch("/options").then((response) => {
     if (response.status < 200 || response.status >= 300) {
-      throw Error("Fail to get orders");
+      throw Error("Fail to get options");
     }
 
     return response.json();
@@ -94,7 +94,7 @@ export const addItemToCart = (itemId) => {
     credentials: "include",
   }).then((response) => {
     if (response.status < 200 || response.status >= 300) {
-      throw Error("Fail to add package item to shopping cart");
+      throw Error("Fail to add package to shopping cart");
     }
   });
 };

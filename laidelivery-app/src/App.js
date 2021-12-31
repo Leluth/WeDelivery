@@ -1,13 +1,17 @@
 import {Layout, Typography} from "antd";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import logo from './image/logo.svg';
 import {makeStyles} from '@material-ui/core/styles';
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
 import SignupForm from "./components/SignupForm";
-import {createMuiTheme, CssBaseline, ThemeProvider} from '@material-ui/core';
+import {createMuiTheme, CssBaseline, Switch, ThemeProvider} from '@material-ui/core';
 import Main from "./components/Main";
+import HeroSection from '../src/components/HeroSection';
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+import {NavLink, Route} from 'react-router-dom'
+import Home from './pages'
 
 const {Header, Content} = Layout;
 const {Title} = Typography;
@@ -58,8 +62,11 @@ function App() {
     const [authed, setAuthed] = useState(false);
     const [showPackageList, setShowPackageList] = useState(true);
 
+
+
     return (
         <Layout style={{height: "100vh"}}>
+
             <Header>
                 <div className="header">
                     <img height={40} src={logo} alt='logo'
@@ -76,12 +83,15 @@ function App() {
                         Lai Delivery
                     </Title>
 
+
                     <div>{authed ? <MyCart setShowPackageList = {setShowPackageList}/> : <SignupForm/>}</div>
                 </div>
 
             </Header>
 
+
             <ThemeProvider theme={theme}>
+
                 <Content
                     style={{
                         padding: "40px 50px 50px 50px",
@@ -89,6 +99,8 @@ function App() {
                         overflowY: "auto",
                     }}
                 >
+
+
                     <div className={classes.appMain}>
                         {authed ? (
                             <Main showPackageList ={showPackageList}/>
@@ -98,6 +110,7 @@ function App() {
                     </div>
                 </Content>
 
+                <HeroSection/>
                 <CssBaseline/>
             </ThemeProvider>
         </Layout>

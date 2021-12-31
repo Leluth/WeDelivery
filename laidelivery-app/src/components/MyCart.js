@@ -1,6 +1,7 @@
 import {Button, Drawer, List, message, Space, Typography} from "antd";
 import {useEffect, useState} from "react";
 import {checkout, getCart} from "../utils";
+import React from "react";
 
 const {Text} = Typography;
 
