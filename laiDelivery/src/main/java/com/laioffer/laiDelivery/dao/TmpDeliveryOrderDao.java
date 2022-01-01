@@ -5,13 +5,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.laioffer.laiDelivery.dao.DeliveryOrderDao;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
