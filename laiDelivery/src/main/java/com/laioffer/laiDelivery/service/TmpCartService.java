@@ -21,10 +21,14 @@ public class TmpCartService {
     private TmpDeliveryOrderDao tmpDeliveryOrderDao;
 
     public List<TmpDeliveryOrder> getTmpCart() {
+        return tmpDeliveryOrderDao.getTmpCart();
+    }
+
+    public List<TmpDeliveryOrder> getTmpDeliveryOrder() {
         return tmpDeliveryOrderDao.getTmpDeliveryOrder();
     }
 
-    public void addTmpCart(TmpDeliveryOrder tmpDeliveryOrder) {
+    public void addTmpDeliveryOrder(TmpDeliveryOrder tmpDeliveryOrder) {
         tmpDeliveryOrderDao.addTmpDeliveryOrder(tmpDeliveryOrder);
     }
 

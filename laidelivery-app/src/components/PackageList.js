@@ -1,6 +1,6 @@
 import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
-import {addItemToCart, addTmpOrder, deleteTmpOrder, getCart, getPackage, updateTmpOrder} from "../utils";
+import {addItemToCart, addTmpOrder, deleteTmpOrder, getCart, getPackage, getTmpOrder, updateTmpOrder} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -169,7 +169,7 @@ const PackageList = () => {
     }
 
     const updateList = () => {
-        getCart()
+        getTmpOrder()
             .then((data) => {
                 console.log(data)
                 setRecords(data)

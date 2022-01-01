@@ -86,6 +86,16 @@ export const getCart = () => {
   });
 };
 
+export const getTmpOrder = () => {
+  // console.log("got the tmp cart from tmpDeliveryOrder table")
+  return fetch("/gettmpcart").then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to get temp order");
+    }
+    return response.json();
+  });
+};
+
 export const addTmpOrder = (data) => {
   return fetch(`/addtmpcart`, {
     method: "POST",

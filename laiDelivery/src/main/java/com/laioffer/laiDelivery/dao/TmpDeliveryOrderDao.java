@@ -25,12 +25,23 @@ public class TmpDeliveryOrderDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<TmpDeliveryOrder> getTmpDeliveryOrder() {
+    public List<TmpDeliveryOrder> getTmpCart() {
         try (Session session = sessionFactory.openSession()) {
             // only submit the deliveryorder which has status == 1
             Criteria cr = session.createCriteria(TmpDeliveryOrder.class);
             cr.add(Restrictions.eq("status", 1));
             return cr.list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<TmpDeliveryOrder> getTmpDeliveryOrder() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createCriteria(TmpDeliveryOrder.class)
+                    .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                    .list();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -26,21 +26,27 @@ public class TmpCartController {
         return tmpCartService.getTmpCart();
     }
 
+    @RequestMapping(value = "/gettmpcart", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TmpDeliveryOrder> getTmpDeliveryOrder() {
+        return tmpCartService.getTmpDeliveryOrder();
+    }
+
     @RequestMapping(value = "/addtmpcart", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void addTmpCart(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
-        tmpCartService.addTmpCart(tmpDeliveryOrder);
+    public void addTmpDeliveryOrder(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
+        tmpCartService.addTmpDeliveryOrder(tmpDeliveryOrder);
     }
 
     @RequestMapping(value = "/deletetmpcart/{id}", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteTmpCart(@PathVariable int id) {
+    public void deleteTmpDeliveryOrder(@PathVariable int id) {
         tmpCartService.deleteTmpDeliveryOrderById(id);
     }
 
     @RequestMapping(value = "/updatetmpcart", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void updateTmpCart(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
+    public void updateTmpDeliveryOrder(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
         tmpCartService.updateTmpDeliveryOrder(tmpDeliveryOrder);
     }
 }
