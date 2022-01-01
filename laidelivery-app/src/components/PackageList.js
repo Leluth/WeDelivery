@@ -61,7 +61,7 @@ const AddToCartButton = (item) => {
     );
 };
 
-const PackageList = () => {
+const PackageList = (props) => {
     const [packageData, setPackageData] = useState([]);
     const [curPackage, setCurPackage] = useState();
     const [options, setOptions] = useState([]);
@@ -93,7 +93,7 @@ const PackageList = () => {
 
     useEffect(() => {
         updateList()
-    }, []);
+    }, [props.signal]);
 
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)

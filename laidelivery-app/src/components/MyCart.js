@@ -37,6 +37,7 @@ const MyCart = (props) => {
             .then(() => {
                 message.success("Successfully checkout");
                 setCartVisible(false);
+                props.setSignal()
             })
             .catch((err) => {
                 // message.success("Successfully checkout");

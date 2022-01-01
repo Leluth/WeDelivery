@@ -10,7 +10,7 @@ class Main extends Component {
     render() {
         return (
             this.props.showPackageList ? (
-                <PackageList/>
+                <PackageList signal={this.props.signal}/>
             ) : (
                 <MyOrders/>
             )

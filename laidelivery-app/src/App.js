@@ -61,8 +61,7 @@ function App() {
     const classes = useStyles();
     const [authed, setAuthed] = useState(false);
     const [showPackageList, setShowPackageList] = useState(true);
-
-
+    const [signal, setSignal] = useState(true)
 
     return (
         <Layout style={{height: "100vh"}}>
@@ -84,7 +83,10 @@ function App() {
                     </Title>
 
 
-                    <div>{authed ? <MyCart setShowPackageList = {setShowPackageList}/> : <SignupForm/>}</div>
+                    <div>{authed ?
+                        <MyCart setShowPackageList = {setShowPackageList} setSignal = {() => {setSignal(!signal)}}/>
+                        : <SignupForm/>}
+                    </div>
                 </div>
 
             </Header>
@@ -103,7 +105,7 @@ function App() {
 
                     <div className={classes.appMain}>
                         {authed ? (
-                            <Main showPackageList ={showPackageList}/>
+                            <Main showPackageList ={showPackageList} signal = {signal}/>
                         ) : (
                             <LoginForm onSuccess={() => setAuthed(true)}/>
                         )}
