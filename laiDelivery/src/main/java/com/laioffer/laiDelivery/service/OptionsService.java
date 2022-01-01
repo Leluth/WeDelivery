@@ -140,7 +140,7 @@ public class OptionsService {
 
         // update price
         double deliveryPrice = round(durationInMinutes * STATIC_DRONE_PRICE, 2);
-        double finalPrice = pickUpPrice + deliveryPrice;
+        double finalPrice = round(pickUpPrice + deliveryPrice, 2);
 
         double finalDistance = shortestPickUpDistance + deliveryDistance;
 
@@ -217,7 +217,7 @@ public class OptionsService {
 
         // update price
         double deliveryPrice = round(durationInMinutes * STATIC_ROBOT_PRICE, 2);
-        double finalPrice = deliveryPrice + priceRobot;
+        double finalPrice = round(deliveryPrice + priceRobot, 2);
 
         double finalDistance = shortestDistance + deliveryDistance;
 
