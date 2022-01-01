@@ -96,7 +96,7 @@ export const addTmpOrder = (data) => {
     body: JSON.stringify(data),
   }).then((response) => {
     if (response.status < 200 || response.status >= 300) {
-      throw Error("Fail to add order");
+      throw Error("Fail to add temp order");
     }
   });
 }
@@ -114,6 +114,20 @@ export const deleteTmpOrder = (id) => {
     }
   });
 };
+
+export const updateTmpOrder = (data) => {
+  return fetch(`/updatetmpcart`, {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to update temp order");
+    }
+  });
+}
 
 export const checkout = () => {
   return fetch("/checkout").then((response) => {

@@ -1,6 +1,6 @@
 import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
-import {addItemToCart, addTmpOrder, deleteTmpOrder, getCart, getPackage} from "../utils";
+import {addItemToCart, addTmpOrder, deleteTmpOrder, getCart, getPackage, updateTmpOrder} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -148,16 +148,24 @@ const PackageList = () => {
     } = useTable(records, headCells, filterFn);
 
     const addOrEdit = (Package, resetForm) => {
-        if (Package.id === 0)
+        if (Package.id === 0) {
             addTmpOrder(Package).then(() => {
                 resetForm()
                 setRecordForEdit(null)
                 setOpenPopup(false)
                 updateList();
-                message.success('Submitted Successfully');
+                message.success('Add Successfully');
             })
-        // else
-        //     packageService.updatePackage(Package)
+        } else {
+            updateTmpOrder(Package).then(() => {
+                resetForm()
+                setRecordForEdit(null)
+                setOpenPopup(false)
+                updateList();
+                message.success('Update Successfully');
+            })
+        }
+
     }
 
     const updateList = () => {
