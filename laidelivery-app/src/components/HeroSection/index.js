@@ -14,8 +14,7 @@ import {
     ArrowRight
 } from './HeroElements';
 
-const HeroSection = () => {
-
+const HeroSection = (props) => {
     const [hover, setHover ] = useState(false)
     const onHover = () => {
         setHover (!hover)
@@ -38,6 +37,7 @@ const HeroSection = () => {
                             onMouseLeave={onHover}
                             primary ="true"
                             dark='true'
+                            onClick={props.getStarted}
                     >
                         Get Started { hover? <ArrowForward/>:<FaArrowRight/>}
                     </Button>

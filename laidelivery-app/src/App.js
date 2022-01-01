@@ -1,19 +1,16 @@
 import {Layout, Typography} from "antd";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import logo from './image/logo.svg';
 import {makeStyles} from '@material-ui/core/styles';
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import MyCart from "./components/MyCart";
 import SignupForm from "./components/SignupForm";
-import {createMuiTheme, CssBaseline, Switch, ThemeProvider} from '@material-ui/core';
+import {createMuiTheme, CssBaseline, ThemeProvider} from '@material-ui/core';
 import Main from "./components/Main";
 import HeroSection from '../src/components/HeroSection';
-import {CSSTransition, TransitionGroup} from 'react-transition-group'
-import {NavLink, Route} from 'react-router-dom'
-import Home from './pages'
 
-const {Header, Content} = Layout;
+const {Header, Content, Footer} = Layout;
 const {Title} = Typography;
 const theme = createMuiTheme({
     palette: {
@@ -60,12 +57,12 @@ const useStyles = makeStyles((theme) => ({
 function App() {
     const classes = useStyles();
     const [authed, setAuthed] = useState(false);
+    const [welcome, setWelcome] = useState(true);
     const [showPackageList, setShowPackageList] = useState(true);
     const [signal, setSignal] = useState(true)
 
     return (
         <Layout style={{height: "100vh"}}>
-
             <Header>
                 <div className="header">
                     <img height={40} src={logo} alt='logo'
@@ -82,39 +79,48 @@ function App() {
                         Lai Delivery
                     </Title>
 
-
                     <div>{authed ?
-                        <MyCart setShowPackageList = {setShowPackageList} setSignal = {() => {setSignal(!signal)}}/>
+                        <MyCart setShowPackageList={setShowPackageList} setSignal={() => {
+                            setSignal(!signal)
+                        }}/>
                         : <SignupForm/>}
                     </div>
                 </div>
-
             </Header>
 
-
             <ThemeProvider theme={theme}>
-
-                <Content
-                    style={{
-                        padding: "40px 50px 50px 50px",
-                        maxHeight: "calc(100% - 64px)",
-                        overflowY: "auto",
-                    }}
-                >
-
-
-                    <div className={classes.appMain}>
-                        {authed ? (
-                            <Main showPackageList ={showPackageList} signal = {signal}/>
-                        ) : (
-                            <LoginForm onSuccess={() => setAuthed(true)}/>
-                        )}
-                    </div>
-                </Content>
-
-                <HeroSection/>
+                {
+                    welcome ? (
+                        <HeroSection getStarted = {() => setWelcome(false)}/>
+                    ) : (
+                        <Content
+                            style={{
+                                padding: "40px 50px 50px 50px",
+                                maxHeight: "calc(100% - 64px)",
+                                overflowY: "auto",
+                            }}
+                        >
+                            <div className={classes.appMain}>
+                                {authed ? (
+                                    <Main showPackageList={showPackageList} signal={signal}/>
+                                ) : (
+                                    <LoginForm onSuccess={() => setAuthed(true)}/>
+                                )}
+                            </div>
+                        </Content>
+                    )
+                }
                 <CssBaseline/>
             </ThemeProvider>
+            {
+                welcome ? (
+                    <Footer style={{textAlign: "center", backgroundColor: "#001529", color: "white"}}>
+                        LaiDelivery ©2022 Created by Team 3
+                    </Footer>
+                ) : (
+                    <></>
+                )
+            }
         </Layout>
     );
 }
