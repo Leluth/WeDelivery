@@ -31,4 +31,8 @@ public class TmpCartService {
     public void deleteTmpDeliveryOrderById(int id) {
         tmpDeliveryOrderDao.deleteTmpDeliveryOrderById(id);
     }
+
+    public void updateTmpDeliveryOrder(TmpDeliveryOrder tmpDeliveryOrder) {
+        tmpDeliveryOrderDao.updateTmpDeliveryOrder(tmpDeliveryOrder);
+    }
 }
