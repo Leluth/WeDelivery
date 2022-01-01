@@ -1,6 +1,6 @@
 import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
-import {addItemToCart, getCart, getPackage} from "../utils";
+import {addItemToCart, addTmpOrder, getCart, getPackage} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -148,15 +148,16 @@ const PackageList = () => {
     } = useTable(records, headCells, filterFn);
 
     const addOrEdit = (Package, resetForm) => {
-        // if (Package.id === 0)
-        //     packageService.insertPackage(Package)
+        if (Package.id === 0)
+            addTmpOrder(Package).then(() => {
+                resetForm()
+                setRecordForEdit(null)
+                setOpenPopup(false)
+                updateList();
+                message.success('Submitted Successfully');
+            })
         // else
         //     packageService.updatePackage(Package)
-        resetForm()
-        setRecordForEdit(null)
-        setOpenPopup(false)
-        updateList();
-        message.success('Submitted Successfully');
     }
 
     const updateList = () => {
@@ -221,7 +222,7 @@ const PackageList = () => {
                             recordsAfterPagingAndSorting().map(item =>
                                 (
                                     <TableRow key={item.id}>
-                                        <TableCell>{item.content}</TableCell>
+                                        <TableCell>{item.packageContent}</TableCell>
                                         <TableCell>{item.weight}</TableCell>
                                         <TableCell>{item.size}</TableCell>
                                         <TableCell>{item.shippingFrom}</TableCell>

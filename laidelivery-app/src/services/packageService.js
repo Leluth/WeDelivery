@@ -4,10 +4,10 @@ const KEYS ={
 }
 
 export const getCategoryCollection = ()=>([
-    { id: '1', title: 'Regular Package' },
-    { id: '2', title: 'Special Package' },
-    { id: '3', title: 'Liquid Package' },
-    { id: '4', title: 'Document' },
+    { id: 'Regular Package', title: 'Regular Package' },
+    { id: 'Special Package', title: 'Special Package' },
+    { id: 'Liquid Package', title: 'Liquid Package' },
+    { id: 'Document', title: 'Document' },
 ])
 
 export function insertPackage(data) {

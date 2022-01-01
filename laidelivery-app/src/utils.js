@@ -87,6 +87,20 @@ export const getCart = () => {
   });
 };
 
+export const addTmpOrder = (data) => {
+  return fetch(`/addtmpcart`, {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to add order");
+    }
+  });
+}
+
 export const checkout = () => {
   return fetch("/checkout").then((response) => {
     if (response.status < 200 || response.status >= 300) {

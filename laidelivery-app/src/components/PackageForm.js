@@ -16,17 +16,16 @@ const modeItems = [
 ]
 
 const initialFValues = {
-
     id: 0,
     size: '',
     weight: 0,
-    content: '',
+    packageContent: '',
     mode: 'pickup',
-    categoryId: '',
+    packageType: '',
     PickupDate: new Date('December 22, 2021 03:24:00'),
     isMember: false,
-    shippingFrom: '', //The Marina at Pier 39
-    shippingTo: '' //Marina Middle School
+    shippingFrom: '', // The Marina at Pier 39
+    shippingTo: '' // Marina Middle School
 }
 
 export default function PackageForm(props) {
@@ -40,8 +39,8 @@ export default function PackageForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = {...errors}
-        if ('content' in fieldValues)
-            temp.content = fieldValues.content ? "" : "This field is required."
+        if ('packageContent' in fieldValues)
+            temp.packageContent = fieldValues.packageContent ? "" : "This field is required."
         if ('weight' in fieldValues)
             temp.weight = fieldValues.weight.length > 0 ? "" : "Minimum 2 numbers required."
         if ('size' in fieldValues)
@@ -51,8 +50,8 @@ export default function PackageForm(props) {
         if ('shippingTo' in fieldValues)
             temp.shippingTo = fieldValues.shippingTo ? "" : "This field is required."
 
-        if ('categoryId' in fieldValues)
-            temp.categoryId = fieldValues.categoryId.length !== 0 ? "" : "This field is required."
+        if ('packageType' in fieldValues)
+            temp.packageType = fieldValues.packageType.length !== 0 ? "" : "This field is required."
         setErrors({
             ...temp
         })
@@ -128,11 +127,11 @@ export default function PackageForm(props) {
                         <Grid item xs={6}>
 
                             <Controls.Input
-                                name="content"
+                                name="packageContent"
                                 label="Package Content"
-                                value={values.content}
+                                value={values.packageContent}
                                 onChange={handleInputChange}
-                                error={errors.content}
+                                error={errors.packageContent}
                             />
                             <Controls.Input
                                 label="Weight(lb)"
@@ -173,12 +172,12 @@ export default function PackageForm(props) {
                                 items={modeItems}
                             />
                             <Controls.Select
-                                name="categoryId"
+                                name="packageType"
                                 label="Category"
-                                value={values.categoryId}
+                                value={values.packageType}
                                 onChange={handleInputChange}
                                 options={packageService.getCategoryCollection()}
-                                error={errors.categoryId}
+                                error={errors.packageType}
                             />
                             <Controls.DatePicker
                                 name="PickupDate"
