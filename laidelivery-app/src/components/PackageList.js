@@ -1,6 +1,6 @@
-import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
+import {Button, Card, List, message, PageHeader, Select, Spin, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
-import {addItemToCart, addTmpOrder, deleteTmpOrder, getCart, getPackage, getTmpOrder, updateTmpOrder} from "../utils";
+import {addTmpOrder, deleteTmpOrder, getPackage, getTmpOrder, updateTmpOrder} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -106,6 +106,7 @@ const PackageList = () => {
     const [openPopup, setOpenPopup] = useState(false)
     const [setNotify] = useState({isOpen: false, message: '', type: ''})
     const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subTitle: ''})
+    const [fetchingData, setFetchingData] = useState(true)
 
     const {
         TblContainer,
@@ -136,13 +137,15 @@ const PackageList = () => {
     }
 
     const updateList = () => {
+        setFetchingData(true)
         getTmpOrder()
             .then((data) => {
                 setRecords(data)
             })
             .catch((err) => {
                 message.error(err.message);
-            });
+            })
+            .finally(() => setFetchingData(false));
     }
 
     // edit
@@ -168,7 +171,10 @@ const PackageList = () => {
     const handleCellClick = (item) => {
         item.status = 1;
         updateTmpOrder(item)
-            .then(() => message.success(`Successfully add to cart`))
+            .then(() => {
+                message.success(`Successfully add to cart`)
+                updateList();
+            })
             .catch((err) => message.error(err.message))
     }
 
@@ -194,75 +200,84 @@ const PackageList = () => {
                 </Toolbar>
                 <TblContainer>
                     <TblHead/>
-                    <TableBody>
-                        {
-                            recordsAfterPagingAndSorting().map(item =>
-                                (
-                                    <TableRow key={item.id}>
-                                        <TableCell>{item.packageContent}</TableCell>
-                                        <TableCell>{item.weight}</TableCell>
-                                        <TableCell>{item.size}</TableCell>
-                                        <TableCell>{item.shippingFrom}</TableCell>
-                                        <TableCell>{item.shippingTo}</TableCell>
-                                        <TableCell> {item.deliveryType}</TableCell>
-                                        <TableCell> {item.serviceType}</TableCell>
-                                        <TableCell> {item.pickUpTime}</TableCell>
-                                        <TableCell> {item.deliveryTime}</TableCell>
-                                        <TableCell> ${item.price}</TableCell>
-
-                                        <TableCell>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                onClick={() => {
-                                                    openInPopup(item)
-                                                }}>
-                                                <EditOutlinedIcon fontSize="small"/>
-                                            </Controls.ActionButton>
-
-                                            <Controls.ActionButton
-                                                color="secondary"
-                                                onClick={() => {
-                                                    setConfirmDialog({
-                                                        isOpen: true,
-                                                        title: 'Are you sure to delete this record?',
-                                                        subTitle: "You can't undo this operation",
-                                                        onConfirm: () => {
-                                                            onDelete(item.id)
-                                                        }
-                                                    })
-                                                }}>
-                                                <CloseIcon fontSize="small"/>
-                                            </Controls.ActionButton>
-                                        </TableCell>
-                                        <TableCell onClick={() => handleCellClick(item)}>
-                                            {
-                                                item.status === 1 ? (
-                                                    <Controls.Button
-                                                        type="AddToCart"
-                                                        text="Added"
-                                                        disabled/>
-                                                ) : (
-                                                    <Controls.Button
-                                                        type="AddToCart"
-                                                        text="Add"/>
-                                                )
-                                            }
-                                            {item.request}
-                                        </TableCell>
-                                        {packageData.map((item) => (
+                    {
+                        fetchingData? (
+                            <></>
+                        ) : (
+                            <TableBody>
+                                {
+                                    recordsAfterPagingAndSorting().map(item =>
+                                        (
                                             <TableRow key={item.id}>
+                                                <TableCell>{item.packageContent}</TableCell>
+                                                <TableCell>{item.weight}</TableCell>
+                                                <TableCell>{item.size}</TableCell>
+                                                <TableCell>{item.shippingFrom}</TableCell>
+                                                <TableCell>{item.shippingTo}</TableCell>
+                                                <TableCell> {item.deliveryType}</TableCell>
+                                                <TableCell> {item.serviceType}</TableCell>
+                                                <TableCell> {item.pickUpTime}</TableCell>
+                                                <TableCell> {item.deliveryTime}</TableCell>
+                                                <TableCell> ${item.price}</TableCell>
+
                                                 <TableCell>
-                                                    <Button>
-                                                        {item.info}
-                                                    </Button>
+                                                    <Controls.ActionButton
+                                                        color="primary"
+                                                        onClick={() => {
+                                                            openInPopup(item)
+                                                        }}>
+                                                        <EditOutlinedIcon fontSize="small"/>
+                                                    </Controls.ActionButton>
+
+                                                    <Controls.ActionButton
+                                                        color="secondary"
+                                                        onClick={() => {
+                                                            setConfirmDialog({
+                                                                isOpen: true,
+                                                                title: 'Are you sure to delete this record?',
+                                                                subTitle: "You can't undo this operation",
+                                                                onConfirm: () => {
+                                                                    onDelete(item.id)
+                                                                }
+                                                            })
+                                                        }}>
+                                                        <CloseIcon fontSize="small"/>
+                                                    </Controls.ActionButton>
                                                 </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableRow>)
-                            )
-                        }
-                    </TableBody>
+                                                <TableCell onClick={() => handleCellClick(item)}>
+                                                    {
+                                                        item.status === 1 ? (
+                                                            <Controls.Button
+                                                                type="AddToCart"
+                                                                text="Added"
+                                                                disabled/>
+                                                        ) : (
+                                                            <Controls.Button
+                                                                type="AddToCart"
+                                                                text="Add"/>
+                                                        )
+                                                    }
+                                                    {item.request}
+                                                </TableCell>
+                                                {packageData.map((item) => (
+                                                    <TableRow key={item.id}>
+                                                        <TableCell>
+                                                            <Button>
+                                                                {item.info}
+                                                            </Button>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableRow>)
+                                    )
+                                }
+                            </TableBody>
+                        )
+                    }
                 </TblContainer>
+                <div style={{textAlign:"center", marginTop:20}}>
+                    <Spin spinning={fetchingData} size="large"/>
+                </div>
                 <TblPagination/>
             </Paper>
 
