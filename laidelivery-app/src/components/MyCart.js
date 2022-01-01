@@ -37,6 +37,7 @@ const MyCart = (props) => {
             .then(() => {
                 message.success("Successfully checkout");
                 setCartVisible(false);
+                // trigger package list update
                 props.setSignal()
             })
             .catch((err) => {
