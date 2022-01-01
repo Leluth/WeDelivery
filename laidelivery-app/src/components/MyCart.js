@@ -1,6 +1,6 @@
 import {Button, Drawer, List, message, Space, Typography} from "antd";
 import React, {useEffect, useState} from "react";
-import {checkout, getCart, getTmpOrder} from "../utils";
+import {checkout, getCart, getTmpOrder, cancelCart} from "../utils";
 
 const {Text} = Typography;
 
@@ -37,6 +37,24 @@ const MyCart = (props) => {
             .then(() => {
                 message.success("Successfully checkout");
                 setCartVisible(false);
+                // trigger package list update
+                props.setSignal()
+            })
+            .catch((err) => {
+                // message.success("Successfully checkout");
+                message.error(err.message);
+            })
+            .finally(() => {
+                setChecking(false);
+            });
+
+    };
+
+    const onCancel = () => {
+        cancelCart()
+            .then(() => {
+                message.success("Successfully cancel");
+                // setCartVisible(false);
                 // trigger package list update
                 props.setSignal()
             })
@@ -110,7 +128,10 @@ const MyCart = (props) => {
                     >
                         <Text strong={true}>{`Total price: $${sum(cartData)}`}</Text>
                         <div>
-                            <Button onClick={onCloseDrawer} style={{marginRight: 8}}>
+                            <Button onClick={() => {
+                                onCloseDrawer();
+                                onCancel();
+                            }} style={{marginRight: 8}}>
                                 Cancel
                             </Button>
                             <Button

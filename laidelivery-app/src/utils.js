@@ -85,6 +85,19 @@ export const getCart = () => {
     return response.json();
   });
 };
+export const cancelCart = (data) => {
+  return fetch(`/cancelcart`, {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to cancel");
+    }
+  });
+};
 
 export const getTmpOrder = () => {
   // console.log("got the tmp cart from tmpDeliveryOrder table")

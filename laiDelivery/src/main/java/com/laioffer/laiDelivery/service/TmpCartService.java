@@ -40,7 +40,8 @@ public class TmpCartService {
         tmpDeliveryOrderDao.updateTmpDeliveryOrder(tmpDeliveryOrder);
     }
 
-    public void deleteTmpDeliveryOrderByStatus(int status) {
-        tmpDeliveryOrderDao.deleteTmpDeliveryOrderByStatus(status);
+    public void updateTmpDeliveryOrderStatus(TmpDeliveryOrder tmpDeliveryOrder) {
+        tmpDeliveryOrderDao.updateTmpDeliveryOrderStatus(tmpDeliveryOrder);
     }
+
 }

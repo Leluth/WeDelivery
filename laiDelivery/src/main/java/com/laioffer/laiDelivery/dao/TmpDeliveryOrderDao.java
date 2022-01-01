@@ -5,6 +5,7 @@ import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
@@ -92,11 +93,6 @@ public class TmpDeliveryOrderDao {
         }
     }
 
-    public void deleteTmpDeliveryOrderByStatus(int status) {
-        Session session = sessionFactory.openSession();
-        Query q = session.createQuery("delete TmpDeliveryOrder where status = 0");
-        q.executeUpdate();
-    }
 
     public void updateTmpDeliveryOrder(TmpDeliveryOrder tmpDeliveryOrder) {
         Session session = null;
@@ -109,6 +105,27 @@ public class TmpDeliveryOrderDao {
                 session.update(persistentInstance);
             }
             session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void updateTmpDeliveryOrderStatus(TmpDeliveryOrder tmpDeliveryOrder) {
+        System.out.print("updating");
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction tx3 = session.beginTransaction();
+             session.saveOrUpdate(tmpDeliveryOrder);
+            tmpDeliveryOrder.setStatus(0);
+            tx3.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
             if (session != null) {

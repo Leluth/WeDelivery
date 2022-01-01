@@ -62,4 +62,16 @@ public class CheckoutController {
             tmpCartService.deleteTmpDeliveryOrderById(tmpId);
         }
     }
+
+    @RequestMapping(value = "/cancelcart", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void cancel() {
+//      update all the item in tmpDB into status of 0
+        List<TmpDeliveryOrder> tmpList = tmpCartService.getTmpCart();
+        System.out.print(tmpList);
+        for (TmpDeliveryOrder tmp : tmpList) { // getTmpCart only return the cases that status == 1
+            System.out.print(tmp);
+            tmpCartService.updateTmpDeliveryOrderStatus(tmp);
+        }
+    }
 }
