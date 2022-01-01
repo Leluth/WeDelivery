@@ -1,6 +1,5 @@
 package com.laioffer.laiDelivery.dao;
 
-import com.laioffer.laiDelivery.entity.Customer;
 import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @author Hung-Hsi
  * @version 1.0
@@ -32,5 +32,25 @@ public class TmpDeliveryOrderDao {
             ex.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    public void addTmpDeliveryOrder(TmpDeliveryOrder tmpDeliveryOrder) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.save(tmpDeliveryOrder);
+            session.getTransaction().commit();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 }

@@ -2,9 +2,9 @@ package com.laioffer.laiDelivery.service;
 
 
 import com.laioffer.laiDelivery.dao.TmpDeliveryOrderDao;
+import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 
 import java.util.List;
 
@@ -22,5 +22,9 @@ public class TmpCartService {
 
     public List<TmpDeliveryOrder> getTmpCart() {
         return tmpDeliveryOrderDao.getTmpDeliveryOrder();
+    }
+
+    public void addTmpCart(TmpDeliveryOrder tmpDeliveryOrder) {
+        tmpDeliveryOrderDao.addTmpDeliveryOrder(tmpDeliveryOrder);
     }
 }

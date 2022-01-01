@@ -3,10 +3,9 @@ package com.laioffer.laiDelivery.controller;
 import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 import com.laioffer.laiDelivery.service.TmpCartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +24,11 @@ public class TmpCartController {
     @ResponseBody
     public List<TmpDeliveryOrder> getTmpCart() {
         return tmpCartService.getTmpCart();
+    }
+
+    @RequestMapping(value = "/addtmpcart", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void signUp(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
+        tmpCartService.addTmpCart(tmpDeliveryOrder);
     }
 }
