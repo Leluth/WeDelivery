@@ -27,4 +27,8 @@ public class TmpCartService {
     public void addTmpCart(TmpDeliveryOrder tmpDeliveryOrder) {
         tmpDeliveryOrderDao.addTmpDeliveryOrder(tmpDeliveryOrder);
     }
+
+    public void deleteTmpDeliveryOrderById(int id) {
+        tmpDeliveryOrderDao.deleteTmpDeliveryOrderById(id);
+    }
 }

@@ -28,7 +28,13 @@ public class TmpCartController {
 
     @RequestMapping(value = "/addtmpcart", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void signUp(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
+    public void addTmpCart(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
         tmpCartService.addTmpCart(tmpDeliveryOrder);
+    }
+
+    @RequestMapping(value = "/deletetmpcart/{id}", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void addMenuItemToCart(@PathVariable int id) {
+        tmpCartService.deleteTmpDeliveryOrderById(id);
     }
 }

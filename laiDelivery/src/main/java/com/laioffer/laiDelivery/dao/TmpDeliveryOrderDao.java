@@ -53,4 +53,26 @@ public class TmpDeliveryOrderDao {
             }
         }
     }
+
+    public void deleteTmpDeliveryOrderById(int id) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Object persistentInstance = session.load(TmpDeliveryOrder.class, id);
+            if (persistentInstance != null) {
+                session.beginTransaction();
+                session.delete(persistentInstance);
+                session.getTransaction().commit();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }
