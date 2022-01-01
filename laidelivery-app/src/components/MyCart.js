@@ -22,7 +22,7 @@ const MyCart = (props) => {
             .then((data) => {
                 // console.log(data)
                 setCartData(data);
-                console.log(cartData);
+                // console.log(cartData);
             })
             .catch((err) => {
                 message.error(err.message);
@@ -34,7 +34,7 @@ const MyCart = (props) => {
 
     const onCheckOut = () => {
         setChecking(true);
-        checkout()
+        checkout(cartData)
             .then(() => {
                 message.success("Successfully checkout");
                 setCartVisible(false);
@@ -126,14 +126,12 @@ const MyCart = (props) => {
                 <List
                     loading={loading}
                     itemLayout="horizontal"
-                    // dataSource={cartData?.orderItemList} array=>objects
                     dataSource={cartData}
-                    // how do we create list based on the list of cartdata?
                     renderItem={(item) => (
                         <List.Item>
                             <List.Item.Meta
                                 // add more if needed
-                                title={item.packageType}
+                                title={item.packageContent}
                                 description={`$${item.price}`}
                             />
                         </List.Item>
