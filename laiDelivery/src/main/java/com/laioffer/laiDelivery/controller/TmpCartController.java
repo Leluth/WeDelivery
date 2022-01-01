@@ -49,4 +49,10 @@ public class TmpCartController {
     public void updateTmpDeliveryOrder(@RequestBody TmpDeliveryOrder tmpDeliveryOrder) {
         tmpCartService.updateTmpDeliveryOrder(tmpDeliveryOrder);
     }
+
+    @RequestMapping(value = "/deletebystatus/{status}", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void deleteTmpCartByStatus(@PathVariable int status) {
+        tmpCartService.deleteTmpDeliveryOrderByStatus(status);
+    }
 }

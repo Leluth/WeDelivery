@@ -57,6 +57,8 @@ public class DeliveryOrder implements Serializable {
     // newly added 7 attributes requested by Shaoshuai on 12/26/2021 - Hung-Hsi
     private double centerLat;
 
+    private String size;
+
     private double centerLng;
 
     private double originLat;
@@ -237,5 +239,13 @@ public class DeliveryOrder implements Serializable {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

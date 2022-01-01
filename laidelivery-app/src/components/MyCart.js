@@ -1,6 +1,6 @@
 import {Button, Drawer, List, message, Space, Typography} from "antd";
 import React, {useEffect, useState} from "react";
-import {checkout, getCart} from "../utils";
+import {checkout, getCart, getTmpOrder} from "../utils";
 
 const {Text} = Typography;
 
@@ -45,6 +45,7 @@ const MyCart = (props) => {
             .finally(() => {
                 setChecking(false);
             });
+
     };
 
     function sum(obj) {

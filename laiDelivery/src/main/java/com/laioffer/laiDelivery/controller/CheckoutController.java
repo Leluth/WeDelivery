@@ -2,9 +2,14 @@ package com.laioffer.laiDelivery.controller;
 
 import com.laioffer.laiDelivery.entity.Cart;
 import com.laioffer.laiDelivery.entity.DeliveryOrder;
+import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 import com.laioffer.laiDelivery.service.CartService;
 import com.laioffer.laiDelivery.service.DeliveryOrderService;
 import com.laioffer.laiDelivery.service.EmailService;
+import com.laioffer.laiDelivery.service.TmpCartService;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -28,6 +33,9 @@ public class CheckoutController {
     private CartService cartService;
 
     @Autowired
+    private TmpCartService tmpCartService;
+
+    @Autowired
     private DeliveryOrderService deliveryOrderService;
 
     @Autowired
@@ -36,17 +44,22 @@ public class CheckoutController {
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void checkout(@RequestBody List<DeliveryOrder> deliveryOrders) {
+       // add the item in the cart (stats ==1) into delieverOrder table
         for (DeliveryOrder deliveryOrder : deliveryOrders){
             Cart cart = cartService.getCart();
             deliveryOrder.setCart(cart);
             deliveryOrderService.saveDeliveryOrder(deliveryOrder);
         }
-//        emailService.sendMail("Your LaiDelivery order has been received!!",
-//                "No big deal, it’s just a package sent by cool robots and drones that changes your delivery " +
-//                        "experience forever.");
+        // send notification of mail
+        emailService.sendMail("Your LaiDelivery order has been received!!",
+                "No big deal, it’s just a package sent by cool robots and drones that changes your delivery " +
+                        "experience forever.");
 
-//       delete all content in tmpDB
-//        TmpDeliveryOrderDao deleteDB = new TmpDeliveryOrderDao();
-//        deleteDB.deleteTmpDeliveryOrder(0);
+//      delete the rows with status of 1 in tmpDB
+        List<TmpDeliveryOrder> tmpList = tmpCartService.getTmpCart();
+        for (TmpDeliveryOrder tmp : tmpList) { // getTmpCart only return the cases that status == 1
+            int tmpId = tmp.getId();
+            tmpCartService.deleteTmpDeliveryOrderById(tmpId);
+        }
     }
 }

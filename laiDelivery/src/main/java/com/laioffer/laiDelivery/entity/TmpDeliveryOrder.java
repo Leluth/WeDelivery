@@ -39,6 +39,16 @@ public class TmpDeliveryOrder implements Serializable {
 
     private String centerId;
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    private String size;
+
     private double price;
 
     private String orderId;

@@ -138,15 +138,6 @@ export const updateTmpOrder = (data) => {
   });
 }
 
-// export const checkout = () => {
-//   return fetch("/checkout").then((response) => {
-//     if (response.status < 200 || response.status >= 300) {
-//       throw Error("Fail to checkout");
-//     }
-//   });
-// };
-
-
 export const checkout = (data) => {
   return fetch(`/checkout`, {
     method: "POST",
