@@ -101,6 +101,20 @@ export const addTmpOrder = (data) => {
   });
 }
 
+export const deleteTmpOrder = (id) => {
+  return fetch(`/deletetmpcart/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to delete temp order");
+    }
+  });
+};
+
 export const checkout = () => {
   return fetch("/checkout").then((response) => {
     if (response.status < 200 || response.status >= 300) {

@@ -1,6 +1,6 @@
 import {Button, Card, List, message, PageHeader, Select, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
-import {addItemToCart, addTmpOrder, getCart, getPackage} from "../utils";
+import {addItemToCart, addTmpOrder, deleteTmpOrder, getCart, getPackage} from "../utils";
 import {PlusOutlined} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
@@ -183,13 +183,12 @@ const PackageList = () => {
             ...confirmDialog,
             isOpen: false
         })
-        // packageService.deletePackage(id);
-        updateList();
-        setNotify({
-            isOpen: true,
-            message: 'Deleted Successfully',
-            type: 'error'
-        })
+        deleteTmpOrder(id)
+            .then(() => {
+                message.success(`Successfully delete item`);
+                updateList();
+            })
+            .catch((err) => message.error(err.message))
     }
 
     const handleCellClick = (e) => {
