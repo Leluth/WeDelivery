@@ -12,13 +12,13 @@ class OrderCard extends React.Component {
 
     render = () => {
         const {
-            weight, packageType, shippingFrom, shippingTo,
+            weight, packageType, shippingFrom, shippingTo, packageContent,
             deliveryType, serviceType, createTime, deliveryTime, pickUpTime, centerId, price,
         } = this.props.info;
 
         return (
             <Card
-                title={createTime}
+                title={packageContent}
                 extra={<h1>${price}</h1>}
             >
                 <Descriptions column={1} labelStyle={{fontWeight: 'bold'}}>

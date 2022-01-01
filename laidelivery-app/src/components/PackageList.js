@@ -235,9 +235,18 @@ const PackageList = () => {
                                             </Controls.ActionButton>
                                         </TableCell>
                                         <TableCell onClick={() => handleCellClick(item)}>
-                                            <Controls.Button
-                                                type="AddToCart"
-                                                text="Add"/>
+                                            {
+                                                item.status === 1 ? (
+                                                    <Controls.Button
+                                                        type="AddToCart"
+                                                        text="Added"
+                                                        disabled/>
+                                                ) : (
+                                                    <Controls.Button
+                                                        type="AddToCart"
+                                                        text="Add"/>
+                                                )
+                                            }
                                             {item.request}
                                         </TableCell>
                                         {packageData.map((item) => (
