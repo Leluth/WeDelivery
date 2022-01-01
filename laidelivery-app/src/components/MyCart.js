@@ -1,7 +1,6 @@
 import {Button, Drawer, List, message, Space, Typography} from "antd";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {checkout, getCart} from "../utils";
-import React from "react";
 
 const {Text} = Typography;
 
@@ -50,7 +49,7 @@ const MyCart = (props) => {
 
     function sum(obj) {
         var sum = 0.0;
-        for(var index in obj ) {
+        for (var index in obj) {
             // console.log(obj[index])
             sum += obj[index].price;
         }

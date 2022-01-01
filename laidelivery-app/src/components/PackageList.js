@@ -201,7 +201,7 @@ const PackageList = () => {
                 <TblContainer>
                     <TblHead/>
                     {
-                        fetchingData? (
+                        fetchingData ? (
                             <></>
                         ) : (
                             <TableBody>
@@ -275,7 +275,7 @@ const PackageList = () => {
                         )
                     }
                 </TblContainer>
-                <div style={{textAlign:"center", marginTop:20}}>
+                <div style={{textAlign: "center", marginTop: 20}}>
                     <Spin spinning={fetchingData} size="large"/>
                 </div>
                 <TblPagination/>
