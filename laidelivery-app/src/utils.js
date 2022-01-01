@@ -77,12 +77,11 @@ export const getOrders = () => {
 };
 
 export const getCart = () => {
-  console.log("got the tmp cart from tmpDeliveryOrder table")
+  // console.log("got the tmp cart from tmpDeliveryOrder table")
   return fetch("/tmpcart").then((response) => {
     if (response.status < 200 || response.status >= 300) {
       throw Error("Fail to get shopping cart data");
     }
-
     return response.json();
   });
 };
@@ -129,8 +128,23 @@ export const updateTmpOrder = (data) => {
   });
 }
 
-export const checkout = () => {
-  return fetch("/checkout").then((response) => {
+// export const checkout = () => {
+//   return fetch("/checkout").then((response) => {
+//     if (response.status < 200 || response.status >= 300) {
+//       throw Error("Fail to checkout");
+//     }
+//   });
+// };
+
+
+export const checkout = (data) => {
+  return fetch(`/checkout`, {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
     if (response.status < 200 || response.status >= 300) {
       throw Error("Fail to checkout");
     }

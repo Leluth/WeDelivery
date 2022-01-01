@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import com.laioffer.laiDelivery.dao.TmpDeliveryOrderDao;
+
+import java.util.List;
 
 /**
  * @author Shaoshuai Xu
@@ -32,12 +35,18 @@ public class CheckoutController {
 
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void checkout(@RequestBody DeliveryOrder deliveryOrder) {
-        Cart cart = cartService.getCart();
-        deliveryOrder.setCart(cart);
-        deliveryOrderService.saveDeliveryOrder(deliveryOrder);
-        emailService.sendMail("Your LaiDelivery order has been received!!",
-                "No big deal, it’s just a package sent by cool robots and drones that changes your delivery " +
-                        "experience forever.");
+    public void checkout(@RequestBody List<DeliveryOrder> deliveryOrders) {
+        for (DeliveryOrder deliveryOrder : deliveryOrders){
+            Cart cart = cartService.getCart();
+            deliveryOrder.setCart(cart);
+            deliveryOrderService.saveDeliveryOrder(deliveryOrder);
+        }
+//        emailService.sendMail("Your LaiDelivery order has been received!!",
+//                "No big deal, it’s just a package sent by cool robots and drones that changes your delivery " +
+//                        "experience forever.");
+
+//       delete all content in tmpDB
+//        TmpDeliveryOrderDao deleteDB = new TmpDeliveryOrderDao();
+//        deleteDB.deleteTmpDeliveryOrder(0);
     }
 }

@@ -4,10 +4,14 @@ import com.laioffer.laiDelivery.entity.TmpDeliveryOrder;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.laioffer.laiDelivery.dao.DeliveryOrderDao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +69,28 @@ public class TmpDeliveryOrderDao {
                 session.delete(persistentInstance);
             }
             session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void deleteTmpDeliveryOrder(int buffer) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Object persistentInstance = session.load(TmpDeliveryOrder.class, buffer);
+            if (persistentInstance != null) {
+                session.beginTransaction();
+                session.delete(persistentInstance);
+                session.getTransaction().commit();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             if (session != null) {
