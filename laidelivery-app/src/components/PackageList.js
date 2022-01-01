@@ -41,45 +41,12 @@ const headCells = [
 ]
 
 
-const AddToCartButton = ({itemId}) => {
+const AddToCartButton = (item) => {
     const [loading, setLoading] = useState(false);
-    const [cart, setCart] = useState([]);
-    console.log(cart);
 
-    const AddToCart = (item) => {
-        setCart([...cart, item]);
-        setLoading(true);
-        addItemToCart(itemId)
-            .then(() => message.success(`Successfully add item`))
-            .catch((err) => message.error(err.message))
-            .finally(() => {
-                setLoading(false);
-            });
+    const AddToCart = () => {
+        console.log(item)
     };
-    /*
-    const removeFromCart = (packageItem) => {
-       let hardCopy = [...cart];
-       hardCopy = hardCopy.filter(cartItem => cartItems.packageId !== packageItem.packageId);
-       setCart(hardCopy);
-   };
-
-    const listItems = items.map(packageItem=>(
-        <div key={ packageItem.packageId}>
-         {`${packageItem.weight}: $${packageItem.price}`}
-       <input type= "submit" value = "add" onClick={() =>
-           addItemToCart(packageItem)} />
-           </div>
-
-           ));
-
-   const cartItems = cart.map(packageItem=>(
-       <div key={ packageItem.packageId}>
-           {`${packageItem.weight}: $${packageItem.price}`}
-           <input type= "submit" value = "add" onClick={() =>
-               removeFromCart(packageItem)} />
-       </div>
-
-   ));*/
 
     return (
         <Tooltip title="Add to shopping cart">
@@ -171,7 +138,6 @@ const PackageList = () => {
     const updateList = () => {
         getTmpOrder()
             .then((data) => {
-                console.log(data)
                 setRecords(data)
             })
             .catch((err) => {
@@ -199,9 +165,13 @@ const PackageList = () => {
             .catch((err) => message.error(err.message))
     }
 
-    const handleCellClick = (e) => {
-        console.log(e.target.textContent);
+    const handleCellClick = (item) => {
+        item.status = 1;
+        updateTmpOrder(item)
+            .then(() => message.success(`Successfully add to cart`))
+            .catch((err) => message.error(err.message))
     }
+
     return (
         <>
             <PageHeader
@@ -264,7 +234,7 @@ const PackageList = () => {
                                                 <CloseIcon fontSize="small"/>
                                             </Controls.ActionButton>
                                         </TableCell>
-                                        <TableCell onClick={handleCellClick}>
+                                        <TableCell onClick={() => handleCellClick(item)}>
                                             <Controls.Button
                                                 type="AddToCart"
                                                 text="Add"/>
@@ -324,7 +294,7 @@ const PackageList = () => {
                         <List.Item>
                             <Card
                                 title={item.name}
-                                extra={<AddToCartButton itemId={item.id}/>}
+                                extra={<AddToCartButton item={item}/>}
                             >   {`Price: ${item.price}`}
                                 <Select
                                     value={curPackage}
