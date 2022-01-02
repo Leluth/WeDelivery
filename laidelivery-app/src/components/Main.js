@@ -12,7 +12,7 @@ class Main extends Component {
             this.props.showPackageList ? (
                 <PackageList signal={this.props.signal}/>
             ) : (
-                <MyOrders/>
+                <MyOrders trackingInfo={null}/>
             )
         )
     }

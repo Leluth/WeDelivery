@@ -1,8 +1,10 @@
 package com.laioffer.laiDelivery.dao;
 
 import com.laioffer.laiDelivery.entity.DeliveryOrder;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +37,16 @@ public class DeliveryOrderDao {
                 session.close();
             }
         }
+    }
+
+    public DeliveryOrder gerDeliveryOrder(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            Criteria cr = session.createCriteria(DeliveryOrder.class);
+            cr.add(Restrictions.eq("id", id));
+            return (DeliveryOrder) cr.list().get(0);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new DeliveryOrder();
     }
 }

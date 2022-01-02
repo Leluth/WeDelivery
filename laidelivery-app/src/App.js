@@ -1,5 +1,5 @@
 import {Layout, Typography} from "antd";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import logo from './image/logo.svg';
 import {makeStyles} from '@material-ui/core/styles';
 import "./App.css";
@@ -60,6 +60,7 @@ function App() {
     const [welcome, setWelcome] = useState(true);
     const [showPackageList, setShowPackageList] = useState(true);
     const [signal, setSignal] = useState(true)
+    const [home, setHome] = useState(true)
 
     return (
         <Layout style={{height: "100vh"}}>
@@ -80,10 +81,10 @@ function App() {
                     </Title>
 
                     <div>{authed ?
-                        <MyCart setShowPackageList={setShowPackageList} setSignal={() => {
-                            setSignal(!signal)
-                        }}/>
-                        : <SignupForm/>}
+                        <MyCart
+                            setShowPackageList={setShowPackageList}
+                            setSignal={() => {setSignal(!signal)}}/>
+                        : <SignupForm returnHome = {() => {setHome(!home); setWelcome(true)}}/>}
                     </div>
                 </div>
             </Header>
@@ -91,7 +92,9 @@ function App() {
             <ThemeProvider theme={theme}>
                 {
                     welcome ? (
-                        <HeroSection getStarted = {() => setWelcome(false)}/>
+                        <HeroSection
+                            getStarted = {() => setWelcome(false)}
+                            home = {home}/>
                     ) : (
                         <Content
                             style={{

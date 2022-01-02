@@ -1,12 +1,15 @@
-import { Button, Form, Input, message, Modal } from "antd";
+import {Button, Form, Input, message, Modal, Space} from "antd";
 import React from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { signup } from "../utils";
+import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {signup} from "../utils";
 
 class SignupForm extends React.Component {
-    state = {
-        displayModal: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayModal: false,
+        };
+    }
 
     handleCancel = () => {
         this.setState({
@@ -36,9 +39,14 @@ class SignupForm extends React.Component {
     render = () => {
         return (
             <>
-                <Button shape="round" type="primary" onClick={this.signupOnClick}>
-                    Register
-                </Button>
+                <Space>
+                    <Button shape="round" type="primary" onClick={this.props.returnHome}>
+                        Home
+                    </Button>
+                    <Button shape="round" type="primary" onClick={this.signupOnClick}>
+                        Register
+                    </Button>
+                </Space>
                 <Modal
                     title="Register"
                     visible={this.state.displayModal}
@@ -48,7 +56,7 @@ class SignupForm extends React.Component {
                 >
                     <Form
                         name="normal_register"
-                        initialValues={{ remember: true }}
+                        initialValues={{remember: true}}
                         onFinish={this.onFinish}
                         preserve={false}
                     >
@@ -56,44 +64,44 @@ class SignupForm extends React.Component {
                         <Form.Item
                             name="firstName"
                             rules={[
-                                { required: true, message: "Please input your first name!" },
+                                {required: true, message: "Please input your first name!"},
                             ]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Firstname" />
+                            <Input prefix={<UserOutlined/>} placeholder="Firstname"/>
                         </Form.Item>
 
                         <Form.Item
                             name="lastName"
                             rules={[
-                                { required: true, message: "Please input your last name!" },
+                                {required: true, message: "Please input your last name!"},
                             ]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Lastname" />
+                            <Input prefix={<UserOutlined/>} placeholder="Lastname"/>
                         </Form.Item>
 
                         <Form.Item
                             name="Username"
                             rules={[
-                                { required: true, message: "Please input Username!" },
+                                {required: true, message: "Please input Username!"},
                             ]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Username" />
+                            <Input prefix={<UserOutlined/>} placeholder="Username"/>
                         </Form.Item>
 
                         <Form.Item
                             name="email"
-                            rules={[{ required: true, message: "Please input your email!" }]}
+                            rules={[{required: true, message: "Please input your email!"}]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Email" />
+                            <Input prefix={<UserOutlined/>} placeholder="Email"/>
                         </Form.Item>
 
                         <Form.Item
                             name="password"
                             rules={[
-                                { required: true, message: "Please input your password!" },
+                                {required: true, message: "Please input your password!"},
                             ]}
                         >
-                            <Input prefix={<LockOutlined />} placeholder="Password" />
+                            <Input prefix={<LockOutlined/>} placeholder="Password"/>
                         </Form.Item>
 
                         <Form.Item>

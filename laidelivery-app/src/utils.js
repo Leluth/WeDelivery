@@ -151,6 +151,18 @@ export const updateTmpOrder = (data) => {
   });
 }
 
+export const getDeliveryOrder = (token) => {
+  return fetch(`/getorder`, {
+    method: "POST",
+    body: token,
+  }).then((response) => {
+    if (response.status < 200 || response.status >= 300) {
+      throw Error("Fail to track order");
+    }
+    return response.json();
+  });
+}
+
 export const checkout = (data) => {
   return fetch(`/checkout`, {
     method: "POST",

@@ -7,6 +7,7 @@ import com.laioffer.laiDelivery.service.CartService;
 import com.laioffer.laiDelivery.service.DeliveryOrderService;
 import com.laioffer.laiDelivery.service.EmailService;
 import com.laioffer.laiDelivery.service.TmpCartService;
+import com.laioffer.laiDelivery.utils.TokenUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -49,11 +50,13 @@ public class CheckoutController {
             Cart cart = cartService.getCart();
             deliveryOrder.setCart(cart);
             deliveryOrderService.saveDeliveryOrder(deliveryOrder);
+
+            // generate tracking number and send notification of mail
+            String token = TokenUtils.getToken(deliveryOrder.getId());
+            emailService.sendMail("Your LaiDelivery order < " + token + " > has been received!!",
+                    "No big deal, it’s just a package sent by cool robots and drones that changes your delivery " +
+                            "experience forever :)");
         }
-        // send notification of mail
-        emailService.sendMail("Your LaiDelivery order has been received!!",
-                "No big deal, it’s just a package sent by cool robots and drones that changes your delivery " +
-                        "experience forever.");
 
 //      delete the rows with status of 1 in tmpDB
         List<TmpDeliveryOrder> tmpList = tmpCartService.getTmpCart();

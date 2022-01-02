@@ -5,7 +5,7 @@ import MapContainer from "./MapContainer";
 import {getOrders} from "../utils";
 import {getCurrentTimeStr, smallerThan} from "../timeUtils";
 
-const { Step } = Steps;
+const {Step} = Steps;
 
 class MyOrders extends Component {
     constructor(props) {
@@ -18,15 +18,21 @@ class MyOrders extends Component {
     }
 
     componentDidMount() {
-        getOrders()
-            .then((data) => {
-                this.setState({
-                    data: data.orderItemList.reverse()
+        if (this.props.trackingInfo === null) {
+            getOrders()
+                .then((data) => {
+                    this.setState({
+                        data: data.orderItemList.reverse()
+                    })
                 })
+                .catch((err) => {
+                    message.error(err.message);
+                })
+        } else {
+            this.setState({
+                data: [this.props.trackingInfo]
             })
-            .catch((err) => {
-                message.error(err.message);
-            })
+        }
     }
 
     updateStatus(item) {
@@ -61,13 +67,13 @@ class MyOrders extends Component {
                 </Col>
                 <Col span={17} className="right-side">
                     {
-                        this.state.status === -1? (
+                        this.state.status === -1 ? (
                             <></>
                         ) : (
                             <Steps progressDot current={this.state.status}>
-                                <Step title="Ordered" description="Our robot/drone is on the way" />
-                                <Step title="Picked Up" description="Almost there!" />
-                                <Step title="Delivered" description="Your order has been delivered" />
+                                <Step title="Ordered" description="Our robot/drone is on the way"/>
+                                <Step title="Picked Up" description="Almost there!"/>
+                                <Step title="Delivered" description="Your order has been delivered"/>
                             </Steps>
                         )
                     }

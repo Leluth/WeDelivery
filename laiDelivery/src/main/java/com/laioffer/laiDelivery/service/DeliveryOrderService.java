@@ -19,4 +19,8 @@ public class DeliveryOrderService {
     public void saveDeliveryOrder(DeliveryOrder deliveryOrder) {
         deliveryOrderDao.saveDeliveryOrder(deliveryOrder);
     }
+
+    public DeliveryOrder gerDeliveryOrder(int id) {
+        return deliveryOrderDao.gerDeliveryOrder(id);
+    }
 }
