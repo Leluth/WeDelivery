@@ -115,15 +115,9 @@ function App() {
                 }
                 <CssBaseline/>
             </ThemeProvider>
-            {
-                welcome ? (
-                    <Footer style={{textAlign: "center", backgroundColor: "#001529", color: "white"}}>
-                        LaiDelivery ©2022 Created by Team 3
-                    </Footer>
-                ) : (
-                    <></>
-                )
-            }
+            <Footer style={{textAlign: "center", backgroundColor: "#001529", color: "white"}}>
+                LaiDelivery ©2022 Created by Team 3
+            </Footer>
         </Layout>
     );
 }

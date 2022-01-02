@@ -1,6 +1,7 @@
 import {Button, Drawer, List, message, Space, Typography} from "antd";
 import React, {useEffect, useState} from "react";
 import {checkout, getCart, getTmpOrder, cancelCart} from "../utils";
+import {getCurrentTimeStr, getNewTimeStr} from "../timeUtils";
 
 const {Text} = Typography;
 
@@ -33,6 +34,12 @@ const MyCart = (props) => {
 
     const onCheckOut = () => {
         setChecking(true);
+        cartData.forEach((item) => {
+            item.createTime = getCurrentTimeStr()
+            item.pickUpTime = getNewTimeStr(item.createTime, item.pickUpTime)
+            item.deliveryTime = getNewTimeStr(item.createTime, item.deliveryTime)
+            console.log(item)
+        });
         checkout(cartData)
             .then(() => {
                 message.success("Successfully checkout");
