@@ -1,6 +1,6 @@
 // convert Date to String
 export const dateToString = (date) => {
-    return date.toLocaleString()
+    return date.toLocaleString("en-US", {hour12: false})
 }
 
 // convert String to Date
@@ -8,7 +8,7 @@ export const stringToDate = (str) => {
     const dateTime = str.split(',')
     const dateArr = dateTime[0].split('/')
     const timeArr = dateTime[1].split(':')
-    return new Date(dateArr[2], dateArr[1], dateArr[0], timeArr[0], timeArr[1], timeArr[2])
+    return new Date(dateArr[2], dateArr[1] - 1, dateArr[0], timeArr[0], timeArr[1], timeArr[2])
 }
 
 // get String of current time
