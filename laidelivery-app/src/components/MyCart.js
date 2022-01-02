@@ -38,7 +38,7 @@ const MyCart = (props) => {
             item.createTime = getCurrentTimeStr()
             item.pickUpTime = getNewTimeStr(item.createTime, item.pickUpTime)
             item.deliveryTime = getNewTimeStr(item.createTime, item.deliveryTime)
-            console.log(item)
+            // console.log(item)
         });
         checkout(cartData)
             .then(() => {
