@@ -13,7 +13,7 @@ class OrderCard extends React.Component {
     render = () => {
         const {
             weight, packageType, shippingFrom, shippingTo, packageContent,
-            deliveryType, serviceType, createTime, deliveryTime, pickUpTime, centerId, price,
+            deliveryType, serviceType, createTime, pickUpTime, deliveryTime, centerId, price,
         } = this.props.info;
 
         return (

@@ -146,7 +146,7 @@ class MapContainer extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.geoInfo !== this.props.geoInfo) {
-            const {createTime, deliveryTime, pickUpTime,
+            const {createTime, pickUpTime, deliveryTime,
                 serviceType, centerLat, centerLng, originLat, originLng, destinationLat, destinationLng}
                 = this.props.geoInfo;
             const centerAddress = {lat: centerLat, lng: centerLng}
@@ -158,8 +158,8 @@ class MapContainer extends Component {
             }
             this.map.setCenter(shippingFromAddress)
             this.addMarker(centerAddress, "Pick Center", "Create At: ", createTime)
-            this.addMarker(shippingFromAddress, "Origin",  "Pick At: ", deliveryTime)
-            this.addMarker(shippingToAddress, "Destination", "Deliver At: ", pickUpTime)
+            this.addMarker(shippingFromAddress, "Origin",  "Pick At: ", pickUpTime)
+            this.addMarker(shippingToAddress, "Destination", "Deliver At: ", deliveryTime)
             const bounds = new this.maps.LatLngBounds();
             for (let i = 0; i < this.markers.length; i++) {
                 const position = this.markers[i].getPosition()
