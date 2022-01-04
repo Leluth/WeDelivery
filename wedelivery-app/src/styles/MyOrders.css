@@ -1,0 +1,31 @@
+.main {
+    padding: 0
+}
+
+.left-side {
+    padding-left: 5px;
+    height: 800px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.right-side {
+    padding: 12px 20px 50px;
+    height: 760px;
+}
+
+::-webkit-scrollbar {
+    display: none; /* Chrome Safari */}
+
+.gm-style .gm-style-iw-c {
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    transform: translate3d(-50%,-100%,0);
+    background-color:rgba(255,255,255,0.5);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 7px 1px rgb(0 0 0 / 30%);
+}
