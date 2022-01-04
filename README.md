@@ -1,4 +1,6 @@
 # WeDelivery
+WeDelivery is a Spring and React based dispatch & delivery management application. Our service is to use robots and drones to help users in San Francisco deliver small and medium-sized packages.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Front-end part is implemented by Javascript, CSS, html and React, backend is executed in Java environment, with assistance of libraries of Spring framework, Hibernate and Tomcat. Database used for storing users' input was established on MySQL instance of AWS RDB system.
 
 The introduction of details could be seen in [slides](https://github.com/hoseela41/DeliveryWebApp/blob/main/images/LaiDelivery%201.0%20Demo.pdf).
